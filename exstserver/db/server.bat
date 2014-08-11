@@ -1,0 +1,1 @@
+mongod -f mongodb.conf > log.txt
