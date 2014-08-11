@@ -27,9 +27,13 @@ var setUpCollection = function (params, method, data) {
             break;
         case "POST":
             var xhr = $();
-            this.create(data, {
-                success: xhr.resolve,
-                error: xhr.reject
+            var model = this.create(data, {
+                success: function(){
+                    xhr.resolve(model.attributes);
+                },
+                error: function(){
+                    xhr.reject();
+                }
             });
             return xhr;
             break;

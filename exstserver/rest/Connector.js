@@ -44,9 +44,12 @@ var ConnectorForModels = function(method, model, options){
         switch (method) {
             case 'create':
                 this.collection(db_collection).insert(model.attributes, function(error, result){
+                    var z = options;
                     if (error) {
+                        options.error(error);
                         xhr.reject(error);
                     } else {
+                        options.success(result[0]);
                         xhr.resolve(result[0]);
                     }
                 });
