@@ -11,7 +11,7 @@ define(["underscore", "Backbone", "jquery", "Config"],function(_, Backbone, $, C
 
     // Our init script
     Application.start = _.once(function(){
-        require(_.union(["Models/User","Collections/Employers"], Config.preloadModules), function(User, Employers){
+        require(_.union(["Models/User"], Config.preloadModules), function(User){
             Application.user = new User();
             //Load Routes
             require(Config.routers.list, function(){

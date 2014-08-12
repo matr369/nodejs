@@ -12,6 +12,12 @@ define(["Backbone", "Models/Base", "jquery"], function(Backbone, Model, $){
                 this.__fetchResult = Backbone.Collection.prototype.fetch.apply(this, arguments);
             }
             return this.__fetchResult;
+        },
+        toJSON: function(options){
+            var json = this.map(function(model){
+                return model.id;
+            });
+            return json;
         }
     });
 });

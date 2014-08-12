@@ -138,7 +138,7 @@ define(["Views/Fields/Base", "Collections/Base", "jquery", "underscore", "typeah
     }, {
         defaults: $.extend(true, {}, Field.defaults, {
             type: "text",
-            idKey: "id",
+            idKey: "_id",
             displayKey: "name",
             initEvent: "view:moved",
             destroyEvent: "view:remove",

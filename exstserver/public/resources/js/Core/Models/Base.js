@@ -3,7 +3,7 @@
  */
 define(["Backbone", "jquery"], function(Backbone, $){
     return Backbone.Model.extend({
-
+        idAttribute: "_id",
         /**
          * Fetch data from server
          * @returns {*}
@@ -11,6 +11,17 @@ define(["Backbone", "jquery"], function(Backbone, $){
         fetch: function(){
             //TODO: Realize
             return $.Deferred().resolve();
+        },
+        toJSON: function(options){
+            var json = {};
+           for(var attr in this.attributes){
+               if(this.attributes[attr] && this.attributes[attr].toJSON){
+                   json[attr] = this.attributes[attr].toJSON();
+               } else{
+                   json[attr] = this.attributes[attr];
+               }
+           }
+            return json;
         }
     });
 });

@@ -1,13 +1,14 @@
 /**
  * Created by Administrator on 31.07.2014.
  */
-define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Models/Student", "App"], function(View, $, Popover, bootstrap, Student, App){
+define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Models/Student", "App", "Collections/Students"], function(View, $, Popover, bootstrap, Student, App, Students){
     return View.extend({
         events:{
             "field:changed": "addStudent",
             "click .del-stud" : "detachStudent"
         },
         constructor: function(options){
+            options.allStudents = new Students();
             View.prototype.constructor.apply(this,[options]);
             this.listenTo(this.collection, "add", this.rerender);
             this.listenTo(this.collection, "remove", this.rerender);
@@ -32,7 +33,8 @@ define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Models/Student", 
                 src: "employerstable.html?v=1",
                 $: "students"
             },
-            prepareCollection: false
+            prepareCollection: false,
+            allStudents: null
         })
     });
 });

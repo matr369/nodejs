@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 29.07.2014.
  */
-define(["Models/Base", "Collections/Students"],function(Base, Students){
+define(["Models/Base", "Collections/Students", "underscore"],function(Base, Students, _){
     return Base.extend({
         defaults: function(){
             return {
@@ -13,7 +13,12 @@ define(["Models/Base", "Collections/Students"],function(Base, Students){
         urlRoot: "/curators",
         constructor: function(){
             this.on("change:students", function(model, value){
-                this.set("students", new Students(value), {silent: true});
+                if(_.isArray(value)) {
+                    this.set("students", new Students(value), {silent: true});
+                }
+                this.listenTo(this.get("students"), "add remove", function(){
+                    this.save();
+                });
             });
             Base.prototype.constructor.apply(this, arguments);
         }

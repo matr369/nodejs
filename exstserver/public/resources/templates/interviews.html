@@ -29,7 +29,7 @@
         {%?%}
     </a>
 </div>
-<div id="interview{%- data.model.get('id') %}" class="panel-body panel-collapse collapse in">
+<div id="interview{%- data.model.get('id') %}" class="panel-body panel-collapse collapse">
     <h3 >{%- data.model.get('interviewer') %}</h3>
         <view data-id="EmployersTable" data-constructor="Views/StudentSkillsTable" data-options="{ collection : data.model.get('studentSkills'), prepareCollection: false }" />
     <div class="form-group">

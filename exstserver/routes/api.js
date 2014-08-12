@@ -1,6 +1,7 @@
 var express = require('express'),
     $ = require("Deferred"),
-    router = express.Router();
+    router = express.Router(),
+    ObjectID = require('mongodb').ObjectID;
 
 var setUpModel = function (params, method, data) {
     if (!this.collection_db) {
@@ -13,6 +14,12 @@ var setUpModel = function (params, method, data) {
     switch (method) {
         case "GET":
             return this.fetch();
+            break;
+        case "DELETE":
+            return this.destroy();
+            break;
+        case "PUT":
+            return this.save(data);
             break;
     }
 };
@@ -27,14 +34,20 @@ var setUpCollection = function (params, method, data) {
             break;
         case "POST":
             var xhr = $();
-            var model = this.create(data, {
-                success: function(){
-                    xhr.resolve(model.attributes);
-                },
-                error: function(){
-                    xhr.reject();
-                }
-            });
+            if(params.method){
+                var model = this[params.method](data);
+            } else {
+                var model = this.create(data, {
+                    success: function () {
+                        model.afterFetch().done(function(){
+                            xhr.resolve(model.exportToJSON());
+                        }).fail(xhr.reject);
+                    },
+                    error: function (error) {
+                        xhr.reject(error);
+                    }
+                });
+            }
             return xhr;
             break;
     }
@@ -44,6 +57,12 @@ var doRequrest = function (req, res, next) {
     // Connect to the db
     var EntityFolder = "Collections",
         setUpFunction = setUpCollection;
+    try {
+        ObjectID(req.params.id);
+    } catch (e){
+        req.params.method = req.params.id;
+        req.params.id = null;
+    }
     if (req.params.id) {
         EntityFolder = "Models";
         setUpFunction = setUpModel;
@@ -54,6 +73,7 @@ var doRequrest = function (req, res, next) {
     } catch (e) {
         Constructor = require("../rest/" + EntityFolder + "/Base");
     }
+
     setUpFunction.call(
         new Constructor(),
         req.params,
@@ -74,6 +94,8 @@ var doRequrest = function (req, res, next) {
 
 router
     .post('/:collection/:id?/:method?', doRequrest)
-    .get('/:collection/:id?/:method?', doRequrest);
+    .get('/:collection/:id?/:method?', doRequrest)
+    .delete('/:collection/:id', doRequrest)
+    .put('/:collection?/:id', doRequrest);
 
 module.exports = router;

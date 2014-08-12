@@ -1,15 +1,15 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define(["Views/Base","Views/StudentSkillsRow","underscore", "Collections/StudentSkills", "Collections/Skills"], function(Base, Row, _, StudentSkills, Skills){
-    return Base.extend({
+define(["Views/Form","Views/StudentSkillsRow","underscore", "Collections/StudentSkills", "Collections/Skills", "Models/Skill"], function(Form, Row, _, StudentSkills, Skills, Skill){
+    return Form.extend({
         events: {
             "view:ready": "initSubViews",
             "field:changed": "addSkillToStudent"
         },
         constructor: function(options){
             options.allSkill = new Skills();
-            return Base.prototype.constructor.apply(this, arguments);
+            return Form.prototype.constructor.apply(this, arguments);
         },
         initSubViews: function(){
             if(_.isUndefined(this.collection)){
@@ -19,18 +19,22 @@ define(["Views/Base","Views/StudentSkillsRow","underscore", "Collections/Student
                 el: this.$(".skillsTable"),
                 collection: this.collection
             }));
+            this.disable();
         },
         addSkillToStudent: function(e, skill){
-            this.collection.add(skill);
-            this.childrenViews.newSkill.el.value = "";
+            if(skill instanceof Skill) {
+                this.collection.add(skill);
+                this.childrenViews.newSkill.dropValue.apply(this, arguments);
+            }
         }
     },{
-        defaults: $.extend(true, {}, Base.defaults, {
+        defaults: $.extend(true, {}, Form.defaults, {
             tpl: {
                 src: "studentsskilltable.html?v=1",
                 $ : "skillTable"
             },
-            allSkill:null
+            allSkill:null,
+            value: ""
         })
     })
 });

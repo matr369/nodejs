@@ -7,6 +7,7 @@
  */
 define(["Collections/Base", "Models/Interview"], function(Collection, Interview){
     return Collection.extend({
-        model: Interview
+        model: Interview,
+        url: "/interview"
     });
 });
