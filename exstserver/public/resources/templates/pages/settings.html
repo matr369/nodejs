@@ -1,0 +1,37 @@
+<div class="page-settings">
+    <view data-id="header" data-constructor="Views/Base" data-options='{"tpl": {"src": "header.html?v=1" }}'/>
+    <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+        pageTitle: 'Settings',
+        pageDescription: 'You can change some settings for application'
+    }"/>
+    <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+        {
+            href: '#settings',
+            title: 'Settings'
+        }
+    ]}"/>
+    <div class="container">
+        <div class="row">
+            <div class="content-wraper">
+                <div class="jumbotron">
+                    <div class="row">
+
+                            <div>
+                                <a class="add-field-link" href="#settings/fields">
+                                    <i class="fa fa-plus-square-o"></i>
+                                    <span class="text">Fields</span>
+                                </a>
+                            </div>
+
+                            <div>
+                                <a class="add-field-link" href="#settings/skills">
+                                    <i class="fa fa-graduation-cap"></i>
+                                    <span class="text">Skills</span>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

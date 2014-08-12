@@ -1,0 +1,75 @@
+<div class="page page-student">
+    <view data-id="header" data-constructor="Views/Base" data-options='{"tpl": {"src": "header.html?v=1" }}' />
+    <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+        pageTitle: '{%- data.model.get('name') %}',
+        pageDescription: 'Full information'
+    }"/>
+    <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+        {
+            href: '#students',
+            title: 'Students'
+        }, {
+            href: '#students/{%- data.model.id %}',
+            title: '{%- data.model.get('name') %}'
+        }
+    ]}"/>
+
+    <div class="container">
+        <div class="row">
+            <div class="content-wraper">
+                <div class="jumbotron">
+                    <div class="row">
+
+                            <div class="container filed-student">
+                                <view data-id="commonInfo" data-constructor="Views/CommonStudentInfo" data-options="{ model: data.model, className: 'clearfix' }" />
+
+                            </div>
+
+                        <span class="help-block"></span>
+                        <div class="tabs clearfix">
+                            <ul class="nav nav-tabs ">
+                                <li class="active"><a href="#information">Student information</a></li>
+                                <li><a href="#{%- data.model.get('feedbacksLink') %}">FeedBack</a></li>
+                                <li><a href="#{%- data.model.get('interviewsLink') %}">Interview</a></li>
+                            </ul>
+
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade active in" id="information">
+
+
+                            <div class="container">
+                                <div class="row">
+                                    <view data-id="personal" data-constructor="Views/Base" data-options="{ model: data.model, prepareModel: false, tpl: {src: 'panel.html?v=1'}, title:'Personal Information'}">
+                                        <view data-id="personalTable" data-constructor="Views/StudentPanelTable" data-options="{model: data.model, properties:['name', 'phone', 'email', 'skype']}" />
+                                    </view>
+
+                                    <view data-id="university" data-constructor="Views/Base" data-options="{ model: data.model, prepareModel: false, tpl: {src: 'panel.html?v=1'}, title:'University Information'}">
+                                        <view data-id="personalTable" data-constructor="Views/StudentPanelTable" data-options="{model: data.model, properties:['university', 'faculty', 'speciality', 'course', 'group', 'grade1', 'grade2', 'grade3', 'grade4']}" />
+                                    </view>
+
+                                    <view data-id="work" data-constructor="Views/Base" data-options="{ model: data.model, prepareModel: false, tpl: {src: 'panel.html?v=1'}, title:'Work Information'}">
+                                        <view data-id="personalTable" data-constructor="Views/StudentPanelTable" data-options="{model: data.model, properties:['startWorkDate', 'hadInternship', 'startCourse', 'currentWorkHours', 'futureWorkHours', 'vacation']}" />
+                                    </view>
+
+                                    <view data-id="projects" data-constructor="Views/Base" data-options="{ model: data.model, prepareModel: false, tpl: {src: 'panel.html?v=1'}, title:'Projects Information'}">
+                                        <view data-id="personalTable" data-constructor="Views/StudentPanelTable" data-options="{model: data.model, properties:['previousProjects', 'currentProject', 'billable', 'currentProjectRole', 'currentProjectTeamLead', 'currentProjectPM', 'curator', 'currentProjectTechnologies', 'wantChangeProject']}" />
+                                    </view>
+
+                                    <view data-id="Knowledge" data-constructor="Views/Base" data-options="{ model: data.model, prepareModel: false, tpl: {src: 'panel.html?v=1'}, title:'Knowledge'}">
+                                        <view data-id="personalTable" data-constructor="Views/StudentPanelTable" data-options="{model: data.model, properties:['wantedTechnologies', 'englishLevel', 'englishCourse', 'trainings', 'certificates']}" />
+                                    </view>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>

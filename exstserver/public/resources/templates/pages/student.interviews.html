@@ -1,0 +1,49 @@
+<div class="page page-student">
+    <view data-id="header" data-constructor="Views/Base" data-options='{"tpl": {"src": "header.html?v=1" }}' />
+    <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+        pageTitle: '{%- data.model.get('name') %}',
+        pageDescription: 'Interviews'
+    }"/>
+    <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+        {
+            href: '#students',
+            title: 'Students'
+        }, {
+            href: '#{%- data.model.get('profileLink') %}',
+            title: '{%- data.model.get('name') %}'
+        }, {
+            href: '#{%- data.model.get('interviewsLink') %}',
+            title: 'Interviews'
+        }
+    ]}"/>
+
+    <div class="container">
+        <div class="row">
+            <div class="content-wraper">
+                <div class="jumbotron">
+                    <div class="row">
+                        <view data-id="commonInfo" data-constructor="Views/CommonStudentInfo" data-options="{ model: data.model, className: 'clearfix' }" />
+                        <span class="help-block"></span>
+                        <div class="tabs clearfix">
+                            <ul class="nav nav-tabs ">
+                                <li><a href="#{%- data.model.get('profileLink') %}">Information</a></li>
+                                <li><a href="#{%- data.model.get('feedbacksLink') %}">Feedbacks</a></li>
+                                <li  class="active"><a href="#{%- data.model.get('interviewsLink') %}">Interviews</a></li>
+                            </ul>
+                            <div class="tab-pane">
+                                <view data-id="interviews" data-constructor="Views/Base" data-options="{
+                                    tpl: {
+                                        src: 'interviews.html?v=1',
+                                        $: 'listInterview'
+                                    },
+                                    collection: data.model.get('interviews'),
+                                    prepareCollection: false
+                                }" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

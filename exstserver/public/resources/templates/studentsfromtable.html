@@ -1,0 +1,22 @@
+<tbody>{% var length = data.students.length; %}
+{{~ data.students :student:position }}
+{%? (position <= length+1) %}
+<tr class="active">
+    <td width="10">{%- position+1 %}</td>
+    <td>
+        <a href="students/1.jsp" class="student-name">{%- student.name %}</a></td>
+
+
+    {{~ data.fields :field:position1 }}
+    {% var fieldname = field; %}
+    <td>{%- student[fieldname] %}
+    </td>
+    {{~}}
+
+
+    <td></td>
+
+</tr>
+{%?%}
+{{~}}
+</tbody>

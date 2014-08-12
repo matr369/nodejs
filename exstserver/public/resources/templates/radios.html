@@ -1,0 +1,22 @@
+{% var length = data.names.length; %}
+{{~ data.names :link:position }}
+{%? (position >= length-1) %}
+        <input type="radio">{%- link %}
+<li class="active">
+    {%? link.icon %} <span class="{%- link.icon %}"></span> {%?%}
+                                    <span class="link-label">
+                                        {%- link.title %}
+                                    </span>
+</li>
+{%??%}
+<li>
+    <a href="{%- link.href %}">
+        {%? link.icon %} <span class="{%- link.icon %}"></span> {%?%}
+                                    <span class="link-label">
+                                        {%- link.title %}
+                                    </span>
+    </a>
+</li>
+{%?%}
+
+{{~}}

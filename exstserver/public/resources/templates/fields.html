@@ -1,0 +1,45 @@
+<script type="text/template" id="field">
+    <input type="{%- data.type %}" name="{%- data.name %}" value="{%- data.value %}"
+           title="{%- data.title %}" placeHolder="{%- data.placeHolderName %}" size="{%- data.sizeInput%}"/>
+</script>
+
+<script type="text/template" id="field-radio">
+    <div class="radio-button-list">
+        {{~ data.buttons :button:index }}
+        <label> <input type="radio" class="radio-button" name="{%- data.name %}" value="{%- button.id %}"/>{%-
+            button.label %}</label>
+        {{~}}
+    </div>
+</script>
+
+<script type="text/template" id="field-check">
+    <input type='checkbox' />
+</script>
+
+<script type="text/template" id="field-textarea">
+    <textarea name="{%- data.name %}" rows="{%- data.rows %}">{%- data.value %}</textarea>
+</script>
+
+<script type="text/template" id="field-selectable">
+    <div class="field-selectable btn-group btn-group-xs">
+        {{~data.items :item:index}}
+            <span class='selectable-item btn btn-default' data-index='{%- index || "0" %}'>{%- item.label %}</span>
+        {{~}}
+    </div>
+</script>
+
+<script type="text/template" id="field-dropdown">
+    <div class="field-dropdown dropdown">
+        <button class="btn {%- data.className %} dropdown-toggle" data-toggle="dropdown">
+            <span class="dropdown-label"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            {{~data.items :item:index}}
+            <li class='selectable-item' data-index='{%- index || "0" %}'>
+                <a tabindex="-1" href="javascript:void 0;">{%- item.label %}</a>
+            </li>
+            {{~}}
+        </ul>
+    </div>
+</script>

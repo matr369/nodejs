@@ -1,0 +1,53 @@
+<div class="page page-student">
+    <view data-id="header" data-constructor="Views/Base" data-options='{"tpl": {"src": "header.html?v=1" }}'/>
+    <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+        pageTitle: '{%- data.model.get('name') %}',
+        pageDescription: 'Feedbacks'
+    }"/>
+    <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+        {
+            href: '#students',
+            title: 'Students'
+        }, {
+            href: '#{%- data.model.get('profileLink') %}',
+            title: '{%- data.model.get('name') %}'
+        }, {
+            href: '#{%- data.model.get('feedbacksLink') %}',
+            title: 'Feedbacks'
+        }
+    ]}"/>
+
+    <div class="container">
+        <div class="row">
+            <div class="content-wraper">
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="container filed-student">
+                            <view data-id="commonInfo" data-constructor="Views/CommonStudentInfo"
+                                  data-options="{ model: data.model, className: 'clearfix' }"/>
+                        </div>
+                        <span class="help-block"></span>
+
+                        <div class="tabs clearfix">
+                            <ul class="nav nav-tabs ">
+                                <li><a href="#{%- data.model.get('profileLink') %}">Student Information</a></li>
+                                <li class="active"><a href="#{%- data.model.get('feedbacksLink') %}">Feedbacks</a></li>
+                                <li><a href="#{%- data.model.get('interviewsLink') %}">Interviews</a></li>
+                            </ul>
+                            <div class="tab-pane">
+                                <view data-id="feedbacks" data-constructor="Views/Base" data-options="{
+                                    tpl: {
+                                        src: 'feedbacks.html?v=1',
+                                        $: 'list'
+                                    },
+                                    collection: data.model.get('feedbacks'),
+                                    prepareCollection: false
+                                }"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

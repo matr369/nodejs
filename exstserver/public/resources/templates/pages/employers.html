@@ -1,0 +1,44 @@
+<div class="page-curators">
+    <view data-id="header" data-constructor="Views/Base" data-options='{"tpl": {"src": "header.html?v=1" }}' />
+    <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+        pageTitle: 'Employers',
+        pageDescription: 'List of employers'
+    }"/>
+    <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+        {
+            href: '#employers',
+            title: 'Employers'
+        }
+    ]}"/>
+
+<div class="container">
+    <div class="row">
+    <div class=" content-wraper">
+        <div class="jumbotron">
+            <ul class="nav nav-tabs">
+                <li>
+                    <a href="#students" >Students</a>
+                </li>
+                <li class="active">
+                    <a href="#employers" >Employers</a>
+                </li>
+                <li>
+                    <a href="#managers" >Managers</a>
+                </li>
+                <div class=" pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".add-employer">Add curator</button>
+                    </div>
+                </div>
+            </ul>
+           <view data-id="EmployersTable" data-constructor="Views/EmployersTable" />
+        </div>
+    </div>
+      <view data-id="addEmployer"
+          data-constructor="Views/Overlay"
+          data-options="{className: 'add-employer', title: '{%- data.textAddEmployer %}', hideEvent: 'form:submit:success'}">
+        <view data-id="formAddEmployer" data-constructor="Views/AddEmployerForm" />
+    </view>
+    </div>
+</div>
+</div>

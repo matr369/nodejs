@@ -1,0 +1,25 @@
+<div class="student-common-info">
+    <div class="col-md-4 filed-info">
+        <img class="user-foto avatar" src="{%- data.model.get('avatar') %}" height="180" />
+    </div>
+    <div class="col-md-8 value-info">
+        <table class="table table-user-information">
+            <tbody>
+                <tr>
+                    <th>Name:</th>
+                    <td>{%- data.model.get('name') %}</td>
+                </tr>
+                <tr>
+                    <th>Account:</th>
+                    <td>
+                        {%? data.model.get('enable') %}
+                        <span class="label label-success disable-student">Enabled</span>
+                        {%??%}
+                        <span class="label label-danger enable-student">Disabled</span>
+                        {%?%}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

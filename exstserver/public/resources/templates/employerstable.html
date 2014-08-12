@@ -1,0 +1,66 @@
+<script type="text/template" id="container">
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{%- data.employerName %}</th>
+                <th>{%- data.employerStudents %}</th>
+            </tr>
+            <tr class="filter-container">
+                <th>&nbsp;</th>
+                <th>
+                    <div class="form-group">
+                        <view data-id="employerName" data-constructor="Views/Fields/Base" data-options="{
+                        className: 'form-control',
+                        name: 'employerName',
+                        type: 'name',
+                        attrs: {
+                        placeholder: '{%- data.employerNamePlaceholder %}'
+                         }
+                    }" />
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <view data-id="studentsName" data-constructor="Views/Fields/Base" data-options="{
+                        className: 'form-control',
+                        name: 'studentsName',
+                        type: 'name',
+                        attrs: {
+                        placeholder: '{%- data.employerStudentsPlaceholder %}'
+                         }
+                    }" />
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</script>
+
+<script type="text/template" id="employer">
+    <tr>
+
+        <td>{%- data.index %}</td>
+        <td>{%- data.model.get('name') %}</td>
+        <td>
+            <view data-id="students"  data-constructor="Views/StudentsOfEmployer" data-options="{collection: data.model.get('students') }"/>
+        </td>
+    </tr>
+</script>
+
+<script type="text/template" id="students">
+    <div class="students-list">
+        {% data.collection.forEach(function(student, j) {%}
+            <span class="detach-student">
+                <a class="student" href="#{%- student.get('profileLink') %}">{%- student.get('name') %}</a> <a class="del-stud"><i data-index="{%- j %}" class="fa fa-times"></i></a>
+            </span>
+        {% }); %}
+        <view data-id="addStudPopover" data-constructor="Views/Popover" data-options="{
+            contentPopover: 'Views/Fields/AC',
+            optionsPopover: {
+                name: 'students'
+            }
+        }"></view>
+    </div>
+</script>

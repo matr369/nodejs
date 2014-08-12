@@ -1,0 +1,58 @@
+<div class="students">
+    <view data-id="header" data-constructor="Views/Base" data-options='{"tpl": {"src": "header.html?v=1" }}'/>
+    <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+        pageTitle: 'Students',
+        pageDescription: 'List of students'
+    }"/>
+    <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+         href: '#students',
+            title: 'Students'
+    ]}"/>
+    <div class="container">
+        <div class="row">
+            <div class="content-wraper">
+                <div class="jumbotron">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#students">Students</a></li>
+                        <li><a href="#employers">Employers</a></li>
+                        <li><a href="#managers">Managers</a></li>
+                        <div class="all-check pull-right">
+
+                            <label class="  all-student pull-left">
+                                <view data-constructor="Views/Fields/CheckBox" data-id="allStudents"
+                                      data-options="{name:'allStudents', type:'text', yes:'yes', no:'no'}"/>
+                                <a class="all-student">
+                                    All students
+                                </a>
+                            </label>
+
+                            <div class="btn-group">
+
+                                <button type="button" class="btn btn-primary add-student-link" href="javascript:void 0;"
+                                        data-toggle="modal" data-target=".add-student-popup">Add student
+                                </button>
+                                <view data-id="addStudentPopup"
+                                      data-constructor="Views/Overlay"
+                                      data-options="{className: 'add-student-popup', title: 'New student', hideEvent: 'form:submit:success'}">
+                                    <view data-id='form' data-constructor='Views/AddStudentForm'/>
+                                </view>
+
+
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown"><span
+                                        class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Import from xml</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </ul>
+                    <view data-constructor="Views/StudentsTable" data-id="studentsTable"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

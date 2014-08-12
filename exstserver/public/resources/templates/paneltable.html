@@ -1,0 +1,28 @@
+<div class="info-table">
+    <table class="table table-striped table-hover ">
+        <tbody>
+        {{~ data.properties :property:position }}
+        <tr>
+            <td class="name-coll">{%- property.label %}</td>
+            <td>
+                <view data-id="{%- property.id%}" data-constructor="{%- property.construct%}"
+                      data-options="{%- property.options%}"/>
+            </td>
+        </tr>
+
+        {{~}}
+        </tbody>
+
+    </table>
+    <div >
+
+        <button class="btn edit-button-container btn-primary enable-form pull-right btn-sm">Edit</button>
+
+        <div class="save-button-container pull-right">
+            <button class="btn btn-default editing  cancel-submit btn-sm ">Cancel</button>
+            <button class="btn btn-primary editing submit-button btn-sm ">Save</button>
+
+        </div>
+    </div>
+
+</div>

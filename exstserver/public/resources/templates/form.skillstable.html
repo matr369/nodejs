@@ -1,0 +1,16 @@
+<div>
+    <ol>
+
+        {% data.collection.forEach(function(skill, i){  %}
+
+        <li>
+            {%- skill.get('technology_name') %}
+            <a><i data-id="{%- skill.get('id') %}" class="fa fa-times curs" alt="Delete"> </i></a>
+
+        </li>
+
+        {% }); %}
+
+
+    </ol>
+</div>

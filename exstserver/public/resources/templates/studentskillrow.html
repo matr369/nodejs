@@ -1,0 +1,35 @@
+<script type="text/template" id="studentSkill">
+<tr>
+    <td>
+        <div>
+            {%- data.model.get('technology_name') %}
+        </div>
+    </td>
+    <td>
+            <view data-id="skillLevel" data-constructor="Views/Fields/Dropdown" data-options="{
+                                    name: 'value',
+                                    value: '{%- data.model.get('value') %}',
+                                    rules: 'required',
+                                    items: [{
+                                        value: '',
+                                        label: 'Select level'
+                                    },{
+                                        value: '1',
+                                        label: '1'
+                                    },{
+                                        value: '2',
+                                        label: '2'
+                                    },{
+                                        value: '3',
+                                        label: '3'
+                                    },{
+                                        value: '4',
+                                        label: '4'
+                                    },{
+                                        value: '5',
+                                        label: '5'
+                                    }]
+                                }" />
+    </td>
+</tr>
+</script>

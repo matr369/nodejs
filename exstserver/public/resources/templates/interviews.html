@@ -1,0 +1,83 @@
+<script type="text/template" id="listInterview">
+    <div class="feedback-list">
+        {%? data.collection && data.collection.length %}
+        <div class="accordion">
+            <div class="panel-group" id="accordion">
+                <view data-constructor="Views/InterviewForm" data-options="{ prepareModel: false, model: new data.collection.model(), disable: false, cancelLabel: '' }"/>
+                {% data.collection.forEach(function(el, i){ %}
+                <view data-constructor="Views/InterviewForm" data-options="{ prepareModel: false, model: data.collection.at({%- i %}) }"/>
+                {% }); %}
+            </div>
+        </div>
+        {%??%}
+        <div class="no-inerviews">
+            No interviews...
+        </div>
+        {%?%}
+    </div>
+</script>
+
+<script type="text/template" id="itemInterview">
+<div class="interview-item">
+<div class="accordion-group">
+<div class="panel panel-default">
+<div class="panel-heading accordion-heading">
+    <a class="accordion-toggle"  data-toggle="collapse" href="#interview{%- data.model.get('id') %}">
+        {%- data.model.get('date') || ((new Date).toDateString()) %}
+        {%? data.model.get('interviewer')%}
+        - {%- data.model.get('interviewer') %}
+        {%?%}
+    </a>
+</div>
+<div id="interview{%- data.model.get('id') %}" class="panel-body panel-collapse collapse in">
+    <h3 >{%- data.model.get('interviewer') %}</h3>
+        <view data-id="EmployersTable" data-constructor="Views/StudentSkillsTable" data-options="{ collection : data.model.get('studentSkills'), prepareCollection: false }" />
+    <div class="form-group">
+        <label class="control-label">Note</label>
+        <view data-id="note" data-constructor="Views/Fields/Textarea" data-options="{
+                        className: 'form-control',
+                        value: data.model.get('note') || '',
+                        name: 'note',
+                        rules: {
+                            required: true
+                        },
+                        value: '{%- data.model.get('note') %}'
+                    }"/>
+    </div>
+    <div class="info-interview">
+        <span>
+            <span>Interviewer:</span><span>{%- data.model.get('interviewer')%}</span>
+        </span>
+        <div class="pull-right">
+            <view data-id="result" data-constructor="Views/Fields/Selectable" data-options="{
+                                    name: 'result',
+                                    rules:'required',
+                                    items: [{
+                                        value: 'waiting',
+                                        label: 'Waiting'
+                                    },{
+                                        value: 'no excepted',
+                                        label: 'No Excepted'
+                                    },{
+                                        value: 'excepted',
+                                        label: 'Excepted'
+                                    }]
+                                }" />
+        </div>
+    </div>
+    <div class="form-buttons-container">
+        <div class="edit-button-container">
+            <button type="button" class="btn btn-primary btn-sm enable-form">{%- data.editLabel %}</button>
+        </div>
+        <div class="save-button-container">
+            {%? data.cancelLabel %}
+            <button type="button" class="btn btn-default btn-sm cancel-submit">{%- data.cancelLabel %}</button>
+            {%?%}
+            <button type="button" class="btn btn-primary btn-sm submit-button">{%- data.saveLabel %}</button>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</script>
