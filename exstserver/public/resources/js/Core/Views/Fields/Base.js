@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/25/2014.
  */
-define(["Views/Base", "jquery", "underscore", "Core/Validator", "bootstrap"], function(View, $, _, Validator, bootstrap){
+define("Views/Fields/Base", ["Views/Base", "jquery", "underscore", "Core/Validator", "bootstrap"], function(View, $, _, Validator, bootstrap){
     return View.extend({
         events: {
             "{dropVerificationStatusEvent}": "dropLastVerificationResult"

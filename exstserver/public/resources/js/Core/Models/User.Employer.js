@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 23.07.2014.
  */
-define(["Models/User"], function(User){
+define("Models/User.Employer",["Models/User"], function(User){
     return User.extend({
         defaults: {
             defaultPage: "students"

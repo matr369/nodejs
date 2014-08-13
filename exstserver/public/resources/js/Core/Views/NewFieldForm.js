@@ -1,4 +1,4 @@
-define(["Views/Form", "App", "jquery", "Collections/Fields", "Models/Field"], function (Form, App, $, Fields, Field) {
+define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields", "Models/Field"], function (Form, App, $, Fields, Field) {
     return Form.extend({
         events:{
             "keyup": "submitWithKey",

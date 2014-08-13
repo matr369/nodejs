@@ -1,4 +1,4 @@
-define(["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function(Form, App, $, Students, Student){
+define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function(Form, App, $, Students, Student){
     return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define(["Models/Base","Collections/StudentSkills"], function(Base, StudentSkills){
+define("Models/Interview",["Models/Base","Collections/StudentSkills"], function(Base, StudentSkills){
     return Base.extend({
         defaults: {
             result: "",

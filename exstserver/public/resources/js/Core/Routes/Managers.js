@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 05.08.2014.
  */
-define(["Routes/Base", "App"], function(Router, App){
+define("Routes/Managers", ["Routes/Base", "App"], function(Router, App){
     return Router.extend({
         routes: {
             "managers":"showManagersList"

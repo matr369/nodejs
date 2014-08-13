@@ -5,7 +5,7 @@
  * Time: 18:02
  * To change this template use File | Settings | File Templates.
  */
-define(["Models/Student"], function(Student){
+define("Models/StudentInstance",["Models/Student"], function(Student){
     var RuntimeCollection = {
         list: {},
         set: function(student){

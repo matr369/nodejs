@@ -5,7 +5,7 @@
  * Time: 17:03
  * To change this template use File | Settings | File Templates.
  */
-define(["Views/Fields/Base", "jquery"], function(Field, $){
+define("Views/Fields/Textarea", ["Views/Fields/Base", "jquery"], function(Field, $){
     return Field.extend({
     }, {
         defaults: $.extend(true, {}, Field.defaults, {

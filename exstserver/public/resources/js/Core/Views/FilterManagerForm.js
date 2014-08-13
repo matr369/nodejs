@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
-define(["Views/Form", "jquery"], function(Form, $){
+define("Views/FilterManagerForm",["Views/Form", "jquery"], function(Form, $){
     return Form.extend({
         events:{
             "keyup": "submit"

@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/17/2014.
  */
-define(["App", "Views/Base", "jquery", "Core/Templates"], function(App, View, $, Templates){
+define("Views/Notification",["App", "Views/Base", "jquery", "Core/Templates"], function(App, View, $, Templates){
 
     var Config = App.Config.notification;
 

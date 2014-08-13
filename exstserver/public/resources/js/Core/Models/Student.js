@@ -5,7 +5,7 @@
  * Time: 18:00
  * To change this template use File | Settings | File Templates.
  */
-define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
+define("Models/Student",["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
 debugger;
     return Base.extend({
         defaults: function(){

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 28.07.2014.
  */
-define(["Routes/Base", "App"], function(Router, App){
+define("Routes/Employers", ["Routes/Base", "App"], function(Router, App){
     return Router.extend({
         routes: {
             "employers":"showEmployersList"

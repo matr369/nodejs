@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 28.07.2014.
  */
-define(["Views/Base","underscore", "Views/FilterEmployerForm", "Views/ListEmployers"],function(Base, _, FilterEmployerForm, ListEmployers ){
+define("Views/EmployersTable",["Views/Base","underscore", "Views/FilterEmployerForm", "Views/ListEmployers"],function(Base, _, FilterEmployerForm, ListEmployers ){
     return Base.extend({
         events: {
             "view:ready": "initSubViews"

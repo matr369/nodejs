@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 29.07.2014.
  */
-define(["Views/Base", "Collections/Employers", "Models/Employer", "underscore", "jquery"], function(Base, Employers, Employer, _, $){
+define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Employer", "underscore", "jquery"], function(Base, Employers, Employer, _, $){
     return Base.extend({
         constructor: function(options){
             options = options || {};

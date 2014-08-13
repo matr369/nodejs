@@ -1,4 +1,4 @@
-define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, _, $, Students, Student, PropertyList, StudentsFromTable) {
+define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, _, $, Students, Student, PropertyList, StudentsFromTable) {
     return Form.extend({
         events: {
             "click .extra": "addField",

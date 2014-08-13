@@ -5,7 +5,7 @@
  * Time: 1:04
  * To change this template use File | Settings | File Templates.
  */
-define(["Collections/Base", "Models/Interview"], function(Collection, Interview){
+define("Collections/Interviews",["Collections/Base", "Models/Interview"], function(Collection, Interview){
     return Collection.extend({
         model: Interview,
         url: "/interview"

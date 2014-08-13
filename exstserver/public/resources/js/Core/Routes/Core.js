@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/21/2014.
  */
-define(["Routes/Base", "App"], function(Router, App){
+define("Routes/Core", ["Routes/Base", "App"], function(Router, App){
     return  Router.extend({
         routes: {
             "": "redirectToDefaultPage",

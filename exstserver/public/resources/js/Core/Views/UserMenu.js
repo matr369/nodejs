@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 21.07.2014.
  */
-define(["Views/Base", "bootstrap"], function(View, bootstrap){
+define("Views/UserMenu",["Views/Base", "bootstrap"], function(View, bootstrap){
     return View.extend({
     }, {
         defaults: $.extend(true, {}, View.defaults, {

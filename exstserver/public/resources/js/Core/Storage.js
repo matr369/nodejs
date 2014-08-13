@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 17.07.2014.
  */
-define(["App", "underscore"], function(App, _){
+define("Core/Storage", ["App", "underscore"], function(App, _){
 
     var runtimeStorage = {};
 

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 28.07.2014.
  */
-define(["Collections/Base", "Models/Employer"], function(Base, Employer){
+define("Collections/Employers", ["Collections/Base", "Models/Employer"], function(Base, Employer){
    return Base.extend({
        model: Employer,
        url: "/curators",

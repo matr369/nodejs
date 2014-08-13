@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 29.07.2014.
  */
-define(["Models/Base", "Collections/Students", "underscore"],function(Base, Students, _){
+define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],function(Base, Students, _){
     return Base.extend({
         defaults: function(){
             return {

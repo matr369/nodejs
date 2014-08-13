@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 17.07.2014.
  */
-define({
+define("Config", {
     validateBrowserFeatures: function(){
         return !!(window.localStorage && window.JSON && Function.prototype.bind);
     },
