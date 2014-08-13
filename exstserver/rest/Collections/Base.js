@@ -50,10 +50,37 @@ var Collection = require("backbone").Collection,
             }).fail(xhr.reject);
             return xhr;
         },
+        fetchEachModel: function(result){
+            var self = this,
+                modelFetching = [],
+                xhr = $();
+            try {
+            if (result) {
+                self.set(result || [], {reset: true});
+            }
+            self.forEach(function(model){
+                modelFetching.push(model.afterFetch());
+            });
+                $.when.apply($, modelFetching)
+                    .done(xhr.resolve)
+                    .fail(xhr.reject);
+            } catch (e) {
+                xhr.reject(e);
+            }
+            return xhr;
+        },
         where: function (filter, options) {
+            var self = this, xhr = $();
             options = options || {};
             options.filter = filter;
-            return this.sync("find", this, options);
+            this.sync("find", this, options).done(function(models){
+                self.fetchEachModel(models).done(function(){
+                    self.afterFetch(models)
+                        .done(xhr.resolve)
+                        .fail(xhr.reject);
+                }).fail(xhr.reject);
+            });
+            return xhr;
         },
         beforeFetch: function () {
         },
@@ -68,27 +95,20 @@ var Collection = require("backbone").Collection,
             if (this.length) {
                 result = this.where({
                     _id: { $in: self.getModelsId() }
+                }).done(function(){
+                    xhr.resolve(self.exportToJSON());
                 });
             } else {
-                result = Collection.prototype.fetch.apply(this, arguments);
-            }
-            result.done(function(result){
-                var modelFetching = [];
-                self.set(result || [], {reset: true});
-                self.forEach(function(model){
-                    modelFetching.push(model.afterFetch());
-                });
-                try {
-                    $.when.apply($, modelFetching).done(function(){
-                        self.afterFetch().done(function(){
-                            xhr.resolve(self.exportToJSON());
+                result = Collection.prototype.fetch.apply(this, arguments)
+                    .done(function(result){
+                        self.fetchEachModel(result).done(function(){
+                            self.afterFetch(result).done(function(){
+                                xhr.resolve(self.exportToJSON());
+                            })
                         }).fail(xhr.reject);
-                    }).fail(xhr.reject);
-                } catch (e) {
-                    xhr.reject(e);
-                }
-
-            }).fail(xhr.reject);
+                    });
+            }
+            result.fail(xhr.reject);
             return xhr;
         },
         getModelsId: function(){

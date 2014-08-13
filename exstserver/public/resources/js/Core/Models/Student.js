@@ -37,20 +37,17 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
             this.set("enable", false);
         },
         fetchFeedbacks: function(){
+            var self = this;
             if (!this.__feedbacks) {
                 this.__feedbacks = $.Deferred();
-                //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__feedbacks с коллекцией.
-                this.set("feedbacks", new Feeds([{
-                    id: 1,
-                    curator: "Dmitrii Ivanov",
-                    date: "01/01/2014",
-                    note: "The is text..."
-                },{
-                    id: 2,
-                    curator: "Mikhail Prusov",
-                    date: "01/02/2014"
-                }]));
-                this.__feedbacks.resolve();
+
+                Backbone.ajax({
+                    url: self.urlRoot + "/" + self.id + "/feedbacks",
+                    type: "GET"
+                }).done(function(result){
+                    self.set("feedbacks", new Feeds(result));
+                    self.__feedbacks.resolve();
+                });
             }
             return this.__feedbacks;
         },

@@ -2,6 +2,8 @@
  * Created by Administrator on 11.08.2014.
  */
 var base = require("./Base");
+var Feedbacks = require("./../Collections/feedbacks");
+var $ = require("Deferred");
 
 module.exports = base.extend({
     collection_db: "students",
@@ -47,5 +49,15 @@ module.exports = base.extend({
             trainings: "",
             certificates: ""
         };
+    },
+    feedbacks: function(){
+        var xhr = $(),
+            feeds = new Feedbacks();
+        feeds.where({
+            student: this.id
+        }).done(function(){
+            xhr.resolve(feeds.exportToJSON());
+        }).fail(xhr.fail);
+        return xhr;
     }
 });

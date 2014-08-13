@@ -13,7 +13,11 @@ var setUpModel = function (params, method, data) {
     }
     switch (method) {
         case "GET":
-            return this.fetch();
+            if (params.method) {
+                return this[params.method](data);
+            } else {
+                return this.fetch();
+            }
             break;
         case "DELETE":
             return this.destroy();
