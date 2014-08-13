@@ -18,7 +18,7 @@ var Backbone = require("backbone"),
 var ConnectorForCollections = function(method, model, options){
     var xhr = $();
     var exports = model.model.prototype.exportAttrs || [];
-    var sort = model.sortBy || {};
+    var sort = model.sortByAttrs || {};
     mongoConnector.done(function(){
         switch (method) {
             case 'read':

@@ -18,6 +18,7 @@ var Collection = require("backbone").Collection,
         },
         isCollection: true,
         model: Model,
+        sortByAttrs: {},
         find: function(filter){
             var xhr = $(),
                 self = this;

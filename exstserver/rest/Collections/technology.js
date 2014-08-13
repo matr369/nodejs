@@ -6,7 +6,7 @@ var $ = require("Deferred");
 var Model = require("./../Models/technology");
 module.exports = base.extend({
     model: Model,
-    sortBy: {
+    sortByAttrs: {
         technology_name: 1
     }
 });
