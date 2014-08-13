@@ -8,7 +8,6 @@ define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], 
          */
         constructor: function(){
             if (this.constructor._instance) {
-                debugger;
                 return this.constructor._instance;
             } else {
                 Collection.prototype.constructor.apply(this, arguments);

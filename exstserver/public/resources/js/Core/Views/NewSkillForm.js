@@ -30,8 +30,6 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
             },
             prepareCollection: false,
             formTitle :"new skill"
-
-
         })
     });
 });

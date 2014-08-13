@@ -1,5 +1,6 @@
 define("Views/Pages/SettingsSkills", ["Views/Page"], function(Page){
-    return Page.extend({},{
+    return Page.extend({
+    },{
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {
                 src: "pages/settings.skills.html?v=1"

@@ -5,16 +5,18 @@ define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"]
         },
 
         destroy:function(event){
-            debugger;
-            this.collection.remove($(event.target).data("id"));
-            $(event.target).parents("tr").detach();
-            //$(event.target).parent().detach();
+            var model = this.collection.get($(event.target).data("id"));
+            this.collection.remove(model);
+            model.destroy();
+        },
+
+        __ready: function(){
+            this.listenTo(this.options.collection, "add remove", this.rerender);
+            Base.prototype.__ready.apply(this, arguments);
         },
 
         constructor: function(options){
-            debugger;
             options.collection = new Skills();
-            this.listenTo(options.collection, "add remove", function(){debugger;this.rerender()});
             Base.prototype.constructor.apply(this, arguments);
         },
 
@@ -31,7 +33,6 @@ define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"]
                 src: "form.skillstable.html?v=1"
             },
             formTitle :"skills table"
-
         })
     });
 
