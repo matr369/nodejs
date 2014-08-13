@@ -10,7 +10,7 @@ debugger;
     return Base.extend({
         defaults: function(){
             return {
-                name: "",
+                name: "Ivan",
                 enable: true,
                 status:'work',
                 avatar: "resources/images/default_avatar_male.jpg"
@@ -20,6 +20,7 @@ debugger;
 
 
         constructor: function(options){
+            debugger;
             this.on("change:id", function(){
                 this.set("profileLink", "students/" + this.id);
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");

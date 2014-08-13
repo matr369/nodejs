@@ -1,15 +1,14 @@
-define(["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function(Form, App, $, Students, Student){
-    return Form.extend({
+define(["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function (Form, App, $, Students, Student) {
+   return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"
-
         }),
-
-        constructor: function(options){
-
+        constructor: function (options) {
+            debugger;
             options.collection = new Students();
-            Form.prototype.constructor.apply(this,[options]);
+            Form.prototype.constructor.apply(this, [options]);
         }
+
 
 
     }, {
@@ -19,7 +18,6 @@ define(["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"]
             tpl: {
                 src: "form.addstudent.html?v=1"
             },
-            submitButton: ".button-create",
             submitButtonText: "Create",
             nameText: "Student's name",
             emailText: "Student's email",

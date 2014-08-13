@@ -1,15 +1,15 @@
-<tbody>{% var length = data.students.length; %}
-{{~ data.students :student:position }}
-{%? (position <= length+1) %}
+<tbody>
+
+{% data.collection.forEach(function(student, j) {%}
 <tr class="active">
-    <td width="10">{%- position+1 %}</td>
+    <td width="10"></td>
     <td>
-        <a href="students/1.jsp" class="student-name">{%- student.name %}</a></td>
+        <a href="#students/1.jsp" class="student-name">{%- student.get('name') %}</a></td>
 
 
     {{~ data.fields :field:position1 }}
     {% var fieldname = field; %}
-    <td>{%- student[fieldname] %}
+    <td>{%- student.get(fieldname) %}
     </td>
     {{~}}
 
@@ -17,6 +17,13 @@
     <td></td>
 
 </tr>
-{%?%}
-{{~}}
+
+{% }); %}
+
+
+
+
+
+
+
 </tbody>

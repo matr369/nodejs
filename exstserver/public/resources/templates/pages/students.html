@@ -33,11 +33,7 @@
                                 <button type="button" class="btn btn-primary add-student-link" href="javascript:void 0;"
                                         data-toggle="modal" data-target=".add-student-popup">Add student
                                 </button>
-                                <view data-id="addStudentPopup"
-                                      data-constructor="Views/Overlay"
-                                      data-options="{className: 'add-student-popup', title: 'New student', hideEvent: 'form:submit:success'}">
-                                    <view data-id='form' data-constructor='Views/AddStudentForm'/>
-                                </view>
+
 
 
                                 <button type="button" class="btn btn-primary dropdown-toggle"
@@ -45,16 +41,24 @@
                                         class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Import from xml</a></li>
+                                    <li><a href="#"><label>Import from xml</label><input  type="file"></a></li>
+
 
                                 </ul>
                             </div>
                         </div>
 
                     </ul>
-                    <view data-constructor="Views/StudentsTable" data-id="studentsTable"/>
+                    <view data-constructor="Views/StudentsTable" data-id="studentsTableNomberOne"/>
                 </div>
+
             </div>
+            <view data-id="addStudentPopup"
+                  data-constructor="Views/Overlay"
+                  data-options="{className: 'add-student-popup', title: 'New student', hideEvent: 'form:submit:success'}">
+                <view data-id='AddStudentForm' data-constructor='Views/AddStudentForm'/>
+            </view>
         </div>
     </div>
+
 </div>

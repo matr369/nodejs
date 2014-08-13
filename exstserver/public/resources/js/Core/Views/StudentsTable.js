@@ -1,16 +1,16 @@
-define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, _, $, Students, Student, PropertyList, StudentsFromTable) {
+define(["Views/Form","App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable) {
     return Form.extend({
-        events: {
+        events: $.extend(true, {}, Form.prototype.events, {
             "click .extra": "addField",
             "click .deleteField": "deleteField",
             "view:ready": "initSubViews",
-            "click .find":"submit"
+            "click .find": "findIt"
 
 
-
-        },
+        }),
 
         findIt:function(){
+            debugger;
             $(".intable").detach();
             this.initSubViews();
         },
@@ -19,9 +19,13 @@ define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/St
             debugger;
             this.childrenViews.studentsList.rerender();
         },
-        __sendData: function(data){
-            return $.Deferred().resolve();
+
+        __sendData:function(data){
+            debugger;
+            return $.Deferred().resolve([]);
         },
+
+
 
         initSubViews: function(){
 
@@ -34,9 +38,10 @@ define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/St
             studentsFromTable.show();
         },
 
-        constructor: function (options) {
-            //options.collection = new Students();
-            Form.prototype.constructor.apply(this, [options]);
+        constructor: function(options){
+            debugger;
+            options.collection = new Students();
+            Form.prototype.constructor.apply(this,[options]);
         },
 
         deleteField: function (event) {
@@ -56,7 +61,7 @@ define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/St
                     return field == $(event.target).data("index")
                 }),
                 len = this.options.fields.length;
-            if (ind == -1 && $(event.target).data("index")!="Name") {
+            if (ind == -1 && $(event.target).data("index")!="name") {
                 this.options.fields[len] = $(event.target).data("index");
                 this.rerender();
             }
@@ -76,12 +81,11 @@ define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/St
             tpl: {
                 src: "studentstable.html?v=1"
             },
-            defaultPropertyConstructor: "Views/Fields/Base",
             fields: [],
             properties: {},
-            prepareCollections: false
+            title:"StudentsTable"
+
 
         })
     });
 });
-
