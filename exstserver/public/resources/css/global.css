@@ -419,12 +419,15 @@ h4 {
   padding: 1px;
   border-radius: 5px;
 }
-.form-skills .curs:hover {
+.page-settings-skills .form-skills .curs:hover {
   cursor: pointer;
+}
+.page-settings-skills .skill-form-name {
+  width: 300px;
 }
 .all-student {
   margin: 5px;
 }
-.extra{
-    cursor: pointer;
+.extra {
+  cursor: pointer;
 }
