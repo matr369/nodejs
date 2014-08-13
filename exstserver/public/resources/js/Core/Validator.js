@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 26.07.2014.
  */
-define(["underscore"], function (_) {
+define("Core/Validator", ["underscore"], function (_) {
     return {
         patterns: {
             __defaults: {},

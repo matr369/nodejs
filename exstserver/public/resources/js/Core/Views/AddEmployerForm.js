@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 28.07.2014.
  */
-define(["Views/Form", "App", "jquery", "Collections/Employers", "Models/Employer"], function(Form, App, $, Employers, Employer){
+define("Views/AddEmployerForm",["Views/Form", "App", "jquery", "Collections/Employers", "Models/Employer"], function(Form, App, $, Employers, Employer){
     return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"

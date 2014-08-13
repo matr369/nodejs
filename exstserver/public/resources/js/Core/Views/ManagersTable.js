@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
-define(["Views/Base","underscore", "Views/FilterManagerForm", "Views/ListManagers"],function(Base, _, FilterManagerForm, ListManagers ){
+define("Views/ManagersTable",["Views/Base","underscore", "Views/FilterManagerForm", "Views/ListManagers"],function(Base, _, FilterManagerForm, ListManagers ){
     return Base.extend({
         events: {
             "view:ready": "initSubViews"

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
-define(["Collections/Base", "Models/Manager"], function(Base, Manager){
+define("Collections/Managers",["Collections/Base", "Models/Manager"], function(Base, Manager){
     return Base.extend({
         model: Manager,
         url: "/managers",

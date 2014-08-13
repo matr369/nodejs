@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 17.07.2014.
  */
-define(["Backbone", "jquery", "underscore"], function(Backbone, $, _){
+define("Routes/Base", ["Backbone", "jquery", "underscore"], function(Backbone, $, _){
 
     var RoutesManager = {
         list: {},

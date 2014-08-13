@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/18/2014.
  */
-define(["Backbone", "Models/Base", "jquery"], function(Backbone, Model, $){
+define("Collections/Base", ["Backbone", "Models/Base", "jquery"], function(Backbone, Model, $){
     return Backbone.Collection.extend({
         model: Model,
         at: function(position){

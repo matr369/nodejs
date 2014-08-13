@@ -1,4 +1,4 @@
-define(["Views/Page"], function(Page){
+define("Views/CheckView",["Views/Page"], function(Page){
     return Page.extend({},{
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {

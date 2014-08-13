@@ -1,4 +1,4 @@
-define(["Views/Base"], function(Page){
+define("Views/AddCheckboxFieldForm", ["Views/Base"], function(Page){
     return Page.extend({},{
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {

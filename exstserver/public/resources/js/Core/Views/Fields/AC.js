@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 29.07.2014.
  */
-define(["Views/Fields/Base", "Collections/Base", "jquery", "underscore", "typeahead"], function(Field, Collection, $, _, ac) {
+define("Views/Fields/AC", ["Views/Fields/Base", "Collections/Base", "jquery", "underscore", "typeahead"], function(Field, Collection, $, _, ac) {
 
     return Field.extend({
         events: {

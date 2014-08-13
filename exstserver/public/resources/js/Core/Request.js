@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 17.07.2014.
  */
-define(["jquery", "App"], function($, App){
+define("Core/Request", ["jquery", "App"], function($, App){
 
     var currentRequests = {};
 

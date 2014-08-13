@@ -1,4 +1,4 @@
-define(["Views/Base"], function(View){
+define("Views/PageDescription",["Views/Base"], function(View){
     return View.extend({},{
         defaults: $.extend(true, {}, View.defaults, {
             tpl: {

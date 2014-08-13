@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/25/2014.
  */
-define(["Views/Base", "jquery", "bootstrap"], function(View, $, bootstrap){
+define("Views/Overlay",["Views/Base", "jquery", "bootstrap"], function(View, $, bootstrap){
     return View.extend({
         events: {
             "shown.bs.modal": "__showComplete",

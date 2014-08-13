@@ -1,4 +1,4 @@
-define(["Models/Base", "underscore"], function(Model, _){
+define("Models/Property", ["Models/Base", "underscore"], function(Model, _){
 
     return Model.extend({
         defaults:{

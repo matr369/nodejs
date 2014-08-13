@@ -5,7 +5,7 @@
  * Time: 1:48
  * To change this template use File | Settings | File Templates.
  */
-define(["Views/Base", "jquery"], function(Base, $){
+define("Views/CommonStudentInfo",["Views/Base", "jquery"], function(Base, $){
     return Base.extend({
         events: {
             "click .disable-student": "disableStudent",

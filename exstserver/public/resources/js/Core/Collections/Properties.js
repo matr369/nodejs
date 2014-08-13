@@ -1,4 +1,4 @@
-define(["Models/Property", "Collections/Base", "underscore"], function(Property, Collection, _){
+define("Collections/Properties",["Models/Property", "Collections/Base", "underscore"], function(Property, Collection, _){
     return Collection.extend({
         model:Property,
         /**

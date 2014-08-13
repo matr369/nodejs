@@ -1,4 +1,4 @@
-define(["Views/Form", "App", "Collections/Skills", "Models/Skill"], function(Form, App, Skills, Skill){
+define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/Skill"], function(Form, App, Skills, Skill){
     return Form.extend({
         events:{
             "keyup": "submitWithKey",

@@ -1,5 +1,6 @@
-define(["Views/Form","App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable) {
-    return Form.extend({
+
+define("Views/StudentsTable", ["Views/Form","App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable) {
+   return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "click .extra": "addField",
             "click .deleteField": "deleteField",

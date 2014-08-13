@@ -1,4 +1,4 @@
-define(["Views/Page", "jquery"], function(Page, $){
+define("Views/Pages/Settings", ["Views/Page", "jquery"], function(Page, $){
     return Page.extend({},{
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {

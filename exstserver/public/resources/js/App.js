@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 16.07.2014.
  */
-define(["underscore", "Backbone", "jquery", "Config"],function(_, Backbone, $, Config){
+define("App", ["underscore", "Backbone", "jquery", "Config"],function(_, Backbone, $, Config){
     var Application = {
         Config: Config
     };

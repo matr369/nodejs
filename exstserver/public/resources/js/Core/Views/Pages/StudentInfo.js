@@ -5,7 +5,7 @@
  * Time: 0:41
  * To change this template use File | Settings | File Templates.
  */
-define(["Views/Page", "Models/StudentInstance", "jquery"], function(Page, Student, $){
+define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jquery"], function(Page, Student, $){
 
     return Page.extend({
 

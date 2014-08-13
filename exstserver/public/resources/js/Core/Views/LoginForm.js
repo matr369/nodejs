@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 22.07.2014.
  */
-define(["Views/Form", "App"], function(Form, App){
+define("Views/LoginForm",["Views/Form", "App"], function(Form, App){
    return Form.extend({
         /*
          function handles user's authentication

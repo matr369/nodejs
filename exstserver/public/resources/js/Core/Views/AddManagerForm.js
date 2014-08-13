@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
-define(["Views/Form", "App", "jquery", "Collections/Managers", "Models/Manager"], function(Form, App, $, Managers, Manager){
+define("Views/AddManagerForm",["Views/Form", "App", "jquery", "Collections/Managers", "Models/Manager"], function(Form, App, $, Managers, Manager){
     return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"

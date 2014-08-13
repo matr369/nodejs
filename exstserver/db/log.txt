@@ -367,3 +367,34 @@
 2014-08-13T16:00:55.314+0300 [clientcursormon] mem (MB) res:39 virt:468
 2014-08-13T16:00:55.314+0300 [clientcursormon]  mapped (incl journal view):320
 2014-08-13T16:00:55.314+0300 [clientcursormon]  connections:5
+2014-08-13T16:05:55.339+0300 [clientcursormon] mem (MB) res:39 virt:468
+2014-08-13T16:05:55.339+0300 [clientcursormon]  mapped (incl journal view):320
+2014-08-13T16:05:55.339+0300 [clientcursormon]  connections:5
+2014-08-13T16:06:11.881+0300 [conn117] end connection 127.0.0.1:51088 (4 connections now open)
+2014-08-13T16:06:11.881+0300 [conn121] end connection 127.0.0.1:51092 (3 connections now open)
+2014-08-13T16:06:11.881+0300 [conn119] end connection 127.0.0.1:51090 (2 connections now open)
+2014-08-13T16:06:11.881+0300 [conn118] end connection 127.0.0.1:51089 (1 connection now open)
+2014-08-13T16:06:11.881+0300 [conn120] end connection 127.0.0.1:51091 (0 connections now open)
+2014-08-13T16:10:55.357+0300 [clientcursormon] mem (MB) res:39 virt:463
+2014-08-13T16:10:55.357+0300 [clientcursormon]  mapped (incl journal view):320
+2014-08-13T16:10:55.357+0300 [clientcursormon]  connections:0
+2014-08-13T16:15:55.374+0300 [clientcursormon] mem (MB) res:39 virt:463
+2014-08-13T16:15:55.374+0300 [clientcursormon]  mapped (incl journal view):320
+2014-08-13T16:15:55.374+0300 [clientcursormon]  connections:0
+2014-08-13T16:18:08.264+0300 CTRL_CLOSE_EVENT signal
+2014-08-13T16:18:08.264+0300 [consoleTerminate] got CTRL_CLOSE_EVENT, will terminate after current cmd ends
+2014-08-13T16:18:08.264+0300 [consoleTerminate] now exiting
+2014-08-13T16:18:08.264+0300 [consoleTerminate] dbexit: 
+2014-08-13T16:18:08.264+0300 [consoleTerminate] shutdown: going to close listening sockets...
+2014-08-13T16:18:08.264+0300 [consoleTerminate] closing listening socket: 480
+2014-08-13T16:18:08.264+0300 [consoleTerminate] shutdown: going to flush diaglog...
+2014-08-13T16:18:08.264+0300 [consoleTerminate] shutdown: going to close sockets...
+2014-08-13T16:18:08.265+0300 [consoleTerminate] shutdown: waiting for fs preallocator...
+2014-08-13T16:18:08.265+0300 [consoleTerminate] shutdown: lock for final commit...
+2014-08-13T16:18:08.265+0300 [consoleTerminate] shutdown: final commit...
+2014-08-13T16:18:08.299+0300 [consoleTerminate] shutdown: closing all files...
+2014-08-13T16:18:08.300+0300 [consoleTerminate] closeAllFiles() finished
+2014-08-13T16:18:08.300+0300 [consoleTerminate] journalCleanup...
+2014-08-13T16:18:08.313+0300 [consoleTerminate] removeJournalFiles
+2014-08-13T16:18:08.315+0300 [consoleTerminate] shutdown: removing fs lock...
+2014-08-13T16:18:08.316+0300 [consoleTerminate] dbexit: really exiting now

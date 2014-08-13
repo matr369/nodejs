@@ -1,4 +1,4 @@
-define(["Routes/Base", "App"], function(Router, App){
+define("Routes/Settings", ["Routes/Base", "App"], function(Router, App){
     return  Router.extend({
         routes: {
 

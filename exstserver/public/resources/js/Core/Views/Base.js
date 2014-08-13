@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/17/2014.
  */
-define(["Backbone", "underscore", "jquery", "App", "Core/Templates"], function(Backbone, _, $, App, Templates){
+define("Views/Base",["Backbone", "underscore", "jquery", "App", "Core/Templates"], function(Backbone, _, $, App, Templates){
 
     return Backbone.View.extend({
         events: {

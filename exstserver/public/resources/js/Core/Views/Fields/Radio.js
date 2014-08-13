@@ -1,4 +1,4 @@
-define(["Views/Fields/Base", "jquery", "underscore"], function(View, $, _){
+define("Views/Fields/Radio", ["Views/Fields/Base", "jquery", "underscore"], function(View, $, _){
     return View.extend({
         events:{
             "change {items}":"edited"
