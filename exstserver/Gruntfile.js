@@ -25,6 +25,18 @@ module.exports = function(grunt) {
                 dest: "<%= jsRoot %>/application.js"
             }
         },
+        'closure-compiler': {
+            frontend: {
+                closurePath: './',
+                js: "<%= jsRoot %>/application.js",
+                jsOutputFile: "<%= jsRoot %>/application.min.js",
+                maxBuffer: 500,
+                noreport: true,
+                options: {
+                    compilation_level: 'SIMPLE_OPTIMIZATIONS'
+                }
+            }
+        },
         watch: {
             files: ['<%= jsRoot %>/**/*.js'],
             tasks: ['concat']
@@ -33,7 +45,8 @@ module.exports = function(grunt) {
 
 
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-closure-compiler');
 
-    grunt.registerTask('default', ['concat']);
+    grunt.registerTask('default', ['concat', 'closure-compiler']);
 
 };
