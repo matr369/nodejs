@@ -7,6 +7,11 @@ define("Views/AddManagerForm",["Views/Form", "App", "jquery", "Collections/Manag
             "view:parent:hide": "reset"
         }),
 
+        onSuccessSubmit: function(){
+            this.reset();
+            Form.prototype.onSuccessSubmit.apply(this, arguments);
+        },
+
         constructor: function(options){
             options.collection = new Managers();
             Form.prototype.constructor.apply(this,[options]);
@@ -23,8 +28,8 @@ define("Views/AddManagerForm",["Views/Form", "App", "jquery", "Collections/Manag
             submitButtonText: "Create",
             nameText: "Manager's name",
             emailText: "Manager's email",
-            emailPlaceholder: "matr369@exadel.com",
-            namePlaceholder: "Evgene Ivashkevich"
+            emailPlaceholder: "Example: pgordon@exadel.com",
+            namePlaceholder: "Example: Peter Gordon"
         })
     });
 });

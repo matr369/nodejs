@@ -32,9 +32,8 @@ define("Views/ManagersTable",["Views/Base","underscore", "Views/FilterManagerFor
                 src: "managerstable.html?v=1",
                 $ : "container"
             },
-
             managerName: "Name",
-            managerNamePlaceholder: "Masha Masha"
+            managerNamePlaceholder: "Search by name..."
         })
     });
 });
