@@ -14,14 +14,12 @@
                         <span class="text">{%- data.textChangePassword%}</span>
                     </a>
                 </li>
-                {% if(App.user.can("view_settings")){%}
-                    <li>
-                        <a href="#settings">
-                            <i class="{%- data.iconSettings %}"></i>
-                            <span class="text">{%- data.textSettings%}</span>
-                        </a>
-                    </li>
-                {% } %}
+                <li>
+                    <a href="#settings">
+                        <i class="{%- data.iconSettings %}"></i>
+                        <span class="text">{%- data.textSettings%}</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#logout">
                         <i class="{%- data.iconLogout%}"></i>
