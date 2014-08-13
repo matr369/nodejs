@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
+
     return Base.extend({
         defaults: function(){
             return {

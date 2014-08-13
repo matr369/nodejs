@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 17.07.2014.
  */
-define(["Backbone", "jquery"], function(Backbone, $){
+define("Models/Base",["Backbone", "jquery"], function(Backbone, $){
     return Backbone.Model.extend({
         idAttribute: "_id",
         /**

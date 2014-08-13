@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 29.07.2014.
  */
-define(["Views/Form", "jquery"], function(Form, $){
+define("Views/FilterEmployerForm",["Views/Form", "jquery"], function(Form, $){
     return Form.extend({
         events:{
             "keyup": "submit"

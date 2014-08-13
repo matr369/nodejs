@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 23.07.2014.
  */
-define(["Backbone","Models/Base","crypto","jquery", "Core/Request"], function(Backbone, Base, crypto, $, Request){
+define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request"], function(Backbone, Base, crypto, $, Request){
     var User = Backbone.Model.extend({
         defaults: {
             defaultPage: "login",

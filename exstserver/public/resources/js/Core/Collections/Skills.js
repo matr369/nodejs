@@ -1,4 +1,4 @@
-define(["Models/Skill", "Collections/Base", "underscore"], function(Skill, Collection, _){
+define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], function(Skill, Collection, _){
     return Collection.extend({
         model:Skill,
         url: '/technology',

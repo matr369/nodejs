@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/21/2014.
  */
-define(["Routes/Base", "App"], function(Router){
+define("Routes/Students", ["Routes/Base", "App"], function(Router){
     return  Router.extend({
         routes: {
             "students": "showList",

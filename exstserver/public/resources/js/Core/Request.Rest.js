@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 05.08.2014.
  */
-define(["Backbone", "App", "jquery"], function(Backbone, App, $){
+define("Core/Request.Rest", ["Backbone", "App", "jquery"], function(Backbone, App, $){
     var Config = App.Config.request;
     //Backbone.emulateHTTP = true;
     Backbone.ajax =  function(request){

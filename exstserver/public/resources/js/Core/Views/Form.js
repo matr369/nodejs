@@ -1,7 +1,7 @@
 /**
  * Created by dmantsevich on 7/25/2014.
  */
-define(["Views/Base", "Views/Fields/Base", "jquery", "underscore", "Core/Request"], function(View, Field, $, _, Request){
+define("Views/Form",["Views/Base", "Views/Fields/Base", "jquery", "underscore", "Core/Request"], function(View, Field, $, _, Request){
 
     return View.extend({
         events: {

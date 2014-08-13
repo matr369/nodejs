@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 17.07.2014.
  */
-define(["jquery", "underscore", "App", "Core/Storage", "libs/doT"], function($, _, App, Storage, doT){
+define("Core/Templates", ["jquery", "underscore", "App", "Core/Storage", "doT"], function($, _, App, Storage, doT){
 
     var Config = App.Config.templates, // Settings
         defaults = {

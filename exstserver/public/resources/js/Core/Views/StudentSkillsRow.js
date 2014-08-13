@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define(["Views/Form","underscore"], function(Form, _){
+define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
     return Form.extend({
         constructor: function(options){
             options = options || {};

@@ -2,7 +2,7 @@
  * Created by dmantsevich on 7/17/2014.
  */
 //TODO: Fix hide event!
-define(["Views/Base", "jquery", "App"], function(View, $, App){
+define("Views/Spooler",["Views/Base", "jquery", "App"], function(View, $, App){
 
     var Config = App.Config.spooler;
 

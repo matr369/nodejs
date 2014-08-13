@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 31.07.2014.
  */
-define(["Views/Base", "jquery", "bootstrap"], function(View, $, bootstrap){
+define("Views/Popover",["Views/Base", "jquery", "bootstrap"], function(View, $, bootstrap){
     return View.extend({
         events: {
             "view:ready": "__initPopover",

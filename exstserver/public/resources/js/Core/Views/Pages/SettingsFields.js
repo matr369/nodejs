@@ -1,4 +1,4 @@
-define(["Views/Page", "Views/Form"], function(Page){
+define("Views/Pages/SettingsFields", ["Views/Page", "Views/Form"], function(Page){
     return Page.extend({},{
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {

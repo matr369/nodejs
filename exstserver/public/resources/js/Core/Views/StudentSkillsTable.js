@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define(["Views/Form","Views/StudentSkillsRow","underscore", "Collections/StudentSkills", "Collections/Skills", "Models/Skill"], function(Form, Row, _, StudentSkills, Skills, Skill){
+define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","underscore", "Collections/StudentSkills", "Collections/Skills", "Models/Skill"], function(Form, Row, _, StudentSkills, Skills, Skill){
     return Form.extend({
         events: {
             "view:ready": "initSubViews",

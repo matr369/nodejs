@@ -1,4 +1,4 @@
-define(["Views/Form", "jquery", "Collections/Students"], function (Form, $, Students) {
+define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"], function (Form, $, Students) {
     return Form.extend({
 
 

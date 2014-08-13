@@ -5,7 +5,7 @@
  * Time: 0:44
  * To change this template use File | Settings | File Templates.
  */
-define(["Views/Fields/Selectable", "jquery"], function(Field, $){
+define("Views/Fields/Dropdown", ["Views/Fields/Selectable", "jquery"], function(Field, $){
     return Field.extend({
         events: $.extend({}, Field.prototype.events, {
             "field:changed": "changeLabel",

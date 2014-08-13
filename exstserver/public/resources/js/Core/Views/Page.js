@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 21.07.2014.
  */
-define(["App", "Views/Base", "jquery"], function(App, View, $){
+define("Views/Page",["App", "Views/Base", "jquery"], function(App, View, $){
     var Config = App.Config.pages,
 
         // In this div we will insert all pages

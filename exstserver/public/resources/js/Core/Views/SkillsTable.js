@@ -1,4 +1,4 @@
-define(["Collections/Skills", "Views/Base", "App", "jquery"], function (Skills, Base, App, $){
+define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"], function (Skills, Base, App, $){
     return Base.extend({
         events: {
             "click .fa-times": "destroy"

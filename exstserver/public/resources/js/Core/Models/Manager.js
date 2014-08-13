@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
-define(["Models/Base"],function(Base){
+define("Models/Manager",["Models/Base"],function(Base){
     return Base.extend({
         defaults: function(){
             return {

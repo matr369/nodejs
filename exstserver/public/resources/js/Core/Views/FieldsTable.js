@@ -1,4 +1,4 @@
-define(["Collections/Fields", "Views/Base", "App", "jquery", "Views/FieldRow"], function (Fields, Base, App, $, FieldRow){
+define("Views/FieldsTable",["Collections/Fields", "Views/Base", "App", "jquery", "Views/FieldRow"], function (Fields, Base, App, $, FieldRow){
     return Base.extend({
         events: {
             "click .fa-times": "delete"

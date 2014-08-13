@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 27.07.2014.
  */
-define(["Models/Base"], function(Model){
+define("Models/Settings",["Models/Base"], function(Model){
     return Model.extend({
 
         /**

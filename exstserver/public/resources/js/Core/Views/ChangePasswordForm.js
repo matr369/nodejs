@@ -1,4 +1,4 @@
-define(["Views/Form", "App", "jquery"], function(Form, App, $){
+define("Views/ChangePasswordForm",["Views/Form", "App", "jquery"], function(Form, App, $){
     return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"

@@ -1,4 +1,4 @@
-define(["Models/Field", "Collections/Base", "underscore"], function(Field, Collection, _){
+define("Collections/Fields",["Models/Field", "Collections/Base", "underscore"], function(Field, Collection, _){
     return Collection.extend({
         model:Field,
         url: '/technology',

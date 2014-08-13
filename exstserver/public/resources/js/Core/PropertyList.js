@@ -1,4 +1,4 @@
-define({
+define("Core/PropertyList", {
     name: {label: 'Name', options: {className: "form-control",type: 'text'}},
     startWorkDate: {label: 'Start work date', options: {className: "form-control",type: 'text', rules:'date'}},
     hadInternship: {label: 'Had internship', construct: 'Views/Fields/CheckBox', options: {yes:"Yes", no:"No"}},

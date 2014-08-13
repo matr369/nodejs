@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 06.08.2014.
  */
-define(["Views/Base", "Collections/Managers", "Models/Manager", "underscore", "jquery"], function(Base, Managers, Manager, _, $){
+define("Views/ListManagers",["Views/Base", "Collections/Managers", "Models/Manager", "underscore", "jquery"], function(Base, Managers, Manager, _, $){
     return Base.extend({
         constructor: function(options){
             options = options || {};

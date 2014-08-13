@@ -1,4 +1,4 @@
-define([ "Views/Form", "App", "jquery", "Views/Base", "underscore", "Core/PropertyList"], function (Form, App, $, Base, _, PropertyList) {
+define("Views/StudentPanelTable",[ "Views/Form", "App", "jquery", "Views/Base", "underscore", "Core/PropertyList"], function (Form, App, $, Base, _, PropertyList) {
 
 
     return Form.extend({

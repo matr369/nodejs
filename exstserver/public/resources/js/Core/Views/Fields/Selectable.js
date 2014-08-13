@@ -5,7 +5,7 @@
  * Time: 23:20
  * To change this template use File | Settings | File Templates.
  */
-define(["Views/Fields/Base", "jquery", "underscore"], function(Field, $, _){
+define("Views/Fields/Selectable", ["Views/Fields/Base", "jquery", "underscore"], function(Field, $, _){
     return Field.extend({
 
         events: $.extend(true, {}, Field.prototype.events, {

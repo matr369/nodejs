@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 28.07.2014.
  */
-define(["Views/Form", "App"], function(Form, App){
+define("Views/ForgotPasswordForm",["Views/Form", "App"], function(Form, App){
     return Form.extend({},{
         defaults: $.extend(true, {}, Form.defaults, {
             tpl: {
