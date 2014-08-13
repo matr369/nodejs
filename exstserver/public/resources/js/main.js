@@ -9,6 +9,7 @@ require.config({
     paths: {
         "underscore": "libs/lodash-2.4.1",
         "Backbone": "libs/backbone",
+        "doT": "libs/doT",
         "jquery": "libs/jquery-2.1.1",
         "bootstrap": "libs/bootstrap.min",
         "typeahead": "libs/typeahead.jquery",
