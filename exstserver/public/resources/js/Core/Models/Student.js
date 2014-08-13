@@ -10,9 +10,8 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
     return Base.extend({
         defaults: function(){
             return {
-                name: "Ivan",
+                name: "",
                 enable: true,
-                status:'work',
                 email:"",
                 avatar: "resources/images/default_avatar_male.jpg"
             }
@@ -21,7 +20,7 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
 
 
         constructor: function(options){
-            this.on("change:id", function(){
+            this.on("change:_id", function(){
                 this.set("profileLink", "students/" + this.id);
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
                 this.set("interviewsLink", "students/" + this.id + "/interviews");
