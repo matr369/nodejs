@@ -1,14 +1,14 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define(["Views/Base","underscore"], function(Base, _){
-    return Base.extend({
+define(["Views/Form","underscore"], function(Form, _){
+    return Form.extend({
         constructor: function(options){
             options = options || {};
             this.rows = [];
             this.collection = options.collection;
             this.listenTo(this.collection,"add", this.showSkillRow);
-            Base.prototype.constructor.apply(this, arguments);
+            Form.prototype.constructor.apply(this, arguments);
             this.showAllSkillRow();
         },
 
@@ -17,7 +17,7 @@ define(["Views/Base","underscore"], function(Base, _){
         },
 
         showSkillRow: function(model){
-            var row = new Base({
+            var row = new Form({
                 tpl: {
                     src: "studentskillrow.html?v=1",
                     $: "studentSkill"
@@ -29,9 +29,8 @@ define(["Views/Base","underscore"], function(Base, _){
             row.show();
             this.rows.push(row);
         }
-
     },{
-        default: $.extend(true, {}, Base.default, {
+        default: $.extend(true, {}, Form.default, {
             tpl:{
                 src: null
             }

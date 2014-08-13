@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define(["Models/Base","Collections/StudentSkills","Models/Employer", "Models/Student"], function(Base, StudentSkills, Employer){
+define(["Models/Base","Collections/StudentSkills"], function(Base, StudentSkills){
     return Base.extend({
         defaults: {
             result: "",

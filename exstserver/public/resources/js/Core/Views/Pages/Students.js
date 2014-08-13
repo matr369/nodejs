@@ -1,4 +1,4 @@
-define(["Views/Page", "Models/StudentInstance", "jquery"], function(Page, Student, $){
+define(["Views/Page", "jquery"], function(Page, $){
 
     return Page.extend({}, {
         defaults: $.extend(true, {}, Page.defaults, {

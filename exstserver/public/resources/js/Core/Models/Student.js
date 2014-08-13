@@ -6,16 +6,14 @@
  * To change this template use File | Settings | File Templates.
  */
 define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
-
+debugger;
     return Base.extend({
         defaults: function(){
             return {
-                Name: "Petrov",
+                name: "",
                 enable: true,
-                Status:'work',
-                Email:'petrov@gmail.com',
-                avatar: "resources/images/default_avatar_male.jpg",
-                properties:[{name:'status', value:'work', change:'yes', see:'yes'}, {name:'Name', value:'Ivan', see:'yes', change:'yes'}, {name:'Surname', value:'Petrov', change:'yes', see:'yes'}]
+                status:'work',
+                avatar: "resources/images/default_avatar_male.jpg"
             }
         },
         urlRoot: "/students",
@@ -36,9 +34,6 @@ define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquer
         },
         disable: function(){
             this.set("enable", false);
-        },
-        fetch: function(){
-            return $.Deferred().resolve({});
         },
         fetchFeedbacks: function(){
             if (!this.__feedbacks) {
@@ -95,5 +90,5 @@ define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquer
             }
             return this.__info;
         }
-    })
+    });
 });

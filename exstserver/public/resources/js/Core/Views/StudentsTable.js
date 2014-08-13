@@ -35,8 +35,7 @@ define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/St
         },
 
         constructor: function (options) {
-
-            options.collection = new Students();
+            //options.collection = new Students();
             Form.prototype.constructor.apply(this, [options]);
         },
 
@@ -79,7 +78,8 @@ define(["Views/Form", "underscore", "jquery", "Collections/Students", "Models/St
             },
             defaultPropertyConstructor: "Views/Fields/Base",
             fields: [],
-            properties: {}
+            properties: {},
+            prepareCollections: false
 
         })
     });

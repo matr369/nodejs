@@ -16,7 +16,7 @@ define(["Backbone", "App", "jquery"], function(Backbone, App, $){
                 xhr.resolve(data.data);
             }
             else {
-                xhr.reject(data.message);
+                xhr.reject(data.status);
             }
             })
             .fail(function(axhr, status, error){

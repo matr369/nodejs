@@ -7,7 +7,7 @@ define(["Models/Base", "Collections/Students", "underscore"],function(Base, Stud
             return {
                 name: "",
                 email: "",
-                students: new Students([])
+                students: new Base([])
             };
         },
         urlRoot: "/curators",
