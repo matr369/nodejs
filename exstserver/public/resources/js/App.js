@@ -43,6 +43,18 @@ define("App", ["underscore", "Backbone", "jquery", "Config"],function(_, Backbon
         Application.trigger("error", error); // You can subscribe on error event.
     };
 
+    Application.notify = function(msg, theme){
+        theme = theme || "info";
+        Application.trigger('notify', {
+            message: msg,
+            theme: theme || "info"
+        });
+    };
+
+    Application.success = function(msg){
+        Application.trigger('info', msg);
+    };
+
     window.onerror = Application.Error;
 
     // Authors

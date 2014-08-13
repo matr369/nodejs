@@ -3,8 +3,13 @@ define("Views/ChangePasswordForm",["Views/Form", "App", "jquery"], function(Form
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"
         }),
+
+        onSuccessSubmit: function(){
+            App.notify("Password was changed.", "success");
+            Form.prototype.onSuccessSubmit.apply(this, arguments);
+        },
         __sendData: function(data){
-            return App.user.changePassword(data.oldPassword, data.newPassword);
+            return $.Deferred().resolve(data);
         },
 
         verify: function(){

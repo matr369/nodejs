@@ -65,5 +65,10 @@ define("Views/Notification",["App", "Views/Base", "jquery", "Core/Templates"], f
         });
     }
 
+    App.on("notify", function(options){
+        options.className = "global-notification";
+        (new NotificationView(options)).show();
+    });
+
     return NotificationView;
 });
