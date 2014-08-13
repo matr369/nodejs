@@ -53,7 +53,7 @@
     <div class="students-list">
         {% data.collection.forEach(function(student, j) {%}
             <span class="detach-student">
-                <a class="student" href="#{%- student.get('profileLink') %}">{%- student.get('name') %}</a> <a class="del-stud"><i data-index="{%- j %}" class="fa fa-times"></i></a>
+                <a class="student" href="#{%- student.get('profileLink') %}">{%- student.get('name') %}</a> <a class="del-stud"><i data-index="{%- student.get('_id') %}" class="fa fa-times"></i></a>
             </span>
         {% }); %}
         <view data-id="addStudPopover" data-constructor="Views/Popover" data-options="{

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2014-08-13T12:54:50.598+0300 [initandlisten] MongoDB starting : pid=5652 port=27017 dbpath=C:\DasProject\nodejs\exstserver\db 64-bit host=FIRST_OLD
 2014-08-13T12:54:50.613+0300 [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
 2014-08-13T12:54:50.613+0300 [initandlisten] db version v2.6.4
@@ -398,3 +399,23 @@
 2014-08-13T16:18:08.313+0300 [consoleTerminate] removeJournalFiles
 2014-08-13T16:18:08.315+0300 [consoleTerminate] shutdown: removing fs lock...
 2014-08-13T16:18:08.316+0300 [consoleTerminate] dbexit: really exiting now
+=======
+2014-08-13T09:28:57.417+0300 [initandlisten] MongoDB starting : pid=5504 port=27017 dbpath=C:\Users\Administrator\node\exstserver\exstserver\db 64-bit host=FIRST_OLD
+2014-08-13T09:28:57.419+0300 [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2014-08-13T09:28:57.419+0300 [initandlisten] db version v2.6.3
+2014-08-13T09:28:57.419+0300 [initandlisten] git version: 255f67a66f9603c59380b2a389e386910bbb52cb
+2014-08-13T09:28:57.419+0300 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+2014-08-13T09:28:57.419+0300 [initandlisten] allocator: system
+2014-08-13T09:28:57.419+0300 [initandlisten] options: { config: "mongodb.conf", storage: { dbPath: "C:\Users\Administrator\node\exstserver\exstserver\db" } }
+2014-08-13T09:28:57.420+0300 [initandlisten] exception in initAndListen: 13627 Unable to create/open lock file: C:\Users\Administrator\node\exstserver\exstserver\db\mongod.lock The process cannot access the file because it is being used by another process.. Is a mongod instance already running?, terminating
+2014-08-13T09:28:57.420+0300 [initandlisten] dbexit: 
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: going to close listening sockets...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: going to flush diaglog...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: going to close sockets...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: waiting for fs preallocator...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: lock for final commit...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: final commit...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: closing all files...
+2014-08-13T09:28:57.420+0300 [initandlisten] closeAllFiles() finished
+2014-08-13T09:28:57.420+0300 [initandlisten] dbexit: really exiting now
+>>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503

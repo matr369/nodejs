@@ -8,6 +8,7 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
             "field:changed": "addSkillToStudent"
         },
         constructor: function(options){
+
             options.allSkill = new Skills();
             return Form.prototype.constructor.apply(this, arguments);
         },
@@ -19,12 +20,12 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
                 el: this.$(".skillsTable"),
                 collection: this.collection
             }));
-            this.disable();
         },
         addSkillToStudent: function(e, skill){
             if(skill instanceof Skill) {
                 this.collection.add(skill);
-                this.childrenViews.newSkill.dropValue.apply(this, arguments);
+                this.childrenViews.newSkill.__value = "";
+                this.childrenViews.newSkill.$el[0].value = "";
             }
         }
     },{

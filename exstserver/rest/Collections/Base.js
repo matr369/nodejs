@@ -18,6 +18,21 @@ var Collection = require("backbone").Collection,
         },
         isCollection: true,
         model: Model,
+        find: function(filter){
+            var xhr = $();
+            filter = filter || {};
+            var exports = {};
+            for (var key in filter){
+                exports[key] = true;
+                if (typeof filter[key] === "string") {
+                    filter[key] = new RegExp(filter[key], 'i');
+                }
+            }
+            this.where(filter, {
+                options: exports
+            }).done(xhr.resolve).fail(xhr.reject);
+            return xhr;
+        },
         where: function (filter, options) {
             options = options || {};
             options.filter = filter;

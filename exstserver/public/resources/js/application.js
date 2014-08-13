@@ -18920,8 +18920,6 @@ define("Collections/Properties",["Models/Property", "Collections/Base", "undersc
     });
 });
 
-<<<<<<< HEAD
-=======
 /**
  * Created by Administrator on 13.08.2014.
  */
@@ -18939,7 +18937,6 @@ define(["Backbone", "Collections/Students", "jquery"], function(Backbone, Studen
         return xhr;
     };
 });
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
 define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], function(Skill, Collection, _){
     return Collection.extend({
         model:Skill,
@@ -18950,10 +18947,6 @@ define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], 
          */
         constructor: function(){
             if (this.constructor._instance) {
-<<<<<<< HEAD
-                debugger;
-=======
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
                 return this.constructor._instance;
             } else {
                 Collection.prototype.constructor.apply(this, arguments);
@@ -18982,10 +18975,6 @@ define("Collections/Students",["Collections/Base", "Models/Student"], function(B
     return Base.extend({
         model: Student,
         url: "/students"
-<<<<<<< HEAD
-
-=======
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
     });
 });
 /**
@@ -19024,11 +19013,7 @@ define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],f
             return {
                 name: "",
                 email: "",
-<<<<<<< HEAD
-                students: new Base([])
-=======
                 students: new Students([])
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             };
         },
         urlRoot: "/curators",
@@ -19037,12 +19022,8 @@ define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],f
                 if(_.isArray(value)) {
                     this.set("students", new Students(value), {silent: true});
                 }
-<<<<<<< HEAD
-                this.listenTo(this.get("students"), "add remove", function(){
-=======
                 this.listenTo(this.get("students"), "add remove", function(model, collection){
                     this.set("students", collection, {silent: true});
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
                     this.save();
                 });
             });
@@ -19168,14 +19149,6 @@ define("Models/Skill",["Models/Base", "underscore"], function(Model, _){
  * To change this template use File | Settings | File Templates.
  */
 <<<<<<< HEAD
-define("Models/Student",["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
-debugger;
-    return Base.extend({
-        defaults: function(){
-            return {
-                name: "Ivan",
-=======
-<<<<<<< HEAD
 define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
 =======
 define("Models/Student",["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
@@ -19185,7 +19158,6 @@ debugger;
         defaults: function(){
             return {
                 name: "",
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
                 enable: true,
                 status:'work',
                 avatar: "resources/images/default_avatar_male.jpg"
@@ -19195,10 +19167,6 @@ debugger;
 
 
         constructor: function(options){
-<<<<<<< HEAD
-            debugger;
-=======
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             this.on("change:id", function(){
                 this.set("profileLink", "students/" + this.id);
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
@@ -19312,12 +19280,8 @@ define("Models/StudentInstance",["Models/Student"], function(Student){
 define("Models/User.Admin",["Models/User"], function(User){
     return User.extend({
         defaults: {
-<<<<<<< HEAD
-            defaultPage: "students"
-=======
             defaultPage: "students",
             canDo: []
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         /**
          * function to check allowed actions user
@@ -19339,25 +19303,15 @@ define("Models/User.Admin",["Models/User"], function(User){
 define("Models/User.Employer",["Models/User"], function(User){
     return User.extend({
         defaults: {
-<<<<<<< HEAD
-            defaultPage: "students"
-=======
             defaultPage: "students",
             canDo: ["view_settings"]
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         /**
          * function to check allowed actions user
          */
         can: function(whatCan){
-<<<<<<< HEAD
-            var i;
-            for(i = 0; i < this.canDo.length; i++){
-                if(whatCan == this.canDo[i]){
-=======
             for(var i = 0; i < this.get('canDo').length; i++){
                 if(whatCan == this.get('canDo')[i]){
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
                     return true;
                 }
             }
@@ -19371,12 +19325,8 @@ define("Models/User.Employer",["Models/User"], function(User){
 define("Models/User.Manager",["Models/User"], function(User){
     return User.extend({
         defaults: {
-<<<<<<< HEAD
-            defaultPage: "students"
-=======
             defaultPage: "students",
             canDo: []
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         /**
          * function to check allowed actions user
@@ -19399,12 +19349,8 @@ define("Models/User.Manager",["Models/User"], function(User){
 define("Models/Student",["Models/User"], function(User){
     return User.extend({
         defaults: {
-<<<<<<< HEAD
-            defaultPage: "students"
-=======
             defaultPage: "students",
             canDo: []
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         /**
          * function to check allowed actions user
@@ -19457,12 +19403,8 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
 
             (new Request({
                 //TODO: Дописать, когда будет инфа о сервисах
-<<<<<<< HEAD
-                url: ""
-=======
                 url: "/api/entity",
                 method: "GET"
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             }))
             .send({
                 login: login,
@@ -19470,12 +19412,8 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
             })
             .done(function(result){
                 //TODO: Дописать, когда будет инфа о сервисах
-<<<<<<< HEAD
-                require(["Models/User." + result],function(Employer){
-=======
                     var entity = result.data[0].entity;
                 require(["Models/User." + entity],function(Employer){
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
                     // Подгружаем нужный класс для юзера и создаем его экземпляр в App.user = new U();
                     //TODO: Дописать, когда будет инфа о сервисах
                     App.user = new Employer();
@@ -20289,11 +20227,7 @@ define("Core/Validator", ["underscore"], function (_) {
         },
         // Проверка на тип email
         $email: function(value, rule, name){
-<<<<<<< HEAD
-            return (this.$equal(value, '^[a-zA-Z0-9_-]+[a-zA-Z0-9_-][a-zA-Z0-9_-]@(?:[a-z0-9]+[-a-z0-9]*\\.){1,3}[a-z]{2,9}$', name) === true)? true : "Field "+name+" must be email.";
-=======
             return (this.$equal(value, '^[a-z0-9]+[-\\._a-z0-9][a-z0-9]@(?:[a-z0-9]+[-a-z0-9]*\\.){1,3}[a-z]{2,9}$', name) === true)? true : "Field "+name+" must be email.";
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         // Проверка на полное соответствие регулярному выражению. Регулярное выражение передается в виде строки
         $equal: function(value, rule, name){
@@ -20446,22 +20380,6 @@ define("Views/AddRadioFieldForm",["Views/Base"], function(Page){
         })
     });
 });
-<<<<<<< HEAD
-
-define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function (Form, App, $, Students, Student) {
-   return Form.extend({
-        events: $.extend(true, {}, Form.prototype.events, {
-            "view:parent:hide": "reset"
-        }),
-        constructor: function (options) {
-            debugger;
-            options.collection = new Students();
-            Form.prototype.constructor.apply(this, [options]);
-        }
-
-
-
-=======
 define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function(Form, App, $, Students, Student){
     return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
@@ -20476,7 +20394,6 @@ define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Stude
         }
 
 
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
     }, {
 
 
@@ -20484,10 +20401,7 @@ define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Stude
             tpl: {
                 src: "form.addstudent.html?v=1"
             },
-<<<<<<< HEAD
-=======
             submitButton: ".button-create",
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             submitButtonText: "Create",
             nameText: "Student's name",
             emailText: "Student's email",
@@ -22010,20 +21924,14 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         isNameFilter: function(field, name){
-<<<<<<< HEAD
-=======
             if(field === "")
                 return true;
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             return (new RegExp(field, 'i')).test(name);
         },
 
         isStudentFilter:function(field, students){
-<<<<<<< HEAD
-=======
             if(field === "")
                 return true;
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             return students.some(function(student){
                 return (new RegExp(field, 'i')).test(student.get('name'));
             });
@@ -22040,17 +21948,12 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         doFilter: function(event, filter){
-<<<<<<< HEAD
-            this.filter = filter;
-            this.rows.forEach(this.filterRow, this);
-=======
             try {
                 this.filter = filter;
                 this.rows.forEach(this.filterRow, this);
             } catch (e){
 
             }
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         __ready: function(){
             this.$el.trigger("view:ready");
@@ -22121,17 +22024,12 @@ define("Views/ListManagers",["Views/Base", "Collections/Managers", "Models/Manag
         },
 
         doFilter: function(event, filter){
-<<<<<<< HEAD
-            this.filter = filter;
-            this.rows.forEach(this.filterRow, this);
-=======
             try {
                 this.filter = filter;
                 this.rows.forEach(this.filterRow, this);
             } catch (e){
 
             }
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         }
 
     },{
@@ -22740,10 +22638,6 @@ define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jque
             Page.prototype.constructor.apply(this, arguments);
         },
         __ready: function(){
-<<<<<<< HEAD
-            debugger;
-=======
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             this.listenTo(this.model, "change:name", function(){
                 this.childrenViews.pageDescription.options.pageTitle = this.model.get('name');
                 debugger;
@@ -23082,11 +22976,7 @@ define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
                 containerResolveMethod: "append",
                 model: model
             });
-<<<<<<< HEAD
-            row.show();
-=======
             row.render();
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             this.rows.push(row);
         }
     },{
@@ -23107,10 +22997,7 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
             "field:changed": "addSkillToStudent"
         },
         constructor: function(options){
-<<<<<<< HEAD
-=======
 
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             options.allSkill = new Skills();
             return Form.prototype.constructor.apply(this, arguments);
         },
@@ -23122,20 +23009,12 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
                 el: this.$(".skillsTable"),
                 collection: this.collection
             }));
-<<<<<<< HEAD
-            this.disable();
-=======
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         addSkillToStudent: function(e, skill){
             if(skill instanceof Skill) {
                 this.collection.add(skill);
-<<<<<<< HEAD
-                this.childrenViews.newSkill.dropValue.apply(this, arguments);
-=======
                 this.childrenViews.newSkill.__value = "";
                 this.childrenViews.newSkill.$el[0].value = "";
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             }
         }
     },{
@@ -23151,14 +23030,6 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
 });
 define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"], function (Form, $, Students) {
     return Form.extend({
-<<<<<<< HEAD
-        constructor: function(options){
-            debugger;
-            options.collection = new Students();
-            Form.prototype.constructor.apply(this,[options]);
-        }
-=======
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
 
 
 
@@ -23167,10 +23038,7 @@ define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"
             tpl: {
                 src: "studentsfromtable.html?v=1"
             },
-<<<<<<< HEAD
-=======
             students: new Students(),
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             fields: []
         })
     })
@@ -23179,14 +23047,10 @@ define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"
  * Created by Administrator on 31.07.2014.
  */
 <<<<<<< HEAD
-define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students", "Models/Student", "App"], function(View, $, Popover, bootstrap,Students,  Student, App){
-=======
-<<<<<<< HEAD
 define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
 =======
 define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students", "Models/Student", "App"], function(View, $, Popover, bootstrap,Students,  Student, App){
 >>>>>>> 946290ab28aac636d5147debd357a1214f2543e6
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
     return View.extend({
         events:{
             "field:changed": "addStudent",
@@ -23203,23 +23067,15 @@ define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "boo
          */
         addStudent: function(event, student){
             this.$(".popover-btn").popover("hide");
-<<<<<<< HEAD
-            this.options.collection.add(student);
-=======
             this.collection.add(student);
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
         /*
             detach student to employer
          */
         detachStudent: function(event){
             var index = $(event.target).data("index");
-<<<<<<< HEAD
-            this.collection.remove(this.collection.at(index));
-=======
             var delModel = this.collection.get(index);
             this.collection.remove(delModel);
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         }
     }, {
         defaults: $.extend(true, {}, View.defaults, {
@@ -23232,22 +23088,6 @@ define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "boo
         })
     });
 });
-<<<<<<< HEAD
-
-define("Views/StudentsTable", ["Views/Form","App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable) {
-   return Form.extend({
-        events: $.extend(true, {}, Form.prototype.events, {
-            "click .extra": "addField",
-            "click .deleteField": "deleteField",
-            "view:ready": "initSubViews",
-            "click .find": "findIt"
-
-
-        }),
-
-        findIt:function(){
-            debugger;
-=======
 define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, _, $, Students, Student, PropertyList, StudentsFromTable) {
     return Form.extend({
         events: {
@@ -23261,7 +23101,6 @@ define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections
         },
 
         findIt:function(){
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
             $(".intable").detach();
             this.initSubViews();
         },
@@ -23270,21 +23109,10 @@ define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections
             debugger;
             this.childrenViews.studentsList.rerender();
         },
-<<<<<<< HEAD
-
-        __sendData:function(data){
-            debugger;
-            return $.Deferred().resolve([]);
-        },
-
-
-
-=======
         __sendData: function(data){
             return $.Deferred().resolve();
         },
 
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         initSubViews: function(){
 
             var studentsFromTable = new StudentsFromTable({
@@ -23296,16 +23124,9 @@ define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections
             studentsFromTable.show();
         },
 
-<<<<<<< HEAD
-        constructor: function(options){
-            debugger;
-            options.collection = new Students();
-            Form.prototype.constructor.apply(this,[options]);
-=======
         constructor: function (options) {
             //options.collection = new Students();
             Form.prototype.constructor.apply(this, [options]);
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
         },
 
         deleteField: function (event) {
@@ -23325,11 +23146,7 @@ define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections
                     return field == $(event.target).data("index")
                 }),
                 len = this.options.fields.length;
-<<<<<<< HEAD
-            if (ind == -1 && $(event.target).data("index")!="name") {
-=======
             if (ind == -1 && $(event.target).data("index")!="Name") {
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
                 this.options.fields[len] = $(event.target).data("index");
                 this.rerender();
             }
@@ -23349,26 +23166,16 @@ define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections
             tpl: {
                 src: "studentstable.html?v=1"
             },
-<<<<<<< HEAD
-            fields: [],
-            properties: {},
-            title:"StudentsTable"
-
-=======
             defaultPropertyConstructor: "Views/Fields/Base",
             fields: [],
             properties: {},
             prepareCollections: false
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
 
         })
     });
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 7eaa4a475c406486bc2f5c4bf5179a9034323503
 /**
  * Created by Mantsevich on 21.07.2014.
  */

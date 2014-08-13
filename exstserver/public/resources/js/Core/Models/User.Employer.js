@@ -4,15 +4,15 @@
 define("Models/User.Employer",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students"
+            defaultPage: "students",
+            canDo: ["view_settings"]
         },
         /**
          * function to check allowed actions user
          */
         can: function(whatCan){
-            var i;
-            for(i = 0; i < this.canDo.length; i++){
-                if(whatCan == this.canDo[i]){
+            for(var i = 0; i < this.get('canDo').length; i++){
+                if(whatCan == this.get('canDo')[i]){
                     return true;
                 }
             }

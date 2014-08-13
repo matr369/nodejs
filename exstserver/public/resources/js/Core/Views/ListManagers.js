@@ -55,8 +55,12 @@ define("Views/ListManagers",["Views/Base", "Collections/Managers", "Models/Manag
         },
 
         doFilter: function(event, filter){
-            this.filter = filter;
-            this.rows.forEach(this.filterRow, this);
+            try {
+                this.filter = filter;
+                this.rows.forEach(this.filterRow, this);
+            } catch (e){
+
+            }
         }
 
     },{
