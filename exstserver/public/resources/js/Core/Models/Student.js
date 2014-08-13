@@ -30,10 +30,10 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
         },
 
         enable: function(){
-            this.set("enable", true);
+            this.set("enable", true).save();
         },
         disable: function(){
-            this.set("enable", false);
+            this.set("enable", false).save();
         },
         fetchFeedbacks: function(){
             var self = this;

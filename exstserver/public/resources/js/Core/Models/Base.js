@@ -4,13 +4,11 @@
 define("Models/Base",["Backbone", "jquery"], function(Backbone, $){
     return Backbone.Model.extend({
         idAttribute: "_id",
-        /**
-         * Fetch data from server
-         * @returns {*}
-         */
         fetch: function(){
-            //TODO: Realize
-            return $.Deferred().resolve();
+            if(!this.__fetchResult) {
+                this.__fetchResult = Backbone.Model.prototype.fetch.apply(this, arguments);
+            }
+            return this.__fetchResult;
         },
         toJSON: function(options){
             var json = {};

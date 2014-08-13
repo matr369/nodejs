@@ -1,7 +1,7 @@
 /**
  * Created by Mantsevich on 27.07.2014.
  */
-define("Models/Settings",["Models/Base"], function(Model){
+define("Models/Settings",["Models/Base", "jquery"], function(Model, $){
     return Model.extend({
 
         /**
@@ -15,6 +15,9 @@ define("Models/Settings",["Models/Base"], function(Model){
                 Model.prototype.constructor.apply(this, arguments);
                 this.constructor._instance = this;
             }
+        },
+        fetch: function(){
+            return $.Deferred().resolve();
         }
     });
 });
