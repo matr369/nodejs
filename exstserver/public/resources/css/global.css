@@ -401,6 +401,13 @@ html,
 .page-settings .list-group-item-heading i {
   margin-right: 3px;
 }
+.page-settings-fields .new-field-form td,
+.page-settings-fields .new-field-form th {
+  vertical-align: middle;
+}
+.page-settings-fields .fields-forms {
+  margin-bottom: 5px;
+}
 .page-curators li > a {
   padding: 8px;
 }
