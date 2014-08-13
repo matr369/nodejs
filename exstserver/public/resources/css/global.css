@@ -425,3 +425,6 @@ h4 {
 .all-student {
   margin: 5px;
 }
+.extra{
+    cursor: pointer;
+}

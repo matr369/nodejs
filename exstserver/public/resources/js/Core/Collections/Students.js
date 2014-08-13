@@ -5,5 +5,6 @@ define("Collections/Students",["Collections/Base", "Models/Student"], function(B
     return Base.extend({
         model: Student,
         url: "/students"
+
     });
 });

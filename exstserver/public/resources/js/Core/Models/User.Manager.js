@@ -4,7 +4,8 @@
 define("Models/User.Manager",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students"
+            defaultPage: "students",
+            canDo: []
         },
         /**
          * function to check allowed actions user

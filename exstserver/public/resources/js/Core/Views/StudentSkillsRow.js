@@ -26,7 +26,7 @@ define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
                 containerResolveMethod: "append",
                 model: model
             });
-            row.show();
+            row.render();
             this.rows.push(row);
         }
     },{

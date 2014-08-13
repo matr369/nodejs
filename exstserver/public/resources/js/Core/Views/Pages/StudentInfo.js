@@ -16,6 +16,7 @@ define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jque
             Page.prototype.constructor.apply(this, arguments);
         },
         __ready: function(){
+            debugger;
             this.listenTo(this.model, "change:name", function(){
                 this.childrenViews.pageDescription.options.pageTitle = this.model.get('name');
                 debugger;

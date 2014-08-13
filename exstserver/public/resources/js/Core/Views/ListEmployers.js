@@ -41,10 +41,14 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         isNameFilter: function(field, name){
+            if(field === "")
+                return true;
             return (new RegExp(field, 'i')).test(name);
         },
 
         isStudentFilter:function(field, students){
+            if(field === "")
+                return true;
             return students.some(function(student){
                 return (new RegExp(field, 'i')).test(student.get('name'));
             });
@@ -61,8 +65,12 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         doFilter: function(event, filter){
-            this.filter = filter;
-            this.rows.forEach(this.filterRow, this);
+            try {
+                this.filter = filter;
+                this.rows.forEach(this.filterRow, this);
+            } catch (e){
+
+            }
         },
         __ready: function(){
             this.$el.trigger("view:ready");

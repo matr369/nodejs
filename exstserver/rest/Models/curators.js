@@ -5,11 +5,6 @@ var base = require("./Base");
 var Students = require("./../Collections/students");
 var $ = require("Deferred");
 module.exports = base.extend({
-    exportAttrs: {
-        name: true,
-        email : true,
-        students: true
-    },
     defaults: function(){
         return {
 
