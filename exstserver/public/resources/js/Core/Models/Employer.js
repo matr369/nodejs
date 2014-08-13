@@ -7,7 +7,7 @@ define(["Models/Base", "Collections/Students", "underscore"],function(Base, Stud
             return {
                 name: "",
                 email: "",
-                students: new Base([])
+                students: new Students([])
             };
         },
         urlRoot: "/curators",
@@ -16,7 +16,8 @@ define(["Models/Base", "Collections/Students", "underscore"],function(Base, Stud
                 if(_.isArray(value)) {
                     this.set("students", new Students(value), {silent: true});
                 }
-                this.listenTo(this.get("students"), "add remove", function(){
+                this.listenTo(this.get("students"), "add remove", function(model, collection){
+                    this.set("students", collection, {silent: true});
                     this.save();
                 });
             });

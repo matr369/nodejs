@@ -34,7 +34,8 @@ define(["Backbone","Models/Base","crypto","jquery", "Core/Request"], function(Ba
 
             (new Request({
                 //TODO: Дописать, когда будет инфа о сервисах
-                url: ""
+                url: "/api/entity",
+                method: "GET"
             }))
             .send({
                 login: login,
@@ -42,7 +43,8 @@ define(["Backbone","Models/Base","crypto","jquery", "Core/Request"], function(Ba
             })
             .done(function(result){
                 //TODO: Дописать, когда будет инфа о сервисах
-                require(["Models/User." + result],function(Employer){
+                    var entity = result.data[0].entity;
+                require(["Models/User." + entity],function(Employer){
                     // Подгружаем нужный класс для юзера и создаем его экземпляр в App.user = new U();
                     //TODO: Дописать, когда будет инфа о сервисах
                     App.user = new Employer();

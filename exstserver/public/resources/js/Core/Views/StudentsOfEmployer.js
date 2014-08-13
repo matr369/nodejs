@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 31.07.2014.
  */
-define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students", "Models/Student", "App"], function(View, $, Popover, bootstrap,Students,  Student, App){
+define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
     return View.extend({
         events:{
             "field:changed": "addStudent",
@@ -18,14 +18,15 @@ define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Stude
          */
         addStudent: function(event, student){
             this.$(".popover-btn").popover("hide");
-            this.options.collection.add(student);
+            this.collection.add(student);
         },
         /*
             detach student to employer
          */
         detachStudent: function(event){
             var index = $(event.target).data("index");
-            this.collection.remove(this.collection.at(index));
+            var delModel = this.collection.get(index);
+            this.collection.remove(delModel);
         }
     }, {
         defaults: $.extend(true, {}, View.defaults, {

@@ -1,157 +1,18 @@
-2014-08-10T22:08:42.766+0300 [initandlisten] MongoDB starting : pid=3084 port=27017 dbpath=C:\Users\Mantsevich\WebstormProjects\exstserver\db 64-bit host=Mantsevich-PC
-2014-08-10T22:08:42.767+0300 [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
-2014-08-10T22:08:42.767+0300 [initandlisten] db version v2.6.3
-2014-08-10T22:08:42.767+0300 [initandlisten] git version: 255f67a66f9603c59380b2a389e386910bbb52cb
-2014-08-10T22:08:42.767+0300 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
-2014-08-10T22:08:42.767+0300 [initandlisten] allocator: system
-2014-08-10T22:08:42.767+0300 [initandlisten] options: { config: "mongodb.conf", storage: { dbPath: "C:\Users\Mantsevich\WebstormProjects\exstserver\db" } }
-2014-08-10T22:08:42.771+0300 [initandlisten] journal dir=C:\Users\Mantsevich\WebstormProjects\exstserver\db\journal
-2014-08-10T22:08:42.771+0300 [initandlisten] recover begin
-2014-08-10T22:08:42.771+0300 [initandlisten] recover lsn: 0
-2014-08-10T22:08:42.771+0300 [initandlisten] recover C:\Users\Mantsevich\WebstormProjects\exstserver\db\journal\j._0
-2014-08-10T22:08:42.781+0300 [initandlisten] recover cleaning up
-2014-08-10T22:08:42.781+0300 [initandlisten] removeJournalFiles
-2014-08-10T22:08:42.781+0300 [initandlisten] recover done
-2014-08-10T22:08:42.791+0300 [initandlisten] waiting for connections on port 27017
-2014-08-10T22:09:04.343+0300 [initandlisten] connection accepted from 127.0.0.1:50595 #1 (1 connection now open)
-2014-08-10T22:09:04.346+0300 [initandlisten] connection accepted from 127.0.0.1:50596 #2 (2 connections now open)
-2014-08-10T22:09:04.346+0300 [initandlisten] connection accepted from 127.0.0.1:50597 #3 (3 connections now open)
-2014-08-10T22:09:04.346+0300 [initandlisten] connection accepted from 127.0.0.1:50598 #4 (4 connections now open)
-2014-08-10T22:09:04.347+0300 [initandlisten] connection accepted from 127.0.0.1:50599 #5 (5 connections now open)
-2014-08-10T22:09:04.347+0300 [initandlisten] connection accepted from 127.0.0.1:50600 #6 (6 connections now open)
-2014-08-10T22:09:04.348+0300 [conn1] end connection 127.0.0.1:50595 (5 connections now open)
-2014-08-10T22:09:42.792+0300 [clientcursormon] mem (MB) res:54 virt:470
-2014-08-10T22:09:42.792+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:09:42.792+0300 [clientcursormon]  connections:5
-2014-08-10T22:14:42.810+0300 [clientcursormon] mem (MB) res:55 virt:467
-2014-08-10T22:14:42.810+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:14:42.810+0300 [clientcursormon]  connections:5
-2014-08-10T22:18:44.689+0300 [conn2] end connection 127.0.0.1:50596 (4 connections now open)
-2014-08-10T22:18:44.689+0300 [conn3] end connection 127.0.0.1:50597 (3 connections now open)
-2014-08-10T22:18:44.691+0300 [conn4] end connection 127.0.0.1:50598 (2 connections now open)
-2014-08-10T22:18:44.692+0300 [conn6] end connection 127.0.0.1:50600 (2 connections now open)
-2014-08-10T22:18:44.692+0300 [conn5] end connection 127.0.0.1:50599 (2 connections now open)
-2014-08-10T22:18:50.439+0300 [initandlisten] connection accepted from 127.0.0.1:50921 #7 (1 connection now open)
-2014-08-10T22:18:50.440+0300 [conn7] end connection 127.0.0.1:50921 (0 connections now open)
-2014-08-10T22:18:50.442+0300 [initandlisten] connection accepted from 127.0.0.1:50922 #8 (1 connection now open)
-2014-08-10T22:18:50.442+0300 [initandlisten] connection accepted from 127.0.0.1:50923 #9 (2 connections now open)
-2014-08-10T22:18:50.442+0300 [initandlisten] connection accepted from 127.0.0.1:50924 #10 (3 connections now open)
-2014-08-10T22:18:50.442+0300 [initandlisten] connection accepted from 127.0.0.1:50925 #11 (4 connections now open)
-2014-08-10T22:18:50.443+0300 [initandlisten] connection accepted from 127.0.0.1:50926 #12 (5 connections now open)
-2014-08-10T22:19:06.543+0300 [conn8] end connection 127.0.0.1:50922 (4 connections now open)
-2014-08-10T22:19:06.543+0300 [conn9] end connection 127.0.0.1:50923 (3 connections now open)
-2014-08-10T22:19:06.544+0300 [conn10] end connection 127.0.0.1:50924 (3 connections now open)
-2014-08-10T22:19:06.544+0300 [conn11] end connection 127.0.0.1:50925 (1 connection now open)
-2014-08-10T22:19:06.544+0300 [conn12] end connection 127.0.0.1:50926 (1 connection now open)
-2014-08-10T22:19:32.275+0300 [initandlisten] connection accepted from 127.0.0.1:50932 #13 (1 connection now open)
-2014-08-10T22:19:32.276+0300 [conn13] end connection 127.0.0.1:50932 (0 connections now open)
-2014-08-10T22:19:32.277+0300 [initandlisten] connection accepted from 127.0.0.1:50933 #14 (1 connection now open)
-2014-08-10T22:19:32.277+0300 [initandlisten] connection accepted from 127.0.0.1:50934 #15 (2 connections now open)
-2014-08-10T22:19:32.277+0300 [initandlisten] connection accepted from 127.0.0.1:50935 #16 (3 connections now open)
-2014-08-10T22:19:32.278+0300 [initandlisten] connection accepted from 127.0.0.1:50936 #17 (4 connections now open)
-2014-08-10T22:19:32.278+0300 [initandlisten] connection accepted from 127.0.0.1:50937 #18 (5 connections now open)
-2014-08-10T22:19:42.827+0300 [clientcursormon] mem (MB) res:55 virt:467
-2014-08-10T22:19:42.827+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:19:42.827+0300 [clientcursormon]  connections:5
-2014-08-10T22:20:19.432+0300 [conn14] end connection 127.0.0.1:50933 (4 connections now open)
-2014-08-10T22:20:19.432+0300 [conn15] end connection 127.0.0.1:50934 (4 connections now open)
-2014-08-10T22:20:19.432+0300 [conn16] end connection 127.0.0.1:50935 (2 connections now open)
-2014-08-10T22:20:19.434+0300 [conn17] end connection 127.0.0.1:50936 (1 connection now open)
-2014-08-10T22:20:19.434+0300 [conn18] end connection 127.0.0.1:50937 (1 connection now open)
-2014-08-10T22:20:32.833+0300 [initandlisten] connection accepted from 127.0.0.1:50946 #19 (1 connection now open)
-2014-08-10T22:20:32.834+0300 [conn19] end connection 127.0.0.1:50946 (0 connections now open)
-2014-08-10T22:20:32.835+0300 [initandlisten] connection accepted from 127.0.0.1:50947 #20 (1 connection now open)
-2014-08-10T22:20:32.835+0300 [initandlisten] connection accepted from 127.0.0.1:50948 #21 (2 connections now open)
-2014-08-10T22:20:32.836+0300 [initandlisten] connection accepted from 127.0.0.1:50949 #22 (3 connections now open)
-2014-08-10T22:20:32.836+0300 [initandlisten] connection accepted from 127.0.0.1:50950 #23 (4 connections now open)
-2014-08-10T22:20:32.836+0300 [initandlisten] connection accepted from 127.0.0.1:50951 #24 (5 connections now open)
-2014-08-10T22:20:40.902+0300 [conn22] build index on: exadel-students.curators properties: { v: 1, key: { _id: 1 }, name: "_id_", ns: "exadel-students.curators" }
-2014-08-10T22:20:40.902+0300 [conn22] 	 added index to empty collection
-2014-08-10T22:22:09.278+0300 [conn20] end connection 127.0.0.1:50947 (4 connections now open)
-2014-08-10T22:22:09.278+0300 [conn22] end connection 127.0.0.1:50949 (4 connections now open)
-2014-08-10T22:22:09.278+0300 [conn21] end connection 127.0.0.1:50948 (4 connections now open)
-2014-08-10T22:22:09.278+0300 [conn24] end connection 127.0.0.1:50951 (2 connections now open)
-2014-08-10T22:22:09.278+0300 [conn23] end connection 127.0.0.1:50950 (0 connections now open)
-2014-08-10T22:22:12.315+0300 [initandlisten] connection accepted from 127.0.0.1:50960 #25 (1 connection now open)
-2014-08-10T22:22:12.316+0300 [conn25] end connection 127.0.0.1:50960 (0 connections now open)
-2014-08-10T22:22:12.317+0300 [initandlisten] connection accepted from 127.0.0.1:50961 #26 (1 connection now open)
-2014-08-10T22:22:12.317+0300 [initandlisten] connection accepted from 127.0.0.1:50962 #27 (2 connections now open)
-2014-08-10T22:22:12.318+0300 [initandlisten] connection accepted from 127.0.0.1:50963 #28 (3 connections now open)
-2014-08-10T22:22:12.318+0300 [initandlisten] connection accepted from 127.0.0.1:50964 #29 (4 connections now open)
-2014-08-10T22:22:12.318+0300 [initandlisten] connection accepted from 127.0.0.1:50965 #30 (5 connections now open)
-2014-08-10T22:23:49.874+0300 [conn26] end connection 127.0.0.1:50961 (4 connections now open)
-2014-08-10T22:23:49.874+0300 [conn27] end connection 127.0.0.1:50962 (4 connections now open)
-2014-08-10T22:23:49.874+0300 [conn28] end connection 127.0.0.1:50963 (4 connections now open)
-2014-08-10T22:23:49.874+0300 [conn29] end connection 127.0.0.1:50964 (4 connections now open)
-2014-08-10T22:23:49.874+0300 [conn30] end connection 127.0.0.1:50965 (2 connections now open)
-2014-08-10T22:24:25.859+0300 [initandlisten] connection accepted from 127.0.0.1:50974 #31 (1 connection now open)
-2014-08-10T22:24:25.860+0300 [conn31] end connection 127.0.0.1:50974 (0 connections now open)
-2014-08-10T22:24:25.862+0300 [initandlisten] connection accepted from 127.0.0.1:50975 #32 (1 connection now open)
-2014-08-10T22:24:25.862+0300 [initandlisten] connection accepted from 127.0.0.1:50976 #33 (2 connections now open)
-2014-08-10T22:24:25.862+0300 [initandlisten] connection accepted from 127.0.0.1:50977 #34 (3 connections now open)
-2014-08-10T22:24:25.862+0300 [initandlisten] connection accepted from 127.0.0.1:50978 #35 (4 connections now open)
-2014-08-10T22:24:25.863+0300 [initandlisten] connection accepted from 127.0.0.1:50979 #36 (5 connections now open)
-2014-08-10T22:24:42.844+0300 [clientcursormon] mem (MB) res:39 virt:467
-2014-08-10T22:24:42.844+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:24:42.844+0300 [clientcursormon]  connections:5
-2014-08-10T22:26:35.869+0300 [conn32] end connection 127.0.0.1:50975 (4 connections now open)
-2014-08-10T22:26:35.869+0300 [conn34] end connection 127.0.0.1:50977 (4 connections now open)
-2014-08-10T22:26:35.869+0300 [conn35] end connection 127.0.0.1:50978 (4 connections now open)
-2014-08-10T22:26:35.869+0300 [conn33] end connection 127.0.0.1:50976 (4 connections now open)
-2014-08-10T22:26:35.869+0300 [conn36] end connection 127.0.0.1:50979 (4 connections now open)
-2014-08-10T22:26:40.930+0300 [initandlisten] connection accepted from 127.0.0.1:50989 #37 (1 connection now open)
-2014-08-10T22:26:40.931+0300 [conn37] end connection 127.0.0.1:50989 (0 connections now open)
-2014-08-10T22:26:40.933+0300 [initandlisten] connection accepted from 127.0.0.1:50990 #38 (1 connection now open)
-2014-08-10T22:26:40.933+0300 [initandlisten] connection accepted from 127.0.0.1:50991 #39 (2 connections now open)
-2014-08-10T22:26:40.933+0300 [initandlisten] connection accepted from 127.0.0.1:50992 #40 (3 connections now open)
-2014-08-10T22:26:40.934+0300 [initandlisten] connection accepted from 127.0.0.1:50993 #41 (4 connections now open)
-2014-08-10T22:26:40.934+0300 [initandlisten] connection accepted from 127.0.0.1:50994 #42 (5 connections now open)
-2014-08-10T22:29:42.861+0300 [clientcursormon] mem (MB) res:39 virt:467
-2014-08-10T22:29:42.861+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:29:42.861+0300 [clientcursormon]  connections:5
-2014-08-10T22:31:56.134+0300 [conn39] end connection 127.0.0.1:50991 (4 connections now open)
-2014-08-10T22:31:56.134+0300 [conn42] end connection 127.0.0.1:50994 (4 connections now open)
-2014-08-10T22:31:56.134+0300 [conn40] end connection 127.0.0.1:50992 (4 connections now open)
-2014-08-10T22:31:56.134+0300 [conn41] end connection 127.0.0.1:50993 (4 connections now open)
-2014-08-10T22:31:56.134+0300 [conn38] end connection 127.0.0.1:50990 (4 connections now open)
-2014-08-10T22:34:42.878+0300 [clientcursormon] mem (MB) res:39 virt:462
-2014-08-10T22:34:42.878+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:34:42.878+0300 [clientcursormon]  connections:0
-2014-08-10T22:35:57.177+0300 [initandlisten] connection accepted from 127.0.0.1:51055 #43 (1 connection now open)
-2014-08-10T22:35:57.180+0300 [conn43] end connection 127.0.0.1:51055 (0 connections now open)
-2014-08-10T22:36:31.080+0300 [initandlisten] connection accepted from 127.0.0.1:51067 #44 (1 connection now open)
-2014-08-10T22:36:31.082+0300 [conn44] end connection 127.0.0.1:51067 (0 connections now open)
-2014-08-10T22:37:00.063+0300 [initandlisten] connection accepted from 127.0.0.1:51072 #45 (1 connection now open)
-2014-08-10T22:37:00.066+0300 [conn45] end connection 127.0.0.1:51072 (0 connections now open)
-2014-08-10T22:37:00.069+0300 [initandlisten] connection accepted from 127.0.0.1:51073 #46 (1 connection now open)
-2014-08-10T22:37:00.070+0300 [initandlisten] connection accepted from 127.0.0.1:51074 #47 (2 connections now open)
-2014-08-10T22:37:00.070+0300 [initandlisten] connection accepted from 127.0.0.1:51075 #48 (3 connections now open)
-2014-08-10T22:37:00.071+0300 [initandlisten] connection accepted from 127.0.0.1:51076 #49 (4 connections now open)
-2014-08-10T22:37:00.071+0300 [initandlisten] connection accepted from 127.0.0.1:51077 #50 (5 connections now open)
-2014-08-10T22:39:28.315+0300 [conn47] end connection 127.0.0.1:51074 (4 connections now open)
-2014-08-10T22:39:28.315+0300 [conn46] end connection 127.0.0.1:51073 (4 connections now open)
-2014-08-10T22:39:28.315+0300 [conn50] end connection 127.0.0.1:51077 (4 connections now open)
-2014-08-10T22:39:28.316+0300 [conn49] end connection 127.0.0.1:51076 (4 connections now open)
-2014-08-10T22:39:28.316+0300 [conn48] end connection 127.0.0.1:51075 (0 connections now open)
-2014-08-10T22:39:40.076+0300 [initandlisten] connection accepted from 127.0.0.1:51125 #51 (1 connection now open)
-2014-08-10T22:39:40.079+0300 [conn51] end connection 127.0.0.1:51125 (0 connections now open)
-2014-08-10T22:39:40.082+0300 [initandlisten] connection accepted from 127.0.0.1:51126 #52 (1 connection now open)
-2014-08-10T22:39:40.083+0300 [initandlisten] connection accepted from 127.0.0.1:51127 #53 (2 connections now open)
-2014-08-10T22:39:40.083+0300 [initandlisten] connection accepted from 127.0.0.1:51128 #54 (3 connections now open)
-2014-08-10T22:39:40.084+0300 [initandlisten] connection accepted from 127.0.0.1:51129 #55 (4 connections now open)
-2014-08-10T22:39:40.085+0300 [initandlisten] connection accepted from 127.0.0.1:51130 #56 (5 connections now open)
-2014-08-10T22:39:42.895+0300 [clientcursormon] mem (MB) res:39 virt:467
-2014-08-10T22:39:42.895+0300 [clientcursormon]  mapped (incl journal view):320
-2014-08-10T22:39:42.895+0300 [clientcursormon]  connections:5
-2014-08-10T22:40:08.231+0300 [conn52] end connection 127.0.0.1:51126 (4 connections now open)
-2014-08-10T22:40:08.231+0300 [conn53] end connection 127.0.0.1:51127 (4 connections now open)
-2014-08-10T22:40:08.231+0300 [conn55] end connection 127.0.0.1:51129 (3 connections now open)
-2014-08-10T22:40:08.231+0300 [conn56] end connection 127.0.0.1:51130 (4 connections now open)
-2014-08-10T22:40:08.231+0300 [conn54] end connection 127.0.0.1:51128 (4 connections now open)
-2014-08-10T22:40:11.089+0300 [initandlisten] connection accepted from 127.0.0.1:51135 #57 (1 connection now open)
-2014-08-10T22:40:11.090+0300 [conn57] end connection 127.0.0.1:51135 (0 connections now open)
-2014-08-10T22:40:11.092+0300 [initandlisten] connection accepted from 127.0.0.1:51136 #58 (1 connection now open)
-2014-08-10T22:40:11.092+0300 [initandlisten] connection accepted from 127.0.0.1:51137 #59 (2 connections now open)
-2014-08-10T22:40:11.092+0300 [initandlisten] connection accepted from 127.0.0.1:51138 #60 (3 connections now open)
-2014-08-10T22:40:11.093+0300 [initandlisten] connection accepted from 127.0.0.1:51139 #61 (4 connections now open)
-2014-08-10T22:40:11.093+0300 [initandlisten] connection accepted from 127.0.0.1:51140 #62 (5 connections now open)
+2014-08-13T09:28:57.417+0300 [initandlisten] MongoDB starting : pid=5504 port=27017 dbpath=C:\Users\Administrator\node\exstserver\exstserver\db 64-bit host=FIRST_OLD
+2014-08-13T09:28:57.419+0300 [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2014-08-13T09:28:57.419+0300 [initandlisten] db version v2.6.3
+2014-08-13T09:28:57.419+0300 [initandlisten] git version: 255f67a66f9603c59380b2a389e386910bbb52cb
+2014-08-13T09:28:57.419+0300 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+2014-08-13T09:28:57.419+0300 [initandlisten] allocator: system
+2014-08-13T09:28:57.419+0300 [initandlisten] options: { config: "mongodb.conf", storage: { dbPath: "C:\Users\Administrator\node\exstserver\exstserver\db" } }
+2014-08-13T09:28:57.420+0300 [initandlisten] exception in initAndListen: 13627 Unable to create/open lock file: C:\Users\Administrator\node\exstserver\exstserver\db\mongod.lock The process cannot access the file because it is being used by another process.. Is a mongod instance already running?, terminating
+2014-08-13T09:28:57.420+0300 [initandlisten] dbexit: 
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: going to close listening sockets...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: going to flush diaglog...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: going to close sockets...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: waiting for fs preallocator...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: lock for final commit...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: final commit...
+2014-08-13T09:28:57.420+0300 [initandlisten] shutdown: closing all files...
+2014-08-13T09:28:57.420+0300 [initandlisten] closeAllFiles() finished
+2014-08-13T09:28:57.420+0300 [initandlisten] dbexit: really exiting now

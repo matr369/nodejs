@@ -17,10 +17,20 @@ var Backbone = require("backbone"),
 
 var ConnectorForCollections = function(method, model, options){
     var xhr = $();
+    var exports = model.model.prototype.exportAttrs || [];
     mongoConnector.done(function(){
         switch (method) {
             case 'read':
-                this.collection(model.collection_db).find().toArray(function(err, data){
+                this.collection(model.collection_db).find({}, exports).toArray(function(err, data){
+                    if (err) {
+                        xhr.reject(err);
+                    }else {
+                        xhr.resolve(data);
+                    }
+                });
+                break;
+            case "find":
+                this.collection(model.collection_db).find(options.filter, options.exports || exports).toArray(function(err, data){
                     if (err) {
                         xhr.reject(err);
                     }else {
@@ -40,11 +50,12 @@ var ConnectorForCollections = function(method, model, options){
 var ConnectorForModels = function(method, model, options){
     var xhr = $();
     var db_collection = model.collection_db || model.collection.collection_db;
+    var findById = model.id? { "_id": ObjectID(model.id) } : {};
+    var exports = model.exportAttrs;
     mongoConnector.done(function(){
         switch (method) {
             case 'create':
                 this.collection(db_collection).insert(model.attributes, function(error, result){
-                    var z = options;
                     if (error) {
                         options.error(error);
                         xhr.reject(error);
@@ -55,7 +66,25 @@ var ConnectorForModels = function(method, model, options){
                 });
                 break;
             case 'read':
-                this.collection(db_collection).findOne({ "_id": ObjectID(model.id) }, function(error, result){
+                this.collection(db_collection).findOne(findById, exports, function(error, result){
+                    if (error) {
+                        xhr.reject(error);
+                    } else {
+                        xhr.resolve(result);
+                    }
+                });
+                break;
+            case 'delete':
+                this.collection(db_collection).remove( findById, function(error, result){
+                    if (error) {
+                        xhr.reject(error);
+                    } else {
+                        xhr.resolve(result);
+                    }
+                });
+                break;
+            case 'update':
+                this.collection(db_collection).update(findById, model.changed, {}, function(error, result) {
                     if (error) {
                         xhr.reject(error);
                     } else {

@@ -6,5 +6,8 @@ var Model = require("./../Models/students");
 
 module.exports = base.extend({
     collection_db: "students",
-    model: Model
+    model: Model,
+    _prepareModel: function(attrs){
+        return new Model().clear().set(attrs);
+    }
 });

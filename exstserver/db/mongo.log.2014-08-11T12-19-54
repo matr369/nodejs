@@ -1,0 +1,3 @@
+2014-08-11T15:19:43.846+0300 Trying to install Windows service 'MongoDB'
+2014-08-11T15:19:45.142+0300 Service 'MongoDB' (MongoDB) installed with command line 'C:\mongodb\bin\mongod.exe --config C:\Users\Administrator\node\exstserver\exstserver\db\mongodb.conf --service'
+2014-08-11T15:19:45.142+0300 Service can be started from the command line with 'net start MongoDB'

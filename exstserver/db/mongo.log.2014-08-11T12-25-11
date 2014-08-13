@@ -1,0 +1,27 @@
+2014-08-11T15:19:54.339+0300 Trying to start Windows service 'MongoDB'
+2014-08-11T15:19:54.341+0300 Service running
+2014-08-11T15:19:54.347+0300 [initandlisten] MongoDB starting : pid=456 port=27017 dbpath=C:\Users\Administrator\node\exstserver\exstserver\db 64-bit host=FIRST_OLD
+2014-08-11T15:19:54.347+0300 [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2014-08-11T15:19:54.347+0300 [initandlisten] db version v2.6.3
+2014-08-11T15:19:54.348+0300 [initandlisten] git version: 255f67a66f9603c59380b2a389e386910bbb52cb
+2014-08-11T15:19:54.348+0300 [initandlisten] build info: windows sys.getwindowsversion(major=6, minor=1, build=7601, platform=2, service_pack='Service Pack 1') BOOST_LIB_VERSION=1_49
+2014-08-11T15:19:54.348+0300 [initandlisten] allocator: system
+2014-08-11T15:19:54.348+0300 [initandlisten] options: { config: "C:\Users\Administrator\node\exstserver\exstserver\db\mongodb.conf", service: true, storage: { dbPath: "C:\Users\Administrator\node\exstserver\exstserver\db" }, systemLog: { destination: "file", path: "C:\Users\Administrator\node\exstserver\exstserver\db\mongo.log" } }
+2014-08-11T15:19:54.687+0300 [initandlisten] journal dir=C:\Users\Administrator\node\exstserver\exstserver\db\journal
+2014-08-11T15:19:54.688+0300 [initandlisten] recover begin
+2014-08-11T15:19:54.689+0300 [initandlisten] recover lsn: 779364
+2014-08-11T15:19:54.689+0300 [initandlisten] recover C:\Users\Administrator\node\exstserver\exstserver\db\journal\j._0
+2014-08-11T15:19:54.726+0300 [initandlisten] recover skipping application of section seq:0 < lsn:779364
+2014-08-11T15:19:54.726+0300 [initandlisten] recover skipping application of section seq:659538 < lsn:779364
+2014-08-11T15:19:54.847+0300 [initandlisten] recover cleaning up
+2014-08-11T15:19:54.847+0300 [initandlisten] removeJournalFiles
+2014-08-11T15:19:54.848+0300 [initandlisten] recover done
+2014-08-11T15:19:55.826+0300 [initandlisten] waiting for connections on port 27017
+2014-08-11T15:19:59.893+0300 [initandlisten] connection accepted from 127.0.0.1:49285 #1 (1 connection now open)
+2014-08-11T15:20:55.294+0300 [clientcursormon] mem (MB) res:54 virt:448
+2014-08-11T15:20:55.294+0300 [clientcursormon]  mapped (incl journal view):320
+2014-08-11T15:20:55.294+0300 [clientcursormon]  connections:1
+2014-08-11T15:25:04.000+0300 [conn1] end connection 127.0.0.1:49285 (0 connections now open)
+2014-08-11T15:25:55.312+0300 [clientcursormon] mem (MB) res:54 virt:445
+2014-08-11T15:25:55.312+0300 [clientcursormon]  mapped (incl journal view):320
+2014-08-11T15:25:55.312+0300 [clientcursormon]  connections:0
