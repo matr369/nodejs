@@ -1,1 +1,1 @@
-mongo exadel-students
+mongo 192.168.8.24/exadel-students

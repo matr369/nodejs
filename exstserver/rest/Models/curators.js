@@ -7,7 +7,6 @@ var $ = require("Deferred");
 module.exports = base.extend({
     defaults: function(){
         return {
-
             name: "",
             email: "",
             students: []

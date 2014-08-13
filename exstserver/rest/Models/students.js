@@ -12,6 +12,8 @@ module.exports = base.extend({
     defaults: function(){
         return {
             name: "",
+            email:"",
+            skype:"",
             enable: true,
             startWorkDate: new Date(),
             hadInternship: false,
@@ -41,8 +43,6 @@ module.exports = base.extend({
             englishLevel:"basic",
             englishCourse:"",
             phone:"",
-            email:"",
-            skype:"",
             vacations: "",
             trainings: "",
             certificates: ""

@@ -18920,23 +18920,6 @@ define("Collections/Properties",["Models/Property", "Collections/Base", "undersc
     });
 });
 
-/**
- * Created by Administrator on 13.08.2014.
- */
-define(["Backbone", "Collections/Students", "jquery"], function(Backbone, Students, $){
-    return function(filter){
-        var xhr = $.Deferred();
-        Backbone.ajax({
-            url: "/students/find",
-            type: "POST",
-            data: filter
-        }).done(function(result){
-            var students = new Students(result);
-            xhr.resolveWith(students);
-        }).fail(xhr.reject);
-        return xhr;
-    };
-});
 define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], function(Skill, Collection, _){
     return Collection.extend({
         model:Skill,
@@ -18947,6 +18930,7 @@ define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], 
          */
         constructor: function(){
             if (this.constructor._instance) {
+                debugger;
                 return this.constructor._instance;
             } else {
                 Collection.prototype.constructor.apply(this, arguments);
@@ -19013,7 +18997,7 @@ define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],f
             return {
                 name: "",
                 email: "",
-                students: new Students([])
+                students: new Base([])
             };
         },
         urlRoot: "/curators",
@@ -19022,8 +19006,7 @@ define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],f
                 if(_.isArray(value)) {
                     this.set("students", new Students(value), {silent: true});
                 }
-                this.listenTo(this.get("students"), "add remove", function(model, collection){
-                    this.set("students", collection, {silent: true});
+                this.listenTo(this.get("students"), "add remove", function(){
                     this.save();
                 });
             });
@@ -19148,12 +19131,8 @@ define("Models/Skill",["Models/Base", "underscore"], function(Model, _){
  * Time: 18:00
  * To change this template use File | Settings | File Templates.
  */
-<<<<<<< HEAD
-define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
-=======
 define("Models/Student",["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
 debugger;
->>>>>>> 946290ab28aac636d5147debd357a1214f2543e6
     return Base.extend({
         defaults: function(){
             return {
@@ -19280,8 +19259,7 @@ define("Models/StudentInstance",["Models/Student"], function(Student){
 define("Models/User.Admin",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students",
-            canDo: []
+            defaultPage: "students"
         },
         /**
          * function to check allowed actions user
@@ -19303,15 +19281,15 @@ define("Models/User.Admin",["Models/User"], function(User){
 define("Models/User.Employer",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students",
-            canDo: ["view_settings"]
+            defaultPage: "students"
         },
         /**
          * function to check allowed actions user
          */
         can: function(whatCan){
-            for(var i = 0; i < this.get('canDo').length; i++){
-                if(whatCan == this.get('canDo')[i]){
+            var i;
+            for(i = 0; i < this.canDo.length; i++){
+                if(whatCan == this.canDo[i]){
                     return true;
                 }
             }
@@ -19325,8 +19303,7 @@ define("Models/User.Employer",["Models/User"], function(User){
 define("Models/User.Manager",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students",
-            canDo: []
+            defaultPage: "students"
         },
         /**
          * function to check allowed actions user
@@ -19349,8 +19326,7 @@ define("Models/User.Manager",["Models/User"], function(User){
 define("Models/Student",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students",
-            canDo: []
+            defaultPage: "students"
         },
         /**
          * function to check allowed actions user
@@ -19403,8 +19379,7 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
 
             (new Request({
                 //TODO: Дописать, когда будет инфа о сервисах
-                url: "/api/entity",
-                method: "GET"
+                url: ""
             }))
             .send({
                 login: login,
@@ -19412,8 +19387,7 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
             })
             .done(function(result){
                 //TODO: Дописать, когда будет инфа о сервисах
-                    var entity = result.data[0].entity;
-                require(["Models/User." + entity],function(Employer){
+                require(["Models/User." + result],function(Employer){
                     // Подгружаем нужный класс для юзера и создаем его экземпляр в App.user = new U();
                     //TODO: Дописать, когда будет инфа о сервисах
                     App.user = new Employer();
@@ -21924,14 +21898,10 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         isNameFilter: function(field, name){
-            if(field === "")
-                return true;
             return (new RegExp(field, 'i')).test(name);
         },
 
         isStudentFilter:function(field, students){
-            if(field === "")
-                return true;
             return students.some(function(student){
                 return (new RegExp(field, 'i')).test(student.get('name'));
             });
@@ -21948,12 +21918,8 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         doFilter: function(event, filter){
-            try {
-                this.filter = filter;
-                this.rows.forEach(this.filterRow, this);
-            } catch (e){
-
-            }
+            this.filter = filter;
+            this.rows.forEach(this.filterRow, this);
         },
         __ready: function(){
             this.$el.trigger("view:ready");
@@ -22024,12 +21990,8 @@ define("Views/ListManagers",["Views/Base", "Collections/Managers", "Models/Manag
         },
 
         doFilter: function(event, filter){
-            try {
-                this.filter = filter;
-                this.rows.forEach(this.filterRow, this);
-            } catch (e){
-
-            }
+            this.filter = filter;
+            this.rows.forEach(this.filterRow, this);
         }
 
     },{
@@ -22976,7 +22938,7 @@ define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
                 containerResolveMethod: "append",
                 model: model
             });
-            row.render();
+            row.show();
             this.rows.push(row);
         }
     },{
@@ -22997,7 +22959,6 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
             "field:changed": "addSkillToStudent"
         },
         constructor: function(options){
-
             options.allSkill = new Skills();
             return Form.prototype.constructor.apply(this, arguments);
         },
@@ -23009,12 +22970,12 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
                 el: this.$(".skillsTable"),
                 collection: this.collection
             }));
+            this.disable();
         },
         addSkillToStudent: function(e, skill){
             if(skill instanceof Skill) {
                 this.collection.add(skill);
-                this.childrenViews.newSkill.__value = "";
-                this.childrenViews.newSkill.$el[0].value = "";
+                this.childrenViews.newSkill.dropValue.apply(this, arguments);
             }
         }
     },{
@@ -23046,11 +23007,7 @@ define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"
 /**
  * Created by Administrator on 31.07.2014.
  */
-<<<<<<< HEAD
-define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
-=======
 define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students", "Models/Student", "App"], function(View, $, Popover, bootstrap,Students,  Student, App){
->>>>>>> 946290ab28aac636d5147debd357a1214f2543e6
     return View.extend({
         events:{
             "field:changed": "addStudent",
@@ -23067,15 +23024,14 @@ define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "boo
          */
         addStudent: function(event, student){
             this.$(".popover-btn").popover("hide");
-            this.collection.add(student);
+            this.options.collection.add(student);
         },
         /*
             detach student to employer
          */
         detachStudent: function(event){
             var index = $(event.target).data("index");
-            var delModel = this.collection.get(index);
-            this.collection.remove(delModel);
+            this.collection.remove(this.collection.at(index));
         }
     }, {
         defaults: $.extend(true, {}, View.defaults, {
