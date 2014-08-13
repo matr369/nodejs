@@ -87,7 +87,9 @@ var doRequrest = function (req, res, next) {
     }, function(error){
         res.send({
             status: "error",
-            data: error
+            data: {
+                message: (typeof error === "string")? error : error.message
+            }
         }, 200);
     });
 };

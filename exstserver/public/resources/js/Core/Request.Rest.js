@@ -16,6 +16,7 @@ define("Core/Request.Rest", ["Backbone", "App", "jquery"], function(Backbone, Ap
                 xhr.resolve(data.data);
             }
             else {
+                App.Error("Error:" + data.data.message);
                 xhr.reject(data.status);
             }
             })
