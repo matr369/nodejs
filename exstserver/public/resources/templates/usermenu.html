@@ -3,7 +3,7 @@
     <div class="logged-user current-user">
         <div class="btn-group">
             <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="javascript:void 0;">
-                <img src="{%- App.user.get('avatar') %}" />
+                <img src="{%- App.user.get('avatar') %}" width="40px" height="40px"/>
                 <span class="name">{%- App.user.get('name')%}</span>
                 <span class="caret"></span>
             </a>
@@ -14,14 +14,12 @@
                         <span class="text">{%- data.textChangePassword%}</span>
                     </a>
                 </li>
-                {% if(App.user.can("view_settings")){%}
-                    <li>
-                        <a href="#settings">
-                            <i class="{%- data.iconSettings %}"></i>
-                            <span class="text">{%- data.textSettings%}</span>
-                        </a>
-                    </li>
-                {% } %}
+                <li>
+                    <a href="#settings">
+                        <i class="{%- data.iconSettings %}"></i>
+                        <span class="text">{%- data.textSettings%}</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#logout">
                         <i class="{%- data.iconLogout%}"></i>

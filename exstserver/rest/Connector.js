@@ -18,10 +18,11 @@ var Backbone = require("backbone"),
 var ConnectorForCollections = function(method, model, options){
     var xhr = $();
     var exports = model.model.prototype.exportAttrs || [];
+    var sort = model.sortBy || {};
     mongoConnector.done(function(){
         switch (method) {
             case 'read':
-                this.collection(model.collection_db).find({}, exports).toArray(function(err, data){
+                this.collection(model.collection_db).find({}, exports).sort(sort).toArray(function(err, data){
                     if (err) {
                         xhr.reject(err);
                     }else {
@@ -30,7 +31,7 @@ var ConnectorForCollections = function(method, model, options){
                 });
                 break;
             case "find":
-                this.collection(model.collection_db).find(options.filter, options.exports || exports).toArray(function(err, data){
+                this.collection(model.collection_db).find(options.filter, options.exports || exports).sort(sort).toArray(function(err, data){
                     if (err) {
                         xhr.reject(err);
                     }else {

@@ -5,7 +5,7 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
     var User = Backbone.Model.extend({
         defaults: {
             defaultPage: "login",
-            avatar: "resources/images/user-avatar.png",
+            avatar: "resources/images/default_avatar_male.jpg",
             name: "Janne",
             canDo: []
 
