@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define("Views/Pages/StudentInterview", ["Views/Page", "Views/Base", "Models/StudentInstance", "jquery"], function(Page, Base, Student, $){
+define("Views/Pages/StudentInterviews", ["Views/Page", "Views/Base", "Models/StudentInstance", "jquery"], function(Page, Base, Student, $){
 
     return Page.extend({
 
