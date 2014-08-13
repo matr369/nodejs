@@ -181,7 +181,7 @@ define("Core/Validator", ["underscore"], function (_) {
         },
 
         $radioChoose: function(value, rule, name){
-            return (this.$equal(value,'([a-zA-Z_0-9]*\\=[a-zA-Z_0-9]*\\;\\s){1,}', name)=== true)? true: "Field "+name+" must be Index1=Name1;...";
+            return true;
         },
 
         $phoneNumber: function(value, rule, name){

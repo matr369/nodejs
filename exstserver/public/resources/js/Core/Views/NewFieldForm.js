@@ -5,7 +5,6 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
             "click .submit-button": "submit"
         },
 
-
         submitWithKey: function(e){
             if (e && e.keyCode==13) {
                 this.submit();
@@ -15,13 +14,7 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
         constructor: function (options) {
             options.collection = new Fields();
             Form.prototype.constructor.apply(this, [options]);
-            $( document ).ready(function() {
-
-            });
-
         },
-
-
 
 
         verify: function(){
@@ -41,9 +34,33 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
 
         serialize: function () {
             var result = {};
+            result.options = {};
             _.each(this.fields || [], function (field) {
-                if (field.$el.is(':visible'))
-                    _.extend(result, field.serialize());
+                if (field.$el.is(':visible')) {
+                    var serializeResult = field.serialize();
+                    if (field.options.isOption ) {
+                        if (field.options.name == "items") {
+                            serializeResult = {
+                                items: (function(val){
+                                    var result = [];
+                                    val.split(";").forEach(function(item){
+                                        if (item) {
+                                            var i = item.split("=");
+                                            result.push({
+                                                value: i[0].trim(),
+                                                label: i[1].trim()
+                                            });
+                                        }
+                                    });
+                                    return result;
+                                })(field.getValue())
+                            };
+                        }
+                        _.extend(result.options, serializeResult);
+                    } else {
+                        _.extend(result, serializeResult);
+                    }
+                }
             });
             return result;
         },
@@ -62,18 +79,12 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
         },
 
         hideAllTypesForm: function () {
-
             this.$(".type-form").hide();
-        },
-
-        __sendData: function (field) {
-
-            return $.Deferred().resolve(field);
         },
 
 
         onSuccessSubmit: function (field) {
-
+            App.notify("Field was created", "success");
             this.hideAllTypesForm();
             if (this.collection.where({name: field.name}).length == 0)
                 this.collection.add(field);

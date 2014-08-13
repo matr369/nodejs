@@ -401,6 +401,12 @@ html,
 .page-settings .list-group-item-heading i {
   margin-right: 3px;
 }
+.page-settings-fields .field-options {
+  display: block;
+}
+.page-settings-fields .curs {
+  cursor: pointer;
+}
 .page-settings-fields .new-field-form td,
 .page-settings-fields .new-field-form th {
   vertical-align: middle;

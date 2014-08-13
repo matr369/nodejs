@@ -1,7 +1,7 @@
 define("Collections/Fields",["Models/Field", "Collections/Base", "underscore"], function(Field, Collection, _){
     return Collection.extend({
         model:Field,
-        url: '/technology',
+        url: '/custom-fields',
         constructor: function(){
             if (this.constructor._instance) {
                 return this.constructor._instance;

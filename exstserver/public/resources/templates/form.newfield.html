@@ -40,27 +40,26 @@
         <div class="type-form select-form">
             <h5>Enter id's and names of your radio buttons</h5>
             <view data-id="optionsRadio" data-constructor="Views/Fields/Base"
-                  data-options="{name:'optionsRadio', type:'text', className:'form-control', placeHolderName:'Id1=Name1; Id2=Name2; Id3=Name3;...', rules:'ids'}"/>
+                  data-options="{isOption: true, name:'items', type:'text', className:'form-control', placeHolderName:'Id1=Name1; Id2=Name2; Id3=Name3;...', rules:'ids'}"/>
            <h5>Choose it's look</h5>
             <view data-id="fieldLook" data-constructor="Views/Fields/Radio"
-                  data-options="{buttons:[{label:'selectable', id:'select'},{label:'radio', id:'radio'},{label:'dropdown', id:'dropdown'}],  name:'fieldLook', rules:'fieldLook'}"/>
+                  data-options="{isOption: true, buttons:[{label:'Selectable', id:'Selectable'},{label:'Radio', id:'Radio'},{label:'Dropdown', id:'Dropdown'}],  name:'tpl', rules:'fieldLook'}"/>
             <h5>Enter default value of your radio buttons</h5>
             <view data-id="defaultValue1" data-constructor="Views/Fields/Base"
-                  data-options="{name:'defaultValue', type:'text', className:'form-control', placeHolderName:'Default value (Name2)', rules:'chosen'}"/>
+                  data-options="{isOption: true, name:'defaultValue', type:'text', className:'form-control', placeHolderName:'Default value...', rules:'chosen'}"/>
         </div>
 
 
         <div class='type-form text-form'>
             <h5>Enter default value of your text field</h5>
             <view data-id="defaultValue2" data-constructor="Views/Fields/Base"
-                  data-options="{name:'defaultValue', type:'text', className:'form-control', rules:'textField'}"/>
+                  data-options="{isOption: true, name:'defaultValue', type:'text', className:'form-control', rules:'textField'}"/>
         </div>
 
 
         <div class="type-form check-form">
-            <h5>Enter default value of your checkbox</h5>
-            <view data-id="defaultValue3" data-constructor="Views/Fields/CheckBox"
-                  data-options="{name:'defaultValue', type:'text', yes:'yes', no:'no', rules:'checkField'}"/>
+            <h5>Enter default value of your checkbox: <view data-id="defaultValue3" data-constructor="Views/Fields/CheckBox"
+                                                            data-options="{isOption: true, name:'defaultValue', type:'text', yes:'yes', no:'no', rules:'checkField'}"/></h5>
         </div>
         </div>
 

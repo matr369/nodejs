@@ -1,25 +1,74 @@
 <div>
-
+    {% var getKey = function(key){
+        var keys = {
+            tpl: "Template",
+            select: "Selectable",
+            check: "Checkbox",
+            text: "Text",
+            items: "Possible values"
+        };
+        return keys[key];
+    }; %}
+    {% var getValue = function(key, value){
+        var result = value;
+        var keys = {
+            items: function(){
+                return value.map(function(v){
+                    return v.label;
+                }).join(",");
+            }
+        };
+        if (keys[key]) {
+            result = keys[key]();
+        }
+        return result;
+    }; %}
     <table class="table table-striped table-hover ">
         <thead>
         <tr>
             <th>Name</th>
+            <th>Can be changed</th>
             <th>Type</th>
             <th>Default</th>
-            <th>Look</th>
-            <th>Can be changed</th>
             <th>Options</th>
-
             <th></th>
         </tr>
         </thead>
         <tbody>
-<!--
         {% data.collection.forEach(function(field, i){ %}
-
-        <view data-id=i data-constructor='Views/FieldRow' data-options="{field:field}"/>
-
-        {% }); %}-->
+            {% var options = field.get('options') || {}; %}
+            <tr data-id="{%- field.id %}" class="field-item">
+                <td>
+                    <strong>
+                        {%- field.get('name') %}
+                    </strong>
+                </td>
+                <td>
+                    {%? field.get('change') %}
+                    <span class="label label-success">Yes</span>
+                    {%??%}
+                    <span class="label label-danger">No</span>
+                    {%?%}
+                </td>
+                <td>{%- getKey(field.get('fieldType')) %}</td>
+                <td>{%- options.defaultValue %}</td>
+                <td>
+                    {% for(var key in options){ %}
+                        {%? key!='defaultValue' %}
+                            <span class="field-options">
+                                <span class="label label-default">{%- getKey(key) %}</span>
+                                {%- getValue(key,options[key]) %}
+                            </span>
+                        {%?%}
+                    {% } %}
+                </td>
+                <td>
+                    <a>
+                        <i class="fa fa-times curs"> </i>
+                    </a>
+                </td>
+            </tr>
+        {% }); %}
         </tbody>
     </table>
 </div>
