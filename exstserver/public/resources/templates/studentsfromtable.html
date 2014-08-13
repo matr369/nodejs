@@ -4,7 +4,7 @@
 <tr class="active">
     <td width="10"></td>
     <td>
-        <a href="#students/1.jsp" class="student-name">{%- student.get('name') %}</a></td>
+        <a href="#students/{%- student.get('_id')%}" class="student-name">{%- student.get('name') %}</a></td>
 
 
     {{~ data.fields :field:position1 }}

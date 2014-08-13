@@ -13,11 +13,10 @@
 
 
                                 {{~ data.fields :field:position }}
-                                <th>{%- field %}
+                                <th>{%- data.properties[field].label %}
                                     <i class="fa fa-times deleteField" data-index="{%- field %}"></i>
                                 </th>
                                 {{~}}
-
 
                                 <th>
                                     <div class="dropdown">
@@ -25,19 +24,15 @@
                                                 class="fa fa-plus-square fa-2x"></i></a>
                                         <ul class="dropdown-menu">
                                             {% for (x in data.properties){ %}
-
-                                            <li class="extra" data-index="{%- x %}">
-                                                {%- data.properties[x].label %}
-
+                                            {%? x!=='name' %}
+                                            <li class="extra" data-index="{%- x %}"><a href="javascript:void 0;">
+                                                {%- data.properties[x].label %}</a>
                                             </li>
-
+                                            {%?%}
                                             {%}%}
-
-
                                         </ul>
                                     </div>
                                 </th>
-
                             </tr>
 
                             <tr>
@@ -63,8 +58,9 @@
                                         <button class="btn btn-primary submit-button find">Find</button>
                                     </div>
                                 </th>
-
                             </tr>
+
+
                             </thead>
                             <tbody>
                             </tbody>

@@ -23,7 +23,9 @@ define("Views/StudentPanelTable",[ "Views/Form", "App", "jquery", "Views/Base", 
         },
 
         __sendData: function (data) {
+
             this.model.set(data);
+            this.model.save();
             return $.Deferred().resolve(data);
         },
 

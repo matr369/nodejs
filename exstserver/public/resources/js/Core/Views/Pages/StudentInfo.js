@@ -13,7 +13,9 @@ define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jque
             options.model = new Student({
                 id: options.student
             });
+
             Page.prototype.constructor.apply(this, arguments);
+
         },
         __ready: function(){
             this.listenTo(this.model, "change:name", function(){

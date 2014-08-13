@@ -52,7 +52,7 @@ var ConnectorForModels = function(method, model, options){
     var xhr = $();
     var db_collection = model.collection_db || model.collection.collection_db;
     var findById = model.id? { "_id": ObjectID(model.id) } : {};
-    var exports = model.exportAttrs;
+    var exports = model.exportAttrs || {};
     mongoConnector.done(function(){
         switch (method) {
             case 'create':

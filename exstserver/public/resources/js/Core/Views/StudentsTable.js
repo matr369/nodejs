@@ -50,15 +50,15 @@ define("Views/StudentsTable", ["Views/Form","App", "underscore", "jquery", "Coll
         },
 
         addField: function (event) {
+
+            var fiedlId = $(event.currentTarget).data("index");
             var ind = _.findIndex(this.options.fields, function (field) {
-                    return field == $(event.target).data("index")
-                }),
-                len = this.options.fields.length;
-            if (ind == -1 && $(event.target).data("index")!="name") {
-                this.options.fields[len] = $(event.target).data("index");
+                    return field == fiedlId
+                });
+            if (ind == -1) {
+                this.options.fields.push(fiedlId);
                 this.rerender();
             }
-
         },
         render: function (options) {
             this.options.properties = PropertyList;

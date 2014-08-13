@@ -5,7 +5,7 @@
  * Time: 18:00
  * To change this template use File | Settings | File Templates.
  */
-define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
+define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill", "Backbone"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill, Backbone){
 
     return Base.extend({
         defaults: function(){
@@ -13,6 +13,7 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
                 name: "Ivan",
                 enable: true,
                 status:'work',
+                email:"",
                 avatar: "resources/images/default_avatar_male.jpg"
             }
         },
@@ -83,10 +84,19 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
             return this.__interviews;
         },
         fetchInfo: function(){
+            var self = this;
             if (!this.__info) {
+
                 this.__info = $.Deferred();
+                Backbone.ajax({
+                    url: "/students/"+this.attributes.id,
+                    method: "GET"
+                }).done(function(data){
+                    self.set(data);
+                    self.__info.resolve(data);
+                }).fail(this.__info.reject);
                 //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__info с коллекцией.
-                this.__info.resolve();
+              //  this.__info.resolve();
             }
             return this.__info;
         }
