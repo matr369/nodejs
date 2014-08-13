@@ -5,7 +5,7 @@ var Backbone = require("backbone"),
     $ = require("Deferred"),
     mongoConnector = $(),
     ObjectID = require('mongodb').ObjectID,
-    client = require('mongodb').MongoClient.connect("mongodb://localhost:27017/exadel-students", function(err, db){
+    client = require('mongodb').MongoClient.connect("mongodb://192.168.8.24:27017/exadel-students", function(err, db){
         if(!err) {
             mongoConnector.resolveWith(db, []);
         } else {
