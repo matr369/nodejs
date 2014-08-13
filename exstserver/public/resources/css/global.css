@@ -372,17 +372,14 @@ html,
 .forgotten-pass {
   margin: 4px;
 }
-.new-skill {
+.page-settings .new-skill {
   background-color: #ffffff;
   position: relative;
   top: 20%;
   width: 300px;
   height: 285px;
 }
-h4 {
-  padding: 6px;
-}
-.tags {
+.page-settings .tags {
   display: inline-block;
   color: #fff;
   padding: 3px 10px;
@@ -396,6 +393,13 @@ h4 {
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
   float: left;
   margin: 3px;
+}
+.page-settings .list-group-item-text {
+  margin-bottom: 0;
+  font-size: 100%;
+}
+.page-settings .list-group-item-heading i {
+  margin-right: 3px;
 }
 .page-curators li > a {
   padding: 8px;
