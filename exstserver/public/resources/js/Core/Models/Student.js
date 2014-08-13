@@ -5,7 +5,7 @@
  * Time: 18:00
  * To change this template use File | Settings | File Templates.
  */
-define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
+define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
 
     return Base.extend({
         defaults: function(){
@@ -20,7 +20,6 @@ define(["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquer
 
 
         constructor: function(options){
-            debugger;
             this.on("change:id", function(){
                 this.set("profileLink", "students/" + this.id);
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");

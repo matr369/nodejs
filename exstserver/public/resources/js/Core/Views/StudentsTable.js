@@ -1,35 +1,29 @@
 
-define("Views/StudentsTable", ["Views/Form","App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable) {
+define("Views/StudentsTable", ["Views/Form","App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable", "Views/FilterStudentForm", "Collections/RemoteStudents"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable, FilterStudentForm, RemoteStudents) {
    return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "click .extra": "addField",
             "click .deleteField": "deleteField",
-            "view:ready": "initSubViews",
-            "click .find": "findIt"
-
-
+            "view:ready": "initSubViews"
         }),
 
-        findIt:function(){
-            debugger;
-            $(".intable").detach();
-            this.initSubViews();
-        },
-
         onSuccessSubmit: function(data){
-            debugger;
             this.childrenViews.studentsList.rerender();
         },
 
         __sendData:function(data){
-            debugger;
-            return $.Deferred().resolve([]);
+            var self = this,
+                xhr = $.Deferred();
+            (new RemoteStudents(data)).done(function(){
+                self.childrenViews.studentsList.options.collection = this;
+                xhr.resolve(data);
+            }).fail(xhr.reject);
+            return xhr;
         },
 
 
 
         initSubViews: function(){
-
             var studentsFromTable = new StudentsFromTable({
                 container: this.$("tbody"),
                 containerResolveMethod: "replaceWith",
@@ -40,8 +34,6 @@ define("Views/StudentsTable", ["Views/Form","App", "underscore", "jquery", "Coll
         },
 
         constructor: function(options){
-            debugger;
-            options.collection = new Students();
             Form.prototype.constructor.apply(this,[options]);
         },
 

@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 31.07.2014.
  */
-define(["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
+define("Views/StudentsOfEmployer", ["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
     return View.extend({
         events:{
             "field:changed": "addStudent",

@@ -35,7 +35,7 @@ var setUpCollection = function (params, method, data) {
         case "POST":
             var xhr = $();
             if(params.method){
-                var model = this[params.method](data, params);
+                xhr = this[params.method](data, params);
             } else {
                 var model = this.create(data, {
                     success: function () {

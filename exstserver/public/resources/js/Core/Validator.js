@@ -126,7 +126,7 @@ define("Core/Validator", ["underscore"], function (_) {
             return (!_.isUndefined(value) && !_.isNull(value) && value.trim() !== "")? true : "Field "+name+" are required.";
         },
         $requiredRadio: function(value, rule, name){
-            debugger;
+
 
             return (value !== undefined)? true : "Field "+name+" are required.";
         },

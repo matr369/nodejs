@@ -3,7 +3,6 @@ define("Collections/Fields",["Models/Field", "Collections/Base", "underscore"], 
         model:Field,
         url: '/technology',
         constructor: function(){
-            debugger;
             if (this.constructor._instance) {
                 return this.constructor._instance;
             } else {

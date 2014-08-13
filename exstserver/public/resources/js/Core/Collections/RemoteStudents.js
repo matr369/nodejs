@@ -1,8 +1,8 @@
 /**
  * Created by Administrator on 13.08.2014.
  */
-define(["Backbone", "Collections/Students", "jquery"], function(Backbone, Students, $){
-    return function(filter){
+define("Collections/RemoteStudents", ["Backbone", "Collections/Students", "jquery"], function(Backbone, Students, $){
+   return function(filter){
         var xhr = $.Deferred();
         Backbone.ajax({
             url: "/students/find",

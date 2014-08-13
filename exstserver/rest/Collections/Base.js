@@ -19,7 +19,8 @@ var Collection = require("backbone").Collection,
         isCollection: true,
         model: Model,
         find: function(filter){
-            var xhr = $();
+            var xhr = $(),
+                self = this;
             filter = filter || {};
             var exports = {};
             for (var key in filter){
@@ -29,8 +30,23 @@ var Collection = require("backbone").Collection,
                 }
             }
             this.where(filter, {
-                options: exports
-            }).done(xhr.resolve).fail(xhr.reject);
+                exports: exports
+            }).done(function(result){
+                var modelFetching = [];
+                self.set(result || [], {reset: true});
+                self.forEach(function(model){
+                    modelFetching.push(model.afterFetch());
+                });
+                try {
+                    $.when.apply($, modelFetching).done(function(){
+                        self.afterFetch().done(function(){
+                            xhr.resolve(self.exportToJSON());
+                        }).fail(xhr.reject);
+                    }).fail(xhr.reject);
+                } catch (e) {
+                    xhr.reject(e);
+                }
+            }).fail(xhr.reject);
             return xhr;
         },
         where: function (filter, options) {
