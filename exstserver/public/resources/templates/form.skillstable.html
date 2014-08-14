@@ -2,7 +2,7 @@
     <ol>
         {% data.collection.forEach(function(skill, i){  %}
         <li>
-            {%- skill.get('technology_name') %}
+            {%- skill.get(data.name || 'technology_name')  %}
             <a><i data-id="{%- skill.id %}" class="fa fa-times curs" alt="Delete"> </i></a>
         </li>
         {% }); %}

@@ -4,6 +4,7 @@ define("Routes/Settings", ["Routes/Base", "App"], function(Router, App){
 
             "settings":"showSettingsPage",
             "settings/fields":"showNewFieldPage",
+            "settings/certificates":"showCertificates",
             "settings/skills":"showNewSkillPage"
         },
 
@@ -24,6 +25,16 @@ define("Routes/Settings", ["Routes/Base", "App"], function(Router, App){
          */
         "showNewSkillPage": function(){
             require(["Views/Pages/SettingsSkills" ], function(Page){
+                (new Page({})).show();
+            });
+        },
+
+
+        /**
+         * New skill
+         */
+        "showCertificates": function(){
+            require(["Views/Pages/SettingsCertificates" ], function(Page){
                 (new Page({})).show();
             });
         },

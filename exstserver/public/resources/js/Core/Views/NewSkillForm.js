@@ -14,7 +14,7 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
 
 
         constructor: function(options){
-            options.collection = new Skills();
+            options.collection = options.collection || new Skills();
             Form.prototype.constructor.apply(this, [options]);
         },
 
@@ -29,7 +29,8 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
                 src: "form.newskill.html?v=1"
             },
             prepareCollection: false,
-            formTitle :"new skill"
+            formTitle :"New Skill",
+            formDescription: "Name of the skill"
         })
     });
 });

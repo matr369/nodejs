@@ -16,7 +16,7 @@ define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"]
         },
 
         constructor: function(options){
-            options.collection = new Skills();
+            options.collection = options.collection || new Skills();
             Base.prototype.constructor.apply(this, arguments);
         },
 
@@ -32,7 +32,7 @@ define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"]
             tpl: {
                 src: "form.skillstable.html?v=1"
             },
-            formTitle :"skills table"
+            formTitle :"Skills Table"
         })
     });
 

@@ -403,6 +403,9 @@ html,
 }
 .page-settings .list-group-item-heading i {
   margin-right: 3px;
+  color: #2E729F;
+  min-width: 23px;
+  text-align: center;
 }
 .page-settings-fields .field-options {
   display: block;

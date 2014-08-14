@@ -1,0 +1,44 @@
+<div class="page page-settings-skills page-settings-certificates">
+    <div>
+
+        <view data-id="header" data-constructor="Views/Base"
+              data-options='{"tpl": {"src": "header.html?v=1" }}'/>
+    </div>
+    <div class="content">
+        <view data-id='pageDescription' data-constructor='Views/PageDescription' data-options="{
+            pageTitle: 'Certificates',
+            pageDescription: 'Add/Remove a new certificates a student can have'
+        }"/>
+        <view data-id='breadcrumbs' data-constructor='Views/Breadcrumb' data-options="{path:[
+            {
+                href: '#settings',
+                title: 'Settings'
+            },
+
+             {
+                href: '#setting/certificates',
+                title: 'Certificates'
+            }
+
+
+        ]}"/>
+    </div>
+
+
+    <div class="container form-skills">
+        <div class="row">
+            <div class="student-info">
+                <div class="jumbotron">
+                    <view data-id='form' data-constructor='Views/NewSkillForm' data-options="{
+                        collection: data.collection,
+                        name: 'name',
+                        formTitle: 'New Certificate',
+                        formDescription: 'Certificate name',
+                        placeholder: 'Example: Oracle Certified Expert Program'
+                    }" />
+                    <view data-id='table' data-constructor='Views/SkillsTable' data-options="{name: 'name', collection: data.collection}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
