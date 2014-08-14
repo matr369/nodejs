@@ -19,7 +19,6 @@ define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Stude
             nameText: "Student's name",
             emailText: "Student's email",
             emailPlaceholder: "student@exadel.com",
-            prepareCollection: false,
             namePlaceholder: "Ivan Ivanov"
         })
     });

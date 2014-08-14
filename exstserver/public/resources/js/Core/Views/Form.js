@@ -138,6 +138,7 @@ define("Views/Form",["Views/Base", "Views/Fields/Base", "jquery", "underscore", 
          * Submit data to the server
          */
         submit: function(e){
+            debugger;
             if (e && e.preventDefault && e.type.indexOf('key') != 0) {e.preventDefault();}
             if (!this.__disabled) {
                 var self = this;

@@ -29,8 +29,7 @@ define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"
             tpl: {
                 src: "studentsfromtable.html?v=1"
             },
-            fields: [],
-            prepareCollection: false
+            fields: []
         })
     })
 });

@@ -12,7 +12,7 @@
                                 <th>Name</th>
 
 
-                                {{~ data.fields :field:position }}
+                                {{~ data.ourfields :field:position }}
                                 <th>{%- data.properties[field].label %}
                                     <i class="fa fa-times deleteField" data-index="{%- field %}"></i>
                                 </th>
@@ -43,7 +43,7 @@
                                               data-options="{name:'name', type:'text', className:'form-control', placeHolderName:'Ivan Ivanov'}"/>
                                     </div>
                                 </th>
-                                {{~ data.fields :field:position }}
+                                {{~ data.ourfields :field:position }}
                                 <th height="20">
                                     <div class="form-group">
                                         <view data-id='{%- field %}' data-constructor="Views/Fields/Base"
