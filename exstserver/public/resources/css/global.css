@@ -463,3 +463,10 @@ html,
 .extra {
   cursor: pointer;
 }
+.student-status-dot {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  padding: 0;
+  border-radius: 10px;
+}

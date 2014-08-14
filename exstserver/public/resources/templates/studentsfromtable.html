@@ -1,29 +1,16 @@
 <tbody>
-
 {% data.collection.forEach(function(student, j) {%}
 <tr class="active">
-    <td width="10"></td>
+    <td width="10">
+        <span class="student-status-dot label {%- student.get('enable')? 'label-success' : 'label-danger' %}"> </span>
+    </td>
     <td>
         <a href="#students/{%- student.get('_id')%}" class="student-name">{%- student.get('name') %}</a></td>
-
-
-    {{~ data.fields :field:position1 }}
-    {% var fieldname = field; %}
-    <td>{%- student.get(fieldname) %}
-    </td>
-    {{~}}
-
-
-    <td></td>
-
+        {{~ data.fields :field:position1 }}
+        {% var fieldname = field; %}
+        <td>{%- student.get(fieldname) %}</td>
+        {{~}}
+    <td> </td>
 </tr>
-
 {% }); %}
-
-
-
-
-
-
-
 </tbody>
