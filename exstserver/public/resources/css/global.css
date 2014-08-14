@@ -301,7 +301,6 @@ html,
 }
 .info-table .name-coll {
   width: 140px;
-    padding: 14px;
 }
 .info-table .edit-button-container {
   display: none;
@@ -430,7 +429,7 @@ html,
 .page-settings-fields .fields-forms {
   margin-bottom: 5px;
 }
-.page-curators li > a {
+.page-curators .table li > a {
   padding: 8px;
 }
 .page-curators table .form-group {
@@ -453,8 +452,6 @@ html,
   margin-bottom: 4px;
   padding: 1px 6px;
   border-radius: 5px;
-  white-space: nowrap;
-
 }
 .page-curators .detach-student.low {
   opacity: 0.4;

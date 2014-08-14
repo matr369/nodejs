@@ -7,7 +7,7 @@ define("Views/Pages/StudentInterviews", ["Views/Page", "Views/Base", "Models/Stu
 
         constructor: function(options){
             options.model = new Student({
-                id: options.student
+                _id: options.student
             });
             Base.prototype.constructor.apply(this, arguments);
         },

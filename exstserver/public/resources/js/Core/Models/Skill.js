@@ -1,9 +1,11 @@
 define("Models/Skill",["Models/Base", "underscore"], function(Model, _){
     return Model.extend({
         defaults:{
-            technology_name: "",
-            value: ''
+            technology_name: ""
         },
-        urlRoot: "/technology"
+        urlRoot: "/technology",
+        toJSON: function(){
+                return _.clone(this.attributes);
+        }
     });
 });

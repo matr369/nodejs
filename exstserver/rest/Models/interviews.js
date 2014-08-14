@@ -2,14 +2,8 @@
  * Created by Administrator on 13.08.2014.
  */
 var base = require("./Base");
-var Students = require("./../Collections/students");
+var Skills = require("./../Collections/technology");
 var $ = require("Deferred");
 module.exports = base.extend({
-    defaults: function(){
-        return {
-            name: "",
-            email: "",
-            students: []
-        };
-    }
+    collection_db: "interviews"
 });

@@ -8,6 +8,6 @@
 define("Collections/Interviews",["Collections/Base", "Models/Interview"], function(Collection, Interview){
     return Collection.extend({
         model: Interview,
-        url: "/interview"
+        url: "/interviews"
     });
 });

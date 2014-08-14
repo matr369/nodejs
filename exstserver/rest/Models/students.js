@@ -3,6 +3,7 @@
  */
 var base = require("./Base");
 var Feedbacks = require("./../Collections/feedbacks");
+var Interviews = require("./../Collections/interviews");
 var $ = require("Deferred");
 
 module.exports = base.extend({
@@ -57,6 +58,16 @@ module.exports = base.extend({
             student: this.id
         }).done(function(){
             xhr.resolve(feeds.exportToJSON());
+        }).fail(xhr.fail);
+        return xhr;
+    },
+    interviews: function(){
+        var xhr = $(),
+            iviews = new Interviews();
+        iviews.where({
+            student: this.id
+        }).done(function(){
+            xhr.resolve(iviews.exportToJSON());
         }).fail(xhr.fail);
         return xhr;
     },

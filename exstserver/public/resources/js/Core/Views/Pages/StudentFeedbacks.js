@@ -25,7 +25,6 @@ define("Views/Pages/StudentFeedbacks", ["Views/Page", "Views/Base", "Models/Stud
             });
             return modelStatus;
         }
-
     }, {
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {

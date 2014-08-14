@@ -24,6 +24,7 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
                 this.set("interviewsLink", "students/" + this.id + "/interviews");
             });
+
             Base.prototype.constructor.apply(this, arguments);
             this.set("profileLink", "students/" + this.id);
             this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
@@ -52,30 +53,17 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
             return this.__feedbacks;
         },
         fetchInterviews: function(){
-
+            var self = this;
             if (!this.__interviews) {
                 this.__interviews = $.Deferred();
-                this.set("interviews", new Interviews([
-                    new Interview({
-                        id: 1,
-                        result: 'Excepted',
-                        interviewer: "Pukova Polina",
-                        idStudent: 2,
-                        date: "01/01/2014",
-                        note: "The is text...",
-                        studentSkills: new StudentSkills([
-                            new Skill({
-                                technology_name: "fsdfsdf",
-                                value: '1'
-                            }),
-                            new Skill({
-                                technology_name: "fsdfsgndfz",
-                                value: '3'
-                            })
-                        ])
-                    })
-                ]));
-                this.__interviews.resolve();
+                Backbone.ajax({
+                    url: self.urlRoot + "/" + self.id + "/interviews",
+                    method: "GET"
+                }).done(function(result){
+                    self.set("interviews", new Interviews(result));
+                    self.__interviews.resolve();
+                }).fail(self.reject);
+
                 //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__interviews с коллекцией.
             }
             return this.__interviews;
@@ -83,6 +71,7 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
         fetchInfo: function(){
             var self = this;
             if (!this.__info) {
+
                 this.__info = $.Deferred();
                 Backbone.ajax({
                     url: self.urlRoot + "/" + self.id + "/info",

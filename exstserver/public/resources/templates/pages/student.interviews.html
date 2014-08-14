@@ -22,7 +22,8 @@
             <div class="content-wraper">
                 <div class="jumbotron">
                     <div class="row">
-                        <view data-id="commonInfo" data-constructor="Views/CommonStudentInfo" data-options="{ model: data.model, className: 'clearfix' }" />
+                        <view data-id="commonInfo" data-constructor="Views/CommonStudentInfo"
+                              data-options="{ model: data.model, className: 'clearfix' }" />
                         <span class="help-block"></span>
                         <div class="tabs clearfix">
                             <ul class="nav nav-tabs ">
@@ -37,7 +38,9 @@
                                         $: 'listInterview'
                                     },
                                     collection: data.model.get('interviews'),
-                                    prepareCollection: false
+                                    student: data.model.id,
+                                    prepareCollection: false,
+                                    
                                 }" />
                             </div>
                         </div>
