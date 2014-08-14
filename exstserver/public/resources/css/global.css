@@ -150,6 +150,9 @@ html,
 .field-dropdown {
   display: inline-block;
 }
+.field-dropdown.btn-xs {
+  padding: 0;
+}
 .has-error .field-dropdown .dropdown-toggle,
 .has-error .field-selectable .selectable-item {
   border-color: #a94442;

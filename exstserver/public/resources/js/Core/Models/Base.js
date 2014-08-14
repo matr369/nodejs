@@ -14,7 +14,11 @@ define("Models/Base",["Backbone", "jquery"], function(Backbone, $){
             var json = {};
            for(var attr in this.attributes){
                if(this.attributes[attr] && this.attributes[attr].toJSON){
-                   json[attr] = this.attributes[attr].toJSON();
+                   if (this.attributes[attr] instanceof Backbone.Model) {
+                       json[attr] = this.attributes[attr].id;
+                   } else {
+                       json[attr] = this.attributes[attr].toJSON();
+                   }
                } else{
                    json[attr] = this.attributes[attr];
                }

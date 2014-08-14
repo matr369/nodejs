@@ -1,17 +1,13 @@
 <script type="text/template" id="list">
     <div class="feedback-list">
+        <view data-constructor="Views/FeedbackForm" data-options="{panelClass:'in', student: data.student, prepareModel: false, model: new data.collection.model(), disable: false, cancelLabel: '' }"/>
         {%? data.collection && data.collection.length %}
         <div class="accordion">
             <div class="panel-group">
-                <view data-constructor="Views/FeedbackForm" data-options="{ prepareModel: false, model: new data.collection.model(), disable: false, cancelLabel: '' }"/>
                 {% data.collection.forEach(function(el, i){ %}
-                   <view data-constructor="Views/FeedbackForm" data-options="{ prepareModel: false, model: data.collection.at({%- i %}) }"/>
+                   <view data-constructor="Views/FeedbackForm" data-options="{student: data.student, prepareModel: false, model: data.collection.at({%- i %}) }"/>
                 {% }); %}
             </div>
-        </div>
-        {%??%}
-        <div class="no-feeds">
-            No feeds...
         </div>
         {%?%}
     </div>
@@ -19,18 +15,20 @@
 
 <script type="text/template" id="item">
     <div class="feedback-item">
+    <view data-id="student" data-constructor="Views/Fields/Base" data-options="{ name: 'student', type: 'hidden', value: data.student, rules:'required'}" />
+    <view data-id="date" data-constructor="Views/Fields/Base" data-options="{ name: 'date', type: 'hidden', value: data.model.get('date') || (new Date()).valueOf(), rules:'required'}" />
         <div class="accordion-group">
             <div class="panel panel-default">
                 <div class="panel-heading accordion-heading">
-                <a class="accordion-toggle"  data-toggle="collapse" href="#feedback{%- data.model.get('id') %}">
+                <a class="accordion-toggle"  data-toggle="collapse" href="#feedback{%- data.model.id %}">
                     {%- data.model.get('date') || ((new Date).toDateString()) %}
-                    {%? data.model.get('curator')%}
-                        - {%- data.model.get('curator') %}
+                    {%? data.model.get('curator').get('name') %}
+                        - {%- data.model.get('curator').get('name') %}
                     {%?%}
                 </a>
             </div>
-            <div id="feedback{%- data.model.get('id') %}" class="panel-body panel-collapse collapse">
-                <h3 >{%- data.model.get('curator') %}</h3>
+            <div id="feedback{%- data.model.id %}" class="panel-body panel-collapse collapse {%- data.panelClass %}">
+                <h3 >{%- data.model.get('curator').get('name') %}</h3>
                 <table class="table table-striped table-hover ">
                     <thead>
                         <tr>

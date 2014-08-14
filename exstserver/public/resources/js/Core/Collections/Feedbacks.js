@@ -5,8 +5,9 @@
  * Time: 1:04
  * To change this template use File | Settings | File Templates.
  */
-define("Collections/Feedbacks",["Collections/Base"], function(Collection){
+define("Collections/Feedbacks",["Collections/Base", "Models/Feedback"], function(Collection, Feed){
     return Collection.extend({
-            url:"/feedbacks"
+        url:"/feedbacks",
+        model: Feed
     });
 });
