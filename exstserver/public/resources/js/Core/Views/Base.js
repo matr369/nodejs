@@ -215,7 +215,6 @@ define("Views/Base",["Backbone", "underscore", "jquery", "App", "Core/Templates"
                 xhr;
             //options.prepareCollection = false;
             if (!this.isRendered) {
-                debugger;
                 xhr = this.render();
             } else {
                 this.isRendered = false;
@@ -226,7 +225,6 @@ define("Views/Base",["Backbone", "underscore", "jquery", "App", "Core/Templates"
                     options.containerResolveMethod = method;
                 });
             }
-            debugger;
             return xhr;
         },
 

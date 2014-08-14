@@ -9,7 +9,7 @@ define("Config", {
     readyClass: "app-ready",
     disableStorage: true,
     request: {
-        restUrl: "http://localhost:3000/api",
+        restUrl: "/api",
         successStatuses: ["success"],
         failStatuses: ["error"]
     },
