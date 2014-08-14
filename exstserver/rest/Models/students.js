@@ -59,5 +59,10 @@ module.exports = base.extend({
             xhr.resolve(feeds.exportToJSON());
         }).fail(xhr.fail);
         return xhr;
+    },
+    info: function(){
+        return this.fetch({
+            exports: {}
+        });
     }
 });

@@ -52,7 +52,8 @@ var ConnectorForModels = function(method, model, options){
     var xhr = $();
     var db_collection = model.collection_db || model.collection.collection_db;
     var findById = model.id? { "_id": ObjectID(model.id) } : {};
-    var exports = model.exportAttrs || {};
+    options = options || {};
+    options.fields = options.exports || model.exportAttrs || {};
     mongoConnector.done(function(){
         switch (method) {
             case 'create':
@@ -67,7 +68,7 @@ var ConnectorForModels = function(method, model, options){
                 });
                 break;
             case 'read':
-                this.collection(db_collection).findOne(findById, exports, function(error, result){
+                this.collection(db_collection).findOne(findById, options, function(error, result){
                     if (error) {
                         xhr.reject(error);
                     } else {

@@ -45,12 +45,12 @@ var Model = require("backbone").Model,
         },
         beforeFetch: function(){
         },
-        fetch: function(){
+        fetch: function(options){
             var self = this,
                 xhr = $();
             this.beforeFetch();
             Model.prototype.fetch.apply(this, arguments).done(function(attrs){
-                self.set(attrs);
+                self.clear().set(attrs);
                 self.afterFetch().done(function(){
                     xhr.resolve(self.exportToJSON());
                 }).fail(xhr.reject);

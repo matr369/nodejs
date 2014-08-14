@@ -83,17 +83,14 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
         fetchInfo: function(){
             var self = this;
             if (!this.__info) {
-
                 this.__info = $.Deferred();
                 Backbone.ajax({
-                    url: "/students/"+this.attributes.id,
-                    method: "GET"
-                }).done(function(data){
-                    self.set(data);
-                    self.__info.resolve(data);
-                }).fail(this.__info.reject);
-                //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__info с коллекцией.
-              //  this.__info.resolve();
+                    url: self.urlRoot + "/" + self.id + "/info",
+                    type: "GET"
+                }).done(function(result){
+                    self.set(result);
+                    self.__info.resolve();
+                }).fail(self.__info.reject);
             }
             return this.__info;
         }

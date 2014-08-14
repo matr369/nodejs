@@ -11,7 +11,7 @@ define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jque
 
         constructor: function(options){
             options.model = new Student({
-                id: options.student
+                _id: options.student
             });
 
             Page.prototype.constructor.apply(this, arguments);
