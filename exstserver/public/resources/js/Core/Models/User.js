@@ -6,7 +6,7 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
         defaults: {
             defaultPage: "login",
             avatar: "resources/images/default_avatar_male.jpg",
-            name: "Janne",
+            name: "Zhanna Vasilenko",
             canDo: []
 
         },

@@ -21,14 +21,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading accordion-heading">
                 <a class="accordion-toggle"  data-toggle="collapse" href="#feedback{%- data.model.id %}">
-                    {%- data.model.get('date') || ((new Date).toDateString()) %}
-                    {%? data.model.get('curator').get('name') %}
-                        - {%- data.model.get('curator').get('name') %}
+                    {% var date = data.model.get('date'); %}
+                    {%- date? (new Date(date*1).toDateString()) : ((new Date).toDateString()) %}
+                    {%? data.model.get('curator').name %}
+                        - {%- data.model.get('curator').name %}
                     {%?%}
                 </a>
             </div>
             <div id="feedback{%- data.model.id %}" class="panel-body panel-collapse collapse {%- data.panelClass %}">
-                <h3 >{%- data.model.get('curator').get('name') %}</h3>
+                <h3 >{%- data.model.get('curator').name %}</h3>
                 <table class="table table-striped table-hover ">
                     <thead>
                         <tr>
