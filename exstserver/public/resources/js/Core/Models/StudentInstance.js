@@ -23,7 +23,7 @@ define("Models/StudentInstance",["Models/Student"], function(Student){
 
     return Student.extend({
         constructor: function(options){
-            var instance = RuntimeCollection.get(options.id);
+            var instance = RuntimeCollection.get(options._id || options.id);
             if (instance) {
                 return instance;
             } else {
