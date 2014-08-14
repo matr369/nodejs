@@ -24,8 +24,10 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
                 this.set("interviewsLink", "students/" + this.id + "/interviews");
             });
-
             Base.prototype.constructor.apply(this, arguments);
+            this.set("profileLink", "students/" + this.id);
+            this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
+            this.set("interviewsLink", "students/" + this.id + "/interviews");
         },
 
         enable: function(){

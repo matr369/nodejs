@@ -15,8 +15,10 @@
 
 <script type="text/template" id="item">
     <div class="feedback-item">
-    <view data-id="student" data-constructor="Views/Fields/Base" data-options="{ name: 'student', type: 'hidden', value: data.student, rules:'required'}" />
-    <view data-id="date" data-constructor="Views/Fields/Base" data-options="{ name: 'date', type: 'hidden', value: data.model.get('date') || (new Date()).valueOf(), rules:'required'}" />
+        <div style="display: none;">
+            <view data-id="student" data-constructor="Views/Fields/Base" data-options="{ name: 'student', type: 'hidden', value: data.student, rules:'required'}" />
+            <view data-id="date" data-constructor="Views/Fields/Base" data-options="{ name: 'date', type: 'hidden', value: data.model.get('date') || (new Date()).valueOf(), rules:'required'}" />
+        </div>
         <div class="accordion-group">
             <div class="panel panel-default">
                 <div class="panel-heading accordion-heading">

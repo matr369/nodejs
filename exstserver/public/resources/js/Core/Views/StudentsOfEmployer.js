@@ -4,9 +4,20 @@
 define("Views/StudentsOfEmployer", ["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
     return View.extend({
         events:{
+            "mouseenter .del-stud": 'addDangerClass',
+            "mouseout .del-stud": 'removeDangerClass',
             "field:changed": "addStudent",
             "click .del-stud" : "detachStudent"
         },
+
+        addDangerClass: function(e){
+            $(e.currentTarget).parents(".detach-student").addClass("low");
+        },
+
+        removeDangerClass: function(e){
+            $(e.currentTarget).parents(".detach-student").removeClass("low");
+        },
+
         constructor: function(options){
             options.allStudents = new Students();
             View.prototype.constructor.apply(this,[options]);
