@@ -301,6 +301,7 @@ html,
 }
 .info-table .name-coll {
   width: 140px;
+    padding: 14px;
 }
 .info-table .edit-button-container {
   display: none;
