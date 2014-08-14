@@ -452,6 +452,8 @@ html,
   margin-bottom: 4px;
   padding: 1px 6px;
   border-radius: 5px;
+  white-space: nowrap;
+
 }
 .page-curators .detach-student.low {
   opacity: 0.4;

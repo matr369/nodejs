@@ -1,12 +1,4 @@
-define("Views/StudentsTable", ["Views/Form",
-    "App",
-    "underscore",
-    "jquery",
-    "Core/PropertyList",
-    "Views/StudentsFromTable",
-    "Views/FilterStudentForm",
-    "Collections/RemoteStudents"
-], function (Form, App, _, $, PropertyList, StudentsFromTable, FilterStudentForm, RemoteStudents) {
+define("Views/StudentsTable", ["Views/Form", "App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable", "Views/FilterStudentForm", "Collections/RemoteStudents"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable, FilterStudentForm, RemoteStudents) {
     return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "click .extra": "addField",
@@ -21,6 +13,7 @@ define("Views/StudentsTable", ["Views/Form",
         __sendData: function (data) {
             var self = this,
                 xhr = $.Deferred();
+
             (new RemoteStudents(data)).done(function () {
                 self.childrenViews.studentsList.options.collection = this;
                 xhr.resolve(data);
@@ -29,6 +22,7 @@ define("Views/StudentsTable", ["Views/Form",
         },
 
         serialize: function () {
+
             var result = {},
                 arr = [];
             for (var j = 0; j < this.fields.length; j++) {

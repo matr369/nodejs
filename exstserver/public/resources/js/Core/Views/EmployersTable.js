@@ -34,8 +34,8 @@ define("Views/EmployersTable",["Views/Base","underscore", "Views/FilterEmployerF
 
            employerName: "Name",
            employerStudents: "Students",
-           employerNamePlaceholder: "Masha Masha",
-           employerStudentsPlaceholder: "masha masha"
+           employerNamePlaceholder: "Search",
+           employerStudentsPlaceholder: "Search by student name"
         })
     });
 });
