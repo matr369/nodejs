@@ -161,6 +161,12 @@ html,
 .has-success .field-selectable .selectable-item {
   border-color: #3c763d;
 }
+.radio-button-list {
+  display: inline-block;
+}
+.radio-button-list.disabled {
+  color: #ccc;
+}
 .navbar {
   margin: auto auto 0px;
   border: 0px;
@@ -187,6 +193,9 @@ html,
 }
 .field {
   margin: 5px;
+}
+.nav-tabs i.fa {
+  color: #2E729F;
 }
 /**
  * Created by Administrator on 24.07.2014.
