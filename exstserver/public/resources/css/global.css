@@ -446,10 +446,18 @@ html,
   cursor: pointer;
 }
 .page-curators .detach-student {
+  display: inline-block;
   border: 1px solid #0081c2;
-  margin: 2px;
-  padding: 1px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 1px 6px;
   border-radius: 5px;
+}
+.page-curators .detach-student:hover {
+  background-color: #0081c2;
+}
+.page-curators .detach-student:hover a {
+  color: #fff !important;
 }
 .page-settings-skills .form-skills .curs:hover {
   cursor: pointer;
