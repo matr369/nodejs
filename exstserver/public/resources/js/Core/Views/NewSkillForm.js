@@ -8,15 +8,19 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
 
         submitWithKey: function(e){
             if (e && e.keyCode==13) {
-                this.submit();
+                debugger;
             }
         },
 
 
         constructor: function(options){
+
             options.collection = options.collection || new Skills();
-            Form.prototype.constructor.apply(this, [options]);
+           Form.prototype.constructor.apply(this, [options]);
         },
+
+
+
 
         onSuccessSubmit: function(skill){
             this.reset();
@@ -28,9 +32,11 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
             tpl: {
                 src: "form.newskill.html?v=1"
             },
+            nom:0,
             prepareCollection: false,
             formTitle :"New Skill",
             formDescription: "Name of the skill"
+
         })
     });
 });

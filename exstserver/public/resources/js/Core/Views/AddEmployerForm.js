@@ -23,8 +23,8 @@ define("Views/AddEmployerForm",["Views/Form", "App", "jquery", "Collections/Empl
             submitButtonText: "Create",
             nameText: "Employer's name",
             emailText: "Employer's email",
-            emailPlaceholder: "matr369@exadel.com",
-            namePlaceholder: "Evgene Ivashkevich"
+            emailPlaceholder: "Example: ivanov@exadel.con",
+            namePlaceholder: "Example: Ivan Ivanov"
         })
     });
 });

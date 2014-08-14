@@ -36,6 +36,6 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
             },
             allSkill:null,
             value: ""
-        })
+       })
     })
 });
