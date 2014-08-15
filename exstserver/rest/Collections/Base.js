@@ -24,6 +24,11 @@ var Collection = require("backbone").Collection,
                 self = this;
             filter = filter || {};
             var exports = {};
+            if (this.model.prototype.exportAttrs) {
+                for (var key in this.model.prototype.exportAttrs){
+                    exports[key] = true;
+                }
+            }
             for (var key in filter){
                 exports[key] = true;
                 if (typeof filter[key] === "string") {
