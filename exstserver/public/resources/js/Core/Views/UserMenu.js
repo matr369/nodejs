@@ -3,6 +3,7 @@
  */
 define("Views/UserMenu",["Views/Base", "bootstrap"], function(View, bootstrap){
     return View.extend({
+
     }, {
         defaults: $.extend(true, {}, View.defaults, {
             tpl: {

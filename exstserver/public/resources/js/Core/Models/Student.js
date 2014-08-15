@@ -19,16 +19,16 @@ define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/I
 
 
         constructor: function(options){
-            this.on("change:_id", function(){
-                this.set("profileLink", "students/" + this.id);
-                this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
-                this.set("interviewsLink", "students/" + this.id + "/interviews");
+            this.on("change", function(){
+                this.set("profileLink", "students/" + this.id, {silent:true});
+                this.set("feedbacksLink", "students/" + this.id + "/feedbacks", {silent:true});
+                this.set("interviewsLink", "students/" + this.id + "/interviews", {silent:true});
             });
 
             Base.prototype.constructor.apply(this, arguments);
-            this.set("profileLink", "students/" + this.id);
-            this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
-            this.set("interviewsLink", "students/" + this.id + "/interviews");
+            this.set("profileLink", "students/" + this.id, {silent:true});
+            this.set("feedbacksLink", "students/" + this.id + "/feedbacks",{silent:true});
+            this.set("interviewsLink", "students/" + this.id + "/interviews",{silent:true});
         },
 
         enable: function(){
