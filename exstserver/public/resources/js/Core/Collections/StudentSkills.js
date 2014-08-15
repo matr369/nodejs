@@ -6,6 +6,13 @@ define("Collections/StudentSkills", ["Collections/Base", "Models/StudentSkill"],
         model: Skill,
         fetch: function(){
             return $.Deferred().resolve([]);
+        },
+        toJSON: function(){
+            var json = {};
+            for(var i =0 ;i < this.models.length; i++){
+                json[i] = this.models[i].toJSON();
+            }
+            return json;
         }
     });
 });

@@ -18826,6 +18826,26 @@ define("Collections/Base", ["Backbone", "Models/Base", "jquery"], function(Backb
         }
     });
 });
+define("Collections/Certificates",["Models/Certificate", "Collections/Base", "underscore"], function(Certificate, Collection){
+    return Collection.extend({
+        model:Certificate,
+        url: '/certificates',
+        /**
+         * Singleton
+         * @returns {*|Collection.constructor._instance}
+         */
+        constructor: function(){
+            if (this.constructor._instance) {
+                return this.constructor._instance;
+            } else {
+                Collection.prototype.constructor.apply(this, arguments);
+                this.constructor._instance = this;
+            }
+        }
+
+    });
+});
+
 /**
  * Created by Administrator on 28.07.2014.
  */
@@ -18850,17 +18870,17 @@ define("Collections/Employers", ["Collections/Base", "Models/Employer"], functio
  * Time: 1:04
  * To change this template use File | Settings | File Templates.
  */
-define("Collections/Feedbacks",["Collections/Base"], function(Collection){
+define("Collections/Feedbacks",["Collections/Base", "Models/Feedback"], function(Collection, Feed){
     return Collection.extend({
-            url:"/feedbacks"
+        url:"/feedbacks",
+        model: Feed
     });
 });
 define("Collections/Fields",["Models/Field", "Collections/Base", "underscore"], function(Field, Collection, _){
     return Collection.extend({
         model:Field,
-        url: '/technology',
+        url: '/custom-fields',
         constructor: function(){
-            debugger;
             if (this.constructor._instance) {
                 return this.constructor._instance;
             } else {
@@ -18881,7 +18901,7 @@ define("Collections/Fields",["Models/Field", "Collections/Base", "underscore"], 
 define("Collections/Interviews",["Collections/Base", "Models/Interview"], function(Collection, Interview){
     return Collection.extend({
         model: Interview,
-        url: "/interview"
+        url: "/interviews"
     });
 });
 /**
@@ -18920,6 +18940,23 @@ define("Collections/Properties",["Models/Property", "Collections/Base", "undersc
     });
 });
 
+/**
+ * Created by Administrator on 13.08.2014.
+ */
+define("Collections/RemoteStudents", ["Backbone", "Collections/Students", "jquery"], function(Backbone, Students, $){
+   return function(filter){
+        var xhr = $.Deferred();
+        Backbone.ajax({
+            url: "/students/find",
+            type: "POST",
+            data: filter
+        }).done(function(result){
+            var students = new Students(result);
+            xhr.resolveWith(students);
+        }).fail(xhr.reject);
+        return xhr;
+    };
+});
 define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], function(Skill, Collection, _){
     return Collection.extend({
         model:Skill,
@@ -18930,7 +18967,6 @@ define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], 
          */
         constructor: function(){
             if (this.constructor._instance) {
-                debugger;
                 return this.constructor._instance;
             } else {
                 Collection.prototype.constructor.apply(this, arguments);
@@ -18944,11 +18980,18 @@ define("Collections/Skills",["Models/Skill", "Collections/Base", "underscore"], 
 /**
  * Created by Administrator on 07.08.2014.
  */
-define("Collections/StudentSkills", ["Collections/Base", "Models/Skill"], function(Base, Skill){
+define("Collections/StudentSkills", ["Collections/Base", "Models/StudentSkill"], function(Base, Skill){
     return Base.extend({
         model: Skill,
         fetch: function(){
             return $.Deferred().resolve([]);
+        },
+        toJSON: function(){
+            var json = {};
+            for(var i =0 ;i < this.models.length; i++){
+                json[i] = this.models[i].toJSON();
+            }
+            return json;
         }
     });
 });
@@ -18967,25 +19010,35 @@ define("Collections/Students",["Collections/Base", "Models/Student"], function(B
 define("Models/Base",["Backbone", "jquery"], function(Backbone, $){
     return Backbone.Model.extend({
         idAttribute: "_id",
-        /**
-         * Fetch data from server
-         * @returns {*}
-         */
         fetch: function(){
-            //TODO: Realize
-            return $.Deferred().resolve();
+            if(!this.__fetchResult) {
+                this.__fetchResult = Backbone.Model.prototype.fetch.apply(this, arguments);
+            }
+            return this.__fetchResult;
         },
         toJSON: function(options){
             var json = {};
            for(var attr in this.attributes){
                if(this.attributes[attr] && this.attributes[attr].toJSON){
-                   json[attr] = this.attributes[attr].toJSON();
+                   if (this.attributes[attr] instanceof Backbone.Model) {
+                       json[attr] = this.attributes[attr].id;
+                   } else {
+                       json[attr] = this.attributes[attr].toJSON();
+                   }
                } else{
                    json[attr] = this.attributes[attr];
                }
            }
             return json;
         }
+    });
+});
+define("Models/Certificate",["Models/Base"], function(Model){
+    return Model.extend({
+        defaults:{
+            name: ""
+        },
+        urlRoot: "/certificates"
     });
 });
 /**
@@ -18997,7 +19050,7 @@ define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],f
             return {
                 name: "",
                 email: "",
-                students: new Base([])
+                students: new Students([])
             };
         },
         urlRoot: "/curators",
@@ -19006,12 +19059,29 @@ define("Models/Employer",["Models/Base", "Collections/Students", "underscore"],f
                 if(_.isArray(value)) {
                     this.set("students", new Students(value), {silent: true});
                 }
-                this.listenTo(this.get("students"), "add remove", function(){
+                this.listenTo(this.get("students"), "add remove", function(model, collection){
+                    this.set("students", collection, {silent: true});
                     this.save();
                 });
             });
             Base.prototype.constructor.apply(this, arguments);
         }
+    });
+});
+/**
+ * Created by Administrator on 29.07.2014.
+ */
+define("Models/Feedback",["Models/Base"],function(Base){
+    return Base.extend({
+        defaults: function(){
+            return {
+                student: "",
+                curator: {
+                    name: "Zhanna Vasilenko"
+                }
+            };
+        },
+        urlRoot: "/feedbacks"
     });
 });
 define("Models/Feild",["Models/Base", "underscore"], function(Model, _){
@@ -19036,16 +19106,10 @@ define("Models/Field",["Models/Base", "underscore"], function(Model, _){
     return Model.extend({
         defaults:{
             name:"",
-            id:1,
             fieldType:"",
-            defaultValue:""
-        }
-
-
-
-
-
-
+            change: false
+        },
+        urlRoot: "/custom-fields"
     });
 });
 /**
@@ -19053,12 +19117,31 @@ define("Models/Field",["Models/Base", "underscore"], function(Model, _){
  */
 define("Models/Interview",["Models/Base","Collections/StudentSkills"], function(Base, StudentSkills){
     return Base.extend({
-        defaults: {
-            result: "",
-            studentSkills: new StudentSkills(),
-            idStudent: "",
-            interviewer: "",
-            date: ""
+        defaults: function() {
+            return {
+                student: "",
+                result: "",
+                studentSkills: new StudentSkills(),
+                interviewer: {
+                    name: "Zhanna Vasilenko"
+                }
+            }
+        },
+        urlRoot: "/interviews",
+        toJSON: function(options){
+            var json = {};
+            for(var attr in this.attributes){
+                if(this.attributes[attr] && this.attributes[attr].toJSON){
+                    if (this.attributes[attr] instanceof Backbone.Model) {
+                        json[attr] = this.attributes[attr].attributes.toJSON();
+                    } else {
+                        json[attr] = this.attributes[attr].toJSON();
+                    }
+                } else{
+                    json[attr] = this.attributes[attr];
+                }
+            }
+            return json;
         }
     });
 });
@@ -19098,7 +19181,7 @@ define("Models/Property", ["Models/Base", "underscore"], function(Model, _){
 /**
  * Created by Mantsevich on 27.07.2014.
  */
-define("Models/Settings",["Models/Base"], function(Model){
+define("Models/Settings",["Models/Base", "jquery"], function(Model, $){
     return Model.extend({
 
         /**
@@ -19112,16 +19195,21 @@ define("Models/Settings",["Models/Base"], function(Model){
                 Model.prototype.constructor.apply(this, arguments);
                 this.constructor._instance = this;
             }
+        },
+        fetch: function(){
+            return $.Deferred().resolve();
         }
     });
 });
 define("Models/Skill",["Models/Base", "underscore"], function(Model, _){
     return Model.extend({
         defaults:{
-            technology_name: "",
-            value: ''
+            technology_name: ""
         },
-        urlRoot: "/technology"
+        urlRoot: "/technology",
+        toJSON: function(){
+                return _.clone(this.attributes);
+        }
     });
 });
 /**
@@ -19131,14 +19219,13 @@ define("Models/Skill",["Models/Base", "underscore"], function(Model, _){
  * Time: 18:00
  * To change this template use File | Settings | File Templates.
  */
-define("Models/Student",["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Collections/StudentSkills", "Models/Interview", "Models/Skill"], function(Base, Feeds, Interviews, $, StudentSkills, Interview, Skill){
-debugger;
+define("Models/Student", ["Models/Base", "Collections/Feedbacks", "Collections/Interviews", "jquery", "Backbone"], function(Base, Feeds, Interviews, $, Backbone){
     return Base.extend({
         defaults: function(){
             return {
                 name: "",
                 enable: true,
-                status:'work',
+                email:"",
                 avatar: "resources/images/default_avatar_male.jpg"
             }
         },
@@ -19146,73 +19233,67 @@ debugger;
 
 
         constructor: function(options){
-            this.on("change:id", function(){
+            this.on("change:_id", function(){
                 this.set("profileLink", "students/" + this.id);
                 this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
                 this.set("interviewsLink", "students/" + this.id + "/interviews");
             });
 
             Base.prototype.constructor.apply(this, arguments);
+            this.set("profileLink", "students/" + this.id);
+            this.set("feedbacksLink", "students/" + this.id + "/feedbacks");
+            this.set("interviewsLink", "students/" + this.id + "/interviews");
         },
 
         enable: function(){
-            this.set("enable", true);
+            this.set("enable", true).save();
         },
         disable: function(){
-            this.set("enable", false);
+            this.set("enable", false).save();
         },
         fetchFeedbacks: function(){
+            var self = this;
             if (!this.__feedbacks) {
                 this.__feedbacks = $.Deferred();
-                //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__feedbacks с коллекцией.
-                this.set("feedbacks", new Feeds([{
-                    id: 1,
-                    curator: "Dmitrii Ivanov",
-                    date: "01/01/2014",
-                    note: "The is text..."
-                },{
-                    id: 2,
-                    curator: "Mikhail Prusov",
-                    date: "01/02/2014"
-                }]));
-                this.__feedbacks.resolve();
+
+                Backbone.ajax({
+                    url: self.urlRoot + "/" + self.id + "/feedbacks",
+                    type: "GET"
+                }).done(function(result){
+                    self.set("feedbacks", new Feeds(result));
+                    self.__feedbacks.resolve();
+                });
             }
             return this.__feedbacks;
         },
         fetchInterviews: function(){
-
+            var self = this;
             if (!this.__interviews) {
                 this.__interviews = $.Deferred();
-                this.set("interviews", new Interviews([
-                    new Interview({
-                        id: 1,
-                        result: 'Excepted',
-                        interviewer: "Pukova Polina",
-                        idStudent: 2,
-                        date: "01/01/2014",
-                        note: "The is text...",
-                        studentSkills: new StudentSkills([
-                            new Skill({
-                                technology_name: "fsdfsdf",
-                                value: '1'
-                            }),
-                            new Skill({
-                                technology_name: "fsdfsgndfz",
-                                value: '3'
-                            })
-                        ])
-                    })
-                ]));
-                this.__interviews.resolve();
+                Backbone.ajax({
+                    url: self.urlRoot + "/" + self.id + "/interviews",
+                    method: "GET"
+                }).done(function(result){
+                    self.set("interviews", new Interviews(result));
+                    self.__interviews.resolve();
+                }).fail(self.reject);
+
                 //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__interviews с коллекцией.
             }
             return this.__interviews;
         },
         fetchInfo: function(){
+            var self = this;
             if (!this.__info) {
+
                 this.__info = $.Deferred();
-                //TODO: Отправляем запрос на сервер за инфой. Сохраняем через this.set. Резолвим this.__info с коллекцией.
-                this.__info.resolve();
+                Backbone.ajax({
+                    url: self.urlRoot + "/" + self.id + "/info",
+                    type: "GET"
+                }).done(function(result){
+                    self.set(result);
+                    self.__info.resolve();
+                }).fail(self.__info.reject);
             }
             return this.__info;
         }
@@ -19243,7 +19324,7 @@ define("Models/StudentInstance",["Models/Student"], function(Student){
 
     return Student.extend({
         constructor: function(options){
-            var instance = RuntimeCollection.get(options.id);
+            var instance = RuntimeCollection.get(options._id || options.id);
             if (instance) {
                 return instance;
             } else {
@@ -19253,13 +19334,28 @@ define("Models/StudentInstance",["Models/Student"], function(Student){
         }
     });
 });
+/**
+ * Created by Administrator on 14.08.2014.
+ */
+define("Models/StudentSkill",["Models/Base", "underscore"], function(Model, _){
+    return Model.extend({
+        defaults:{
+            technology_name: "",
+            value: ""
+        },
+        fetch: function(){
+            return $.Deferred().resolve([]);
+        }
+    });
+});
  /**
  * Created by Administrator on 23.07.2014.
  */
 define("Models/User.Admin",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students"
+            defaultPage: "students",
+            canDo: []
         },
         /**
          * function to check allowed actions user
@@ -19281,15 +19377,15 @@ define("Models/User.Admin",["Models/User"], function(User){
 define("Models/User.Employer",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students"
+            defaultPage: "students",
+            canDo: ["view_settings"]
         },
         /**
          * function to check allowed actions user
          */
         can: function(whatCan){
-            var i;
-            for(i = 0; i < this.canDo.length; i++){
-                if(whatCan == this.canDo[i]){
+            for(var i = 0; i < this.get('canDo').length; i++){
+                if(whatCan == this.get('canDo')[i]){
                     return true;
                 }
             }
@@ -19303,7 +19399,8 @@ define("Models/User.Employer",["Models/User"], function(User){
 define("Models/User.Manager",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students"
+            defaultPage: "students",
+            canDo: []
         },
         /**
          * function to check allowed actions user
@@ -19326,7 +19423,8 @@ define("Models/User.Manager",["Models/User"], function(User){
 define("Models/Student",["Models/User"], function(User){
     return User.extend({
         defaults: {
-            defaultPage: "students"
+            defaultPage: "students",
+            canDo: []
         },
         /**
          * function to check allowed actions user
@@ -19350,8 +19448,8 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
     var User = Backbone.Model.extend({
         defaults: {
             defaultPage: "login",
-            avatar: "resources/images/user-avatar.png",
-            name: "Janne",
+            avatar: "resources/images/default_avatar_male.jpg",
+            name: "Zhanna Vasilenko",
             canDo: []
 
         },
@@ -19379,7 +19477,8 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
 
             (new Request({
                 //TODO: Дописать, когда будет инфа о сервисах
-                url: ""
+                url: "/api/entity",
+                method: "GET"
             }))
             .send({
                 login: login,
@@ -19387,7 +19486,8 @@ define("Models/User", ["Backbone","Models/Base","crypto","jquery", "Core/Request
             })
             .done(function(result){
                 //TODO: Дописать, когда будет инфа о сервисах
-                require(["Models/User." + result],function(Employer){
+                    var entity = result.data[0].entity;
+                require(["Models/User." + entity],function(Employer){
                     // Подгружаем нужный класс для юзера и создаем его экземпляр в App.user = new U();
                     //TODO: Дописать, когда будет инфа о сервисах
                     App.user = new Employer();
@@ -19483,6 +19583,7 @@ define("Core/Request.Rest", ["Backbone", "App", "jquery"], function(Backbone, Ap
                 xhr.resolve(data.data);
             }
             else {
+                App.Error("Error:" + data.data.message);
                 xhr.reject(data.status);
             }
             })
@@ -19735,6 +19836,7 @@ define("Routes/Settings", ["Routes/Base", "App"], function(Router, App){
 
             "settings":"showSettingsPage",
             "settings/fields":"showNewFieldPage",
+            "settings/certificates":"showCertificates",
             "settings/skills":"showNewSkillPage"
         },
 
@@ -19755,6 +19857,16 @@ define("Routes/Settings", ["Routes/Base", "App"], function(Router, App){
          */
         "showNewSkillPage": function(){
             require(["Views/Pages/SettingsSkills" ], function(Page){
+                (new Page({})).show();
+            });
+        },
+
+
+        /**
+         * New skill
+         */
+        "showCertificates": function(){
+            require(["Views/Pages/SettingsCertificates" ], function(Page){
                 (new Page({})).show();
             });
         },
@@ -20192,7 +20304,7 @@ define("Core/Validator", ["underscore"], function (_) {
             return (!_.isUndefined(value) && !_.isNull(value) && value.trim() !== "")? true : "Field "+name+" are required.";
         },
         $requiredRadio: function(value, rule, name){
-            debugger;
+
 
             return (value !== undefined)? true : "Field "+name+" are required.";
         },
@@ -20201,7 +20313,7 @@ define("Core/Validator", ["underscore"], function (_) {
         },
         // Проверка на тип email
         $email: function(value, rule, name){
-            return (this.$equal(value, '^[a-z0-9]+[-\\._a-z0-9][a-z0-9]@(?:[a-z0-9]+[-a-z0-9]*\\.){1,3}[a-z]{2,9}$', name) === true)? true : "Field "+name+" must be email.";
+            return (this.$equal(value, '^[a-zA-Z0-9_-]+[a-zA-Z0-9_-][a-zA-Z0-9_-]@(?:[a-z0-9]+[-a-z0-9]*\\.){1,3}[a-z]{2,9}$', name) === true)? true : "Field "+name+" must be email.";
         },
         // Проверка на полное соответствие регулярному выражению. Регулярное выражение передается в виде строки
         $equal: function(value, rule, name){
@@ -20247,7 +20359,7 @@ define("Core/Validator", ["underscore"], function (_) {
         },
 
         $radioChoose: function(value, rule, name){
-            return (this.$equal(value,'([a-zA-Z_0-9]*\\=[a-zA-Z_0-9]*\\;\\s){1,}', name)=== true)? true: "Field "+name+" must be Index1=Name1;...";
+            return true;
         },
 
         $phoneNumber: function(value, rule, name){
@@ -20307,8 +20419,8 @@ define("Views/AddEmployerForm",["Views/Form", "App", "jquery", "Collections/Empl
             submitButtonText: "Create",
             nameText: "Employer's name",
             emailText: "Employer's email",
-            emailPlaceholder: "matr369@exadel.com",
-            namePlaceholder: "Evgene Ivashkevich"
+            emailPlaceholder: "Example: ivanov@exadel.con",
+            namePlaceholder: "Example: Ivan Ivanov"
         })
     });
 });
@@ -20320,6 +20432,11 @@ define("Views/AddManagerForm",["Views/Form", "App", "jquery", "Collections/Manag
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"
         }),
+
+        onSuccessSubmit: function(){
+            this.reset();
+            Form.prototype.onSuccessSubmit.apply(this, arguments);
+        },
 
         constructor: function(options){
             options.collection = new Managers();
@@ -20337,8 +20454,8 @@ define("Views/AddManagerForm",["Views/Form", "App", "jquery", "Collections/Manag
             submitButtonText: "Create",
             nameText: "Manager's name",
             emailText: "Manager's email",
-            emailPlaceholder: "matr369@exadel.com",
-            namePlaceholder: "Evgene Ivashkevich"
+            emailPlaceholder: "Example: pgordon@exadel.com",
+            namePlaceholder: "Example: Peter Gordon"
         })
     });
 });
@@ -20354,20 +20471,16 @@ define("Views/AddRadioFieldForm",["Views/Base"], function(Page){
         })
     });
 });
-define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function(Form, App, $, Students, Student){
-    return Form.extend({
+
+define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Students", "Models/Student"], function (Form, App, $, Students, Student) {
+   return Form.extend({
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"
-
         }),
-
-        constructor: function(options){
-
+        constructor: function (options) {
             options.collection = new Students();
-            Form.prototype.constructor.apply(this,[options]);
+            Form.prototype.constructor.apply(this, [options]);
         }
-
-
     }, {
 
 
@@ -20375,7 +20488,6 @@ define("Views/AddStudentForm",["Views/Form", "App", "jquery", "Collections/Stude
             tpl: {
                 src: "form.addstudent.html?v=1"
             },
-            submitButton: ".button-create",
             submitButtonText: "Create",
             nameText: "Student's name",
             emailText: "Student's email",
@@ -20613,6 +20725,7 @@ define("Views/Base",["Backbone", "underscore", "jquery", "App", "Core/Templates"
                 xhr;
             //options.prepareCollection = false;
             if (!this.isRendered) {
+           
                 xhr = this.render();
             } else {
                 this.isRendered = false;
@@ -20623,6 +20736,7 @@ define("Views/Base",["Backbone", "underscore", "jquery", "App", "Core/Templates"
                     options.containerResolveMethod = method;
                 });
             }
+         
             return xhr;
         },
 
@@ -20798,8 +20912,13 @@ define("Views/ChangePasswordForm",["Views/Form", "App", "jquery"], function(Form
         events: $.extend(true, {}, Form.prototype.events, {
             "view:parent:hide": "reset"
         }),
+
+        onSuccessSubmit: function(){
+            App.notify("Password was changed.", "success");
+            Form.prototype.onSuccessSubmit.apply(this, arguments);
+        },
         __sendData: function(data){
-            return App.user.changePassword(data.oldPassword, data.newPassword);
+            return $.Deferred().resolve(data);
         },
 
         verify: function(){
@@ -20909,8 +21028,8 @@ define("Views/EmployersTable",["Views/Base","underscore", "Views/FilterEmployerF
 
            employerName: "Name",
            employerStudents: "Students",
-           employerNamePlaceholder: "Masha Masha",
-           employerStudentsPlaceholder: "masha masha"
+           employerNamePlaceholder: "Search",
+           employerStudentsPlaceholder: "Search by student name"
         })
     });
 });
@@ -21470,41 +21589,23 @@ define("Views/Fields/Textarea", ["Views/Fields/Base", "jquery"], function(Field,
 define("Views/FieldsTable",["Collections/Fields", "Views/Base", "App", "jquery", "Views/FieldRow"], function (Fields, Base, App, $, FieldRow){
     return Base.extend({
         events: {
-            "click .fa-times": "delete"
-
+            "click .fa-times": "destroy"
         },
 
-        delete:function(event){
-
-            this.collection= new Fields();
-            this.collection.remove($(event.target).data("id"));
-            $(event.target).parents("tr").detach();
-
-
-
+        destroy: function(event){
+            var tr = $(event.currentTarget).parents("tr");
+            var model = this.collection.remove(tr.data("id"));
+            model.destroy();
+            tr.remove();
         },
-
+        __ready: function(){
+            this.listenTo(this.collection, "add remove", this.rerender);
+            Base.prototype.__ready.apply(this, arguments);
+        },
         constructor: function(options){
             options.collection = new Fields();
-
-            this.listenTo(options.collection, "add", this.addline);
-
             Base.prototype.constructor.apply(this, [options]);
-        },
-
-
-        addline:function(field){
-            var row = new FieldRow({
-
-                container: this.$("tbody"),
-
-                containerResolveMethod: "append",
-                field: field
-            });
-            row.show();
         }
-
-
 
     }, {
         defaults: $.extend(true, {}, Base.defaults, {
@@ -21542,6 +21643,22 @@ define("Views/FilterEmployerForm",["Views/Form", "jquery"], function(Form, $){
  * Created by Administrator on 06.08.2014.
  */
 define("Views/FilterManagerForm",["Views/Form", "jquery"], function(Form, $){
+    return Form.extend({
+        events:{
+            "keyup": "submit"
+        },
+
+        __sendData: function(data){
+            return $.Deferred().resolve(data);
+        }
+
+    },{
+        defaults: $.extend(true, {}, Form.defaults, {
+            tpl: null
+        })
+    });
+});
+define("Views/FilterStudentForm",["Views/Form", "jquery"], function(Form, $){
     return Form.extend({
         events:{
             "keyup": "submit"
@@ -21696,7 +21813,6 @@ define("Views/Form",["Views/Base", "Views/Fields/Base", "jquery", "underscore", 
          */
         onSuccessSubmit: function(data){
             this.__updateFieldsDefaultValue();
-            debugger;
             this.$el.trigger("form:submit:success", data);
         },
 
@@ -21719,7 +21835,6 @@ define("Views/Form",["Views/Base", "Views/Fields/Base", "jquery", "underscore", 
          * Submit data to the server
          */
         submit: function(e){
-            debugger;
             if (e && e.preventDefault && e.type.indexOf('key') != 0) {e.preventDefault();}
             if (!this.__disabled) {
                 var self = this;
@@ -21836,12 +21951,27 @@ define("Views/Form",["Views/Base", "Views/Fields/Base", "jquery", "underscore", 
 /**
  * Created by Administrator on 07.08.2014.
  */
-define("Views/InterviewForm",["Views/Form", "jquery", "bootstrap"], function(Form, $, butblrka){
+define("Views/InterviewForm",["Views/Form", "jquery", "bootstrap","Collections/StudentSkills", "Models/StudentSkill", "underscore"], function(Form, $, butblrka,StudentSkills, Skill, _){
     return Form.extend({
         onSuccessSubmit: function(){
             this.disable();
             Form.prototype.onSuccessSubmit.apply(this, arguments);
+        },
+        serialize: function(){
+            var result,
+                data,
+                studSkills = new StudentSkills();
+            result = Form.prototype.serialize.apply(this, arguments);
+            data = this.model.attributes.studentSkills.models;
+            for(var i = 0; i< this.model.attributes.studentSkills.models.length; i++){
+                var j = data[i].attributes;
+                var x = new Skill(j);
+                studSkills.push(x);
+            }
+            result.studentSkills = studSkills;
+            return result;
         }
+
     }, {
         defaults: $.extend(true, {}, Form.defaults, {
             tpl: {
@@ -21898,10 +22028,14 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         isNameFilter: function(field, name){
+            if(field === "")
+                return true;
             return (new RegExp(field, 'i')).test(name);
         },
 
         isStudentFilter:function(field, students){
+            if(field === "")
+                return true;
             return students.some(function(student){
                 return (new RegExp(field, 'i')).test(student.get('name'));
             });
@@ -21918,8 +22052,12 @@ define("Views/ListEmployers",["Views/Base", "Collections/Employers", "Models/Emp
         },
 
         doFilter: function(event, filter){
-            this.filter = filter;
-            this.rows.forEach(this.filterRow, this);
+            try {
+                this.filter = filter;
+                this.rows.forEach(this.filterRow, this);
+            } catch (e){
+
+            }
         },
         __ready: function(){
             this.$el.trigger("view:ready");
@@ -21990,8 +22128,12 @@ define("Views/ListManagers",["Views/Base", "Collections/Managers", "Models/Manag
         },
 
         doFilter: function(event, filter){
-            this.filter = filter;
-            this.rows.forEach(this.filterRow, this);
+            try {
+                this.filter = filter;
+                this.rows.forEach(this.filterRow, this);
+            } catch (e){
+
+            }
         }
 
     },{
@@ -22072,9 +22214,8 @@ define("Views/ManagersTable",["Views/Base","underscore", "Views/FilterManagerFor
                 src: "managerstable.html?v=1",
                 $ : "container"
             },
-
             managerName: "Name",
-            managerNamePlaceholder: "Masha Masha"
+            managerNamePlaceholder: "Search by name..."
         })
     });
 });
@@ -22087,7 +22228,6 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
             "click .submit-button": "submit"
         },
 
-
         submitWithKey: function(e){
             if (e && e.keyCode==13) {
                 this.submit();
@@ -22097,13 +22237,7 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
         constructor: function (options) {
             options.collection = new Fields();
             Form.prototype.constructor.apply(this, [options]);
-            $( document ).ready(function() {
-
-            });
-
         },
-
-
 
 
         verify: function(){
@@ -22123,9 +22257,33 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
 
         serialize: function () {
             var result = {};
+            result.options = {};
             _.each(this.fields || [], function (field) {
-                if (field.$el.is(':visible'))
-                    _.extend(result, field.serialize());
+                if (field.$el.is(':visible')) {
+                    var serializeResult = field.serialize();
+                    if (field.options.isOption ) {
+                        if (field.options.name == "items") {
+                            serializeResult = {
+                                items: (function(val){
+                                    var result = [];
+                                    val.split(";").forEach(function(item){
+                                        if (item) {
+                                            var i = item.split("=");
+                                            result.push({
+                                                value: i[0].trim(),
+                                                label: i[1].trim()
+                                            });
+                                        }
+                                    });
+                                    return result;
+                                })(field.getValue())
+                            };
+                        }
+                        _.extend(result.options, serializeResult);
+                    } else {
+                        _.extend(result, serializeResult);
+                    }
+                }
             });
             return result;
         },
@@ -22144,18 +22302,12 @@ define("Views/NewFieldForm",["Views/Form", "App", "jquery", "Collections/Fields"
         },
 
         hideAllTypesForm: function () {
-
             this.$(".type-form").hide();
-        },
-
-        __sendData: function (field) {
-
-            return $.Deferred().resolve(field);
         },
 
 
         onSuccessSubmit: function (field) {
-
+            App.notify("Field was created", "success");
             this.hideAllTypesForm();
             if (this.collection.where({name: field.name}).length == 0)
                 this.collection.add(field);
@@ -22185,15 +22337,18 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
 
         submitWithKey: function(e){
             if (e && e.keyCode==13) {
-                this.submit();
             }
         },
 
 
         constructor: function(options){
-            options.collection = new Skills();
-            Form.prototype.constructor.apply(this, [options]);
+
+            options.collection = options.collection || new Skills();
+           Form.prototype.constructor.apply(this, [options]);
         },
+
+
+
 
         onSuccessSubmit: function(skill){
             this.reset();
@@ -22205,9 +22360,10 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
             tpl: {
                 src: "form.newskill.html?v=1"
             },
+            nom:0,
             prepareCollection: false,
-            formTitle :"new skill"
-
+            formTitle :"New Skill",
+            formDescription: "Name of the skill"
 
         })
     });
@@ -22278,6 +22434,11 @@ define("Views/Notification",["App", "Views/Base", "jquery", "Core/Templates"], f
             })).show();
         });
     }
+
+    App.on("notify", function(options){
+        options.className = "global-notification";
+        (new NotificationView(options)).show();
+    });
 
     return NotificationView;
 });
@@ -22507,6 +22668,21 @@ define("Views/Pages/Settings", ["Views/Page", "jquery"], function(Page, $){
         })
     });
 });
+define("Views/Pages/SettingsCertificates", ["Views/Page", "jquery", "Collections/Certificates"], function(Page, $, Collection){
+    return Page.extend({
+        constructor: function(options){
+            options.collection = new Collection();
+            Page.prototype.constructor.apply(this,arguments);
+        }
+    },{
+        defaults: $.extend(true, {}, Page.defaults, {
+            tpl: {
+                src: "pages/settings.certificates.html?v=1"
+            },
+            title: "Certificates"
+        })
+    });
+});
 define("Views/Pages/SettingsFields", ["Views/Page", "Views/Form"], function(Page){
     return Page.extend({},{
         defaults: $.extend(true, {}, Page.defaults, {
@@ -22534,7 +22710,8 @@ define("Views/Pages/SettingsFields", ["Views/Page", "Views/Form"], function(Page
     });
 });
 define("Views/Pages/SettingsSkills", ["Views/Page"], function(Page){
-    return Page.extend({},{
+    return Page.extend({
+    },{
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {
                 src: "pages/settings.skills.html?v=1"
@@ -22557,7 +22734,7 @@ define("Views/Pages/StudentFeedbacks", ["Views/Page", "Views/Base", "Models/Stud
 
         constructor: function(options){
             options.model = new Student({
-                id: options.student
+                _id: options.student
             });
             Base.prototype.constructor.apply(this, arguments);
         },
@@ -22571,7 +22748,6 @@ define("Views/Pages/StudentFeedbacks", ["Views/Page", "Views/Base", "Models/Stud
             });
             return modelStatus;
         }
-
     }, {
         defaults: $.extend(true, {}, Page.defaults, {
             tpl: {
@@ -22595,16 +22771,16 @@ define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jque
 
         constructor: function(options){
             options.model = new Student({
-                id: options.student
+                _id: options.student
             });
+
             Page.prototype.constructor.apply(this, arguments);
+
         },
         __ready: function(){
             this.listenTo(this.model, "change:name", function(){
                 this.childrenViews.pageDescription.options.pageTitle = this.model.get('name');
-                debugger;
                 this.childrenViews.breadcrumbs.options.path[1].title = this.model.get('name');
-                debugger;
                 this.childrenViews.pageDescription.rerender();
                 this.childrenViews.breadcrumbs.rerender();
             });
@@ -22634,13 +22810,13 @@ define("Views/Pages/StudentInfo", ["Views/Page", "Models/StudentInstance", "jque
 /**
  * Created by Administrator on 07.08.2014.
  */
-define("Views/Pages/StudentInterview", ["Views/Page", "Views/Base", "Models/StudentInstance", "jquery"], function(Page, Base, Student, $){
+define("Views/Pages/StudentInterviews", ["Views/Page", "Views/Base", "Models/StudentInstance", "jquery"], function(Page, Base, Student, $){
 
     return Page.extend({
 
         constructor: function(options){
             options.model = new Student({
-                id: options.student
+                _id: options.student
             });
             Base.prototype.constructor.apply(this, arguments);
         },
@@ -22732,16 +22908,18 @@ define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"]
         },
 
         destroy:function(event){
-            debugger;
-            this.collection.remove($(event.target).data("id"));
-            $(event.target).parents("tr").detach();
-            //$(event.target).parent().detach();
+            var model = this.collection.get($(event.target).data("id"));
+            this.collection.remove(model);
+            model.destroy();
+        },
+
+        __ready: function(){
+            this.listenTo(this.options.collection, "add remove", this.rerender);
+            Base.prototype.__ready.apply(this, arguments);
         },
 
         constructor: function(options){
-            debugger;
-            options.collection = new Skills();
-            this.listenTo(options.collection, "add remove", function(){debugger;this.rerender()});
+            options.collection = options.collection || new Skills();
             Base.prototype.constructor.apply(this, arguments);
         },
 
@@ -22757,8 +22935,7 @@ define("Views/SkillsTable",["Collections/Skills", "Views/Base", "App", "jquery"]
             tpl: {
                 src: "form.skillstable.html?v=1"
             },
-            formTitle :"skills table"
-
+            formTitle :"Skills Table"
         })
     });
 
@@ -22865,7 +23042,9 @@ define("Views/StudentPanelTable",[ "Views/Form", "App", "jquery", "Views/Base", 
         },
 
         __sendData: function (data) {
+
             this.model.set(data);
+            this.model.save();
             return $.Deferred().resolve(data);
         },
 
@@ -22911,17 +23090,66 @@ define("Views/StudentPanelTable",[ "Views/Form", "App", "jquery", "Views/Base", 
     });
 });
 /**
+ * Created by Administrator on 14.08.2014.
+ */
+define("Views/StudentSkillValue", ["Views/Fields/Dropdown"], function(Base){
+     return Base.extend({
+         events:$.extend({}, Base.prototype.events, {
+             "field:changed": "addValue",
+             "field:changed": "changeLabel",
+             "click {additionalDisabledElements}": "stopShowItems"
+         }),
+         addValue: function(e, value){
+             this.model.attributes.value = value;
+         },
+
+         stopShowItems: function(e){
+             if (this.__disabled){
+                 e.preventDefault();
+                 e.stopPropagation();
+                 return false
+             }
+         },
+         changeLabel: function(event){
+             var item = this.__findItemByValue(this.getValue());
+             this.$(this.options.toggleLabel).text(item.label);
+             if (this.options.dropVerificationStatusEvent == event.type) {
+                 this.dropLastVerificationResult();
+             }
+         }
+     },{
+         defaults: $.extend(true, {}, Base.defaults, {
+             tpl: {
+                 $: "field-dropdown"
+             },
+             toggleLabel: ".dropdown-label",
+             additionalDisabledElements: ".dropdown-toggle",
+             className:"btn-default btn-xs",
+             temp: null
+         })
+     });
+});
+/**
  * Created by Administrator on 07.08.2014.
  */
-define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
+define("Views/StudentSkillsRow",["Views/Form","underscore", "Models/StudentSkill", "Collections/StudentSkills"], function(Form, _, Skill, StudentSkills){
     return Form.extend({
+        events: {
+            "field:changed": "addValue"
+        },
         constructor: function(options){
             options = options || {};
             this.rows = [];
             this.collection = options.collection;
-            this.listenTo(this.collection,"add", this.showSkillRow);
+            if(!_.isArray(this.collection)) this.listenTo(this.collection,"add", this.showSkillRow);
             Form.prototype.constructor.apply(this, arguments);
             this.showAllSkillRow();
+        },
+        addValue: function(e, skill){
+            if( !_.isString(skill)) {
+                this.options.tempSkills.add(new Skill(skill.attributes));
+                this.collection.add(skill.attributes);
+            }
         },
 
         showAllSkillRow: function(){
@@ -22929,6 +23157,7 @@ define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
         },
 
         showSkillRow: function(model){
+            var self = this;
             var row = new Form({
                 tpl: {
                     src: "studentskillrow.html?v=1",
@@ -22936,29 +23165,36 @@ define("Views/StudentSkillsRow",["Views/Form","underscore"], function(Form, _){
                 },
                 container: this.$el,
                 containerResolveMethod: "append",
-                model: model
+                model: model,
+                prepareModel: false,
+                disabled : true,
+                temp: this.options.tempSkills
             });
-            row.show();
+            this.registerChildView(model, row);
+            row.render();
             this.rows.push(row);
         }
     },{
         default: $.extend(true, {}, Form.default, {
             tpl:{
                 src: null
-            }
+            },
+            disabled: true,
+            tempSkills: null
         })
     })
 });
 /**
  * Created by Administrator on 07.08.2014.
  */
-define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","underscore", "Collections/StudentSkills", "Collections/Skills", "Models/Skill"], function(Form, Row, _, StudentSkills, Skills, Skill){
+define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","underscore", "Collections/StudentSkills", "Collections/Skills", "Models/StudentSkill"], function(Form, Row, _, StudentSkills, Skills, Skill){
     return Form.extend({
         events: {
             "view:ready": "initSubViews",
             "field:changed": "addSkillToStudent"
         },
         constructor: function(options){
+
             options.allSkill = new Skills();
             return Form.prototype.constructor.apply(this, arguments);
         },
@@ -22966,16 +23202,21 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
             if(_.isUndefined(this.collection)){
                 this.collection = new StudentSkills();
             }
+            var skills = new StudentSkills();
+            _.each(this.collection, function(item){
+                skills.add( new Skill(item));
+            });
             this.registerChildView("listSkills", new Row({
                 el: this.$(".skillsTable"),
-                collection: this.collection
+                collection: skills,
+                tempSkills: this.collection
             }));
-            this.disable();
         },
         addSkillToStudent: function(e, skill){
-            if(skill instanceof Skill) {
+            if(!_.isString(skill)) {
                 this.collection.add(skill);
-                this.childrenViews.newSkill.dropValue.apply(this, arguments);
+                this.childrenViews.newSkill.__value = "";
+                this.childrenViews.newSkill.$el[0].value = "";
             }
         }
     },{
@@ -22991,7 +23232,28 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
 });
 define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"], function (Form, $, Students) {
     return Form.extend({
+        constructor: function(options){
+            options.collection = new Students();
+            Form.prototype.constructor.apply(this,[options]);
+        },
+        filterRow: function(row){
+            if( this.isNameFilter(this.filter.employerName, row.model.get('name')) &&
+                this.isStudentFilter(this.filter.studentsName, row.model.get('students'))){
+                row.show();
+            }
+            else{
+                row.hide();
+            }
+        },
 
+        doFilter: function(event, filter){
+            try {
+                this.filter = filter;
+                this.rows.forEach(this.filterRow, this);
+            } catch (e){
+
+            }
+        }
 
 
     }, {
@@ -22999,7 +23261,6 @@ define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"
             tpl: {
                 src: "studentsfromtable.html?v=1"
             },
-            students: new Students(),
             fields: []
         })
     })
@@ -23007,12 +23268,23 @@ define("Views/StudentsFromTable",["Views/Form", "jquery", "Collections/Students"
 /**
  * Created by Administrator on 31.07.2014.
  */
-define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students", "Models/Student", "App"], function(View, $, Popover, bootstrap,Students,  Student, App){
+define("Views/StudentsOfEmployer", ["Views/Base","jquery", "Views/Popover",  "bootstrap", "Collections/Students"], function(View, $, Popover, bootstrap, Students){
     return View.extend({
         events:{
+            "mouseenter .del-stud": 'addDangerClass',
+            "mouseout .del-stud": 'removeDangerClass',
             "field:changed": "addStudent",
             "click .del-stud" : "detachStudent"
         },
+
+        addDangerClass: function(e){
+            $(e.currentTarget).parents(".detach-student").addClass("low");
+        },
+
+        removeDangerClass: function(e){
+            $(e.currentTarget).parents(".detach-student").removeClass("low");
+        },
+
         constructor: function(options){
             options.allStudents = new Students();
             View.prototype.constructor.apply(this,[options]);
@@ -23024,14 +23296,15 @@ define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "boo
          */
         addStudent: function(event, student){
             this.$(".popover-btn").popover("hide");
-            this.options.collection.add(student);
+            this.collection.add(student);
         },
         /*
             detach student to employer
          */
         detachStudent: function(event){
             var index = $(event.target).data("index");
-            this.collection.remove(this.collection.at(index));
+            var delModel = this.collection.get(index);
+            this.collection.remove(delModel);
         }
     }, {
         defaults: $.extend(true, {}, View.defaults, {
@@ -23044,69 +23317,89 @@ define("Views/StudentsOfEmployer",["Views/Base","jquery", "Views/Popover",  "boo
         })
     });
 });
-define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable"], function (Form, _, $, Students, Student, PropertyList, StudentsFromTable) {
+define("Views/StudentsTable", ["Views/Form", "App", "underscore", "jquery", "Collections/Students", "Models/Student", "Core/PropertyList", "Views/StudentsFromTable", "Views/FilterStudentForm", "Collections/RemoteStudents"], function (Form, App, _, $, Students, Student, PropertyList, StudentsFromTable, FilterStudentForm, RemoteStudents) {
     return Form.extend({
-        events: {
+        events: $.extend(true, {}, Form.prototype.events, {
             "click .extra": "addField",
             "click .deleteField": "deleteField",
-            "view:ready": "initSubViews",
-            "click .find":"submit"
+            "view:ready": "initSubViews"
+        }),
 
-
-
-        },
-
-        findIt:function(){
-            $(".intable").detach();
-            this.initSubViews();
-        },
-
-        onSuccessSubmit: function(data){
-            debugger;
+        onSuccessSubmit: function (data) {
             this.childrenViews.studentsList.rerender();
         },
-        __sendData: function(data){
-            return $.Deferred().resolve();
+
+        __sendData: function (data) {
+            var self = this,
+                xhr = $.Deferred();
+
+            (new RemoteStudents(data)).done(function () {
+                self.childrenViews.studentsList.options.collection = this;
+                xhr.resolve(data);
+            }).fail(xhr.reject);
+            return xhr;
         },
 
-        initSubViews: function(){
+        serialize: function () {
 
+            var result = {},
+                arr = [];
+            for (var j = 0; j < this.fields.length; j++) {
+                if(this.fields[j].options.name=="name")
+                {
+                    arr.push(this.fields[j]);
+                }
+                for (var i = 0; i < this.options.ourfields.length; i++) {
+                    if (this.fields[j].options.name == this.options.ourfields[i] ) {
+                        arr.push(this.fields[j]);
+                    }
+                }
+            }
+            this.fields=arr;
+
+            _.each(this.fields || [], function (field) {
+                _.extend(result, field.serialize());
+            });
+            return result;
+        },
+
+
+        initSubViews: function () {
             var studentsFromTable = new StudentsFromTable({
                 container: this.$("tbody"),
                 containerResolveMethod: "replaceWith",
-                fields: this.options.fields
+                fields: this.options.ourfields
             });
             this.registerChildView("studentsList", studentsFromTable);
             studentsFromTable.show();
         },
 
         constructor: function (options) {
-            //options.collection = new Students();
             Form.prototype.constructor.apply(this, [options]);
         },
 
         deleteField: function (event) {
-            var ind = _.findIndex(this.options.fields, function (field) {
+            var ind = _.findIndex(this.options.ourfields, function (field) {
                 return field == $(event.target).data("index")
             });
 
             if (ind > -1) {
-                this.options.fields.splice(ind, 1);
+                this.options.ourfields.splice(ind, 1);
+                this.fields.splice(ind + 1, 1);
                 this.rerender();
             }
-
         },
 
         addField: function (event) {
-            var ind = _.findIndex(this.options.fields, function (field) {
-                    return field == $(event.target).data("index")
-                }),
-                len = this.options.fields.length;
-            if (ind == -1 && $(event.target).data("index")!="Name") {
-                this.options.fields[len] = $(event.target).data("index");
+
+            var fiedlId = $(event.currentTarget).data("index");
+            var ind = _.findIndex(this.options.ourfields, function (field) {
+                return field == fiedlId
+            });
+            if (ind == -1) {
+                this.options.ourfields.push(fiedlId);
                 this.rerender();
             }
-
         },
         render: function (options) {
             this.options.properties = PropertyList;
@@ -23122,15 +23415,14 @@ define("Views/StudentsTable",["Views/Form", "underscore", "jquery", "Collections
             tpl: {
                 src: "studentstable.html?v=1"
             },
-            defaultPropertyConstructor: "Views/Fields/Base",
-            fields: [],
+            ourfields: [],
             properties: {},
-            prepareCollections: false
+            title: "StudentsTable"
+
 
         })
     });
 });
-
 
 /**
  * Created by Mantsevich on 21.07.2014.
@@ -23165,7 +23457,7 @@ define("Config", {
     readyClass: "app-ready",
     disableStorage: true,
     request: {
-        restUrl: "http://localhost:3000/api",
+        restUrl: "/api",
         successStatuses: ["success"],
         failStatuses: ["error"]
     },
@@ -23257,6 +23549,18 @@ define("App", ["underscore", "Backbone", "jquery", "Config"],function(_, Backbon
     Application.Error = function(error){
         (_.isString(error)) && (error = new Error(error));
         Application.trigger("error", error); // You can subscribe on error event.
+    };
+
+    Application.notify = function(msg, theme){
+        theme = theme || "info";
+        Application.trigger('notify', {
+            message: msg,
+            theme: theme || "info"
+        });
+    };
+
+    Application.success = function(msg){
+        Application.trigger('info', msg);
     };
 
     window.onerror = Application.Error;

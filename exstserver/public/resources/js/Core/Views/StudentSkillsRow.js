@@ -1,7 +1,7 @@
 /**
  * Created by Administrator on 07.08.2014.
  */
-define("Views/StudentSkillsRow",["Views/Form","underscore", "Models/StudentSkill"], function(Form, _, Skill){
+define("Views/StudentSkillsRow",["Views/Form","underscore", "Models/StudentSkill", "Collections/StudentSkills"], function(Form, _, Skill, StudentSkills){
     return Form.extend({
         events: {
             "field:changed": "addValue"
@@ -15,7 +15,10 @@ define("Views/StudentSkillsRow",["Views/Form","underscore", "Models/StudentSkill
             this.showAllSkillRow();
         },
         addValue: function(e, skill){
+            if( !_.isString(skill)) {
+                this.options.tempSkills.add(new Skill(skill.attributes));
                 this.collection.add(skill.attributes);
+            }
         },
 
         showAllSkillRow: function(){
@@ -33,7 +36,8 @@ define("Views/StudentSkillsRow",["Views/Form","underscore", "Models/StudentSkill
                 containerResolveMethod: "append",
                 model: model,
                 prepareModel: false,
-                disabled : true
+                disabled : true,
+                temp: this.options.tempSkills
             });
             this.registerChildView(model, row);
             row.render();
@@ -44,7 +48,8 @@ define("Views/StudentSkillsRow",["Views/Form","underscore", "Models/StudentSkill
             tpl:{
                 src: null
             },
-            disabled: true
+            disabled: true,
+            tempSkills: null
         })
     })
 });

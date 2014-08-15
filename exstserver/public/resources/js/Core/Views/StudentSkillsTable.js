@@ -16,13 +16,18 @@ define("Views/StudentSkillsTable",["Views/Form","Views/StudentSkillsRow","unders
             if(_.isUndefined(this.collection)){
                 this.collection = new StudentSkills();
             }
+            var skills = new StudentSkills();
+            _.each(this.collection, function(item){
+                skills.add( new Skill(item));
+            });
             this.registerChildView("listSkills", new Row({
                 el: this.$(".skillsTable"),
-                collection: this.collection
+                collection: skills,
+                tempSkills: this.collection
             }));
         },
         addSkillToStudent: function(e, skill){
-            if(skill instanceof Skill) {
+            if(!_.isString(skill)) {
                 this.collection.add(skill);
                 this.childrenViews.newSkill.__value = "";
                 this.childrenViews.newSkill.$el[0].value = "";

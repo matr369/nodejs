@@ -8,7 +8,6 @@ define("Views/NewSkillForm",["Views/Form", "App", "Collections/Skills", "Models/
 
         submitWithKey: function(e){
             if (e && e.keyCode==13) {
-                debugger;
             }
         },
 

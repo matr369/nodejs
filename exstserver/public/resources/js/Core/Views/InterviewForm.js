@@ -11,7 +11,6 @@ define("Views/InterviewForm",["Views/Form", "jquery", "bootstrap","Collections/S
             var result,
                 data,
                 studSkills = new StudentSkills();
-            debugger;
             result = Form.prototype.serialize.apply(this, arguments);
             data = this.model.attributes.studentSkills.models;
             for(var i = 0; i< this.model.attributes.studentSkills.models.length; i++){

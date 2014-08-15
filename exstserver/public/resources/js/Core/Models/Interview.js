@@ -7,7 +7,7 @@ define("Models/Interview",["Models/Base","Collections/StudentSkills"], function(
             return {
                 student: "",
                 result: "",
-                studentSkills: new StudentSkills([]),
+                studentSkills: new StudentSkills(),
                 interviewer: {
                     name: "Zhanna Vasilenko"
                 }
@@ -15,7 +15,6 @@ define("Models/Interview",["Models/Base","Collections/StudentSkills"], function(
         },
         urlRoot: "/interviews",
         toJSON: function(options){
-            debugger;
             var json = {};
             for(var attr in this.attributes){
                 if(this.attributes[attr] && this.attributes[attr].toJSON){
